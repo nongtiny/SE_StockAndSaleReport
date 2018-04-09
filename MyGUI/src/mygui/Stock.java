@@ -114,7 +114,7 @@ public class Stock extends javax.swing.JFrame {
         });
         jScrollPane1.setViewportView(stockTable);
 
-        exitButton.setText("Exit");
+        exitButton.setText("Back to Menu");
         exitButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 exitButtonActionPerformed(evt);
@@ -253,7 +253,8 @@ public class Stock extends javax.swing.JFrame {
     }//GEN-LAST:event_searchButtonActionPerformed
 
     private void exitButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_exitButtonActionPerformed
-        this.dispose();
+        this.setVisible(false);
+        new Menu().setVisible(true);
     }//GEN-LAST:event_exitButtonActionPerformed
 
     private void deleteButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_deleteButtonActionPerformed
@@ -281,7 +282,8 @@ public class Stock extends javax.swing.JFrame {
     }//GEN-LAST:event_AddButtonActionPerformed
 
     private void editBottonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_editBottonActionPerformed
-        
+        this.setVisible(false);
+        new Menu().setVisible(true);
     }//GEN-LAST:event_editBottonActionPerformed
 
     private void editBottonMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_editBottonMouseClicked
