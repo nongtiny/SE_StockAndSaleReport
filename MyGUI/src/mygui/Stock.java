@@ -282,8 +282,7 @@ public class Stock extends javax.swing.JFrame {
     }//GEN-LAST:event_AddButtonActionPerformed
 
     private void editBottonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_editBottonActionPerformed
-        this.setVisible(false);
-        new Menu().setVisible(true);
+
     }//GEN-LAST:event_editBottonActionPerformed
 
     private void editBottonMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_editBottonMouseClicked
