@@ -304,7 +304,7 @@ public class EditProduct extends javax.swing.JFrame {
                 + "where productID = '" + proID + "'";
         //System.out.println(sql);
         try {
-            Connection con = StockSystem.getConnect();
+            Connection con = StockAndAccountSystem.getConnect();
             Statement stm =con.createStatement();
             stm.executeUpdate(sql);
             JOptionPane.showMessageDialog(null,"Record Edited Successfully");

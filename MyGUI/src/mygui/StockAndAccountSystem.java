@@ -13,15 +13,14 @@ import java.sql.SQLException;
  *
  * @author PS
  */
-public class StockSystem {
+public class StockAndAccountSystem {
 
     /**
      * @param args the command line arguments
      */
     public static void main(String[] args) {
-        //new StockSystem().getConnect();
-        new Stock().show();
-        
+        //new StockAndAccountSystem().getConnect();
+        new Login().show();
     }
     
     public static Connection getConnect(){

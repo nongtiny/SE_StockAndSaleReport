@@ -179,7 +179,7 @@ public class DeleteProduct extends javax.swing.JFrame {
                 + "where productID = '" + proID + "'";
         System.out.println(proID);
         try {
-            Connection con = StockSystem.getConnect();
+            Connection con = StockAndAccountSystem.getConnect();
             Statement stm =con.createStatement();
             stm.executeUpdate(sql);
             JOptionPane.showMessageDialog(null,"Record Deleted Successfully");

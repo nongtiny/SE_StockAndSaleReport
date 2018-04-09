@@ -320,7 +320,7 @@ public class AddProduct extends javax.swing.JFrame {
                 + proID + "', '" + proName + "', " + amountInt + ", " + priceDouble + ", '" + type + "', '"+ date + "')";
         //System.out.println(sql);
         try {
-            Connection con = StockSystem.getConnect();
+            Connection con = StockAndAccountSystem.getConnect();
             Statement stm =con.createStatement();
             stm.executeUpdate(sql);
             JOptionPane.showMessageDialog(null,"Record Inserted Successfully");

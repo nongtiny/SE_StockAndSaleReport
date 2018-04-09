@@ -356,7 +356,7 @@ public class Stock extends javax.swing.JFrame {
         //this.clearTable(stockTable);
         String sql = "select * from stock";
         try {
-            Connection con = StockSystem.getConnect();
+            Connection con = StockAndAccountSystem.getConnect();
             Statement stm =con.createStatement();
             results=stm.executeQuery(sql);
             String proId, proName, amount, price, type, addedDate;
@@ -410,7 +410,7 @@ public class Stock extends javax.swing.JFrame {
         }
         
         try {
-            Connection con = StockSystem.getConnect();
+            Connection con = StockAndAccountSystem.getConnect();
             Statement stm =con.createStatement();
             results=stm.executeQuery(sql);
             String proId, proName, amount, price, type, addedDate;
