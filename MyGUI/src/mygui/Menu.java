@@ -39,6 +39,11 @@ public class Menu extends javax.swing.JFrame {
         jLabel1.setText("MENU");
 
         jButton1.setText("Create Purchase");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
 
         jButton2.setText("Stock");
         jButton2.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -103,6 +108,11 @@ public class Menu extends javax.swing.JFrame {
         this.dispose();
         new Login().show();
     }//GEN-LAST:event_jButton4ActionPerformed
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        this.dispose();
+        new CreatePurchase().show();
+    }//GEN-LAST:event_jButton1ActionPerformed
 
     /**
      * @param args the command line arguments

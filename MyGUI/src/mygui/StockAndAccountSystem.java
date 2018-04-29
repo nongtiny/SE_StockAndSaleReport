@@ -24,10 +24,11 @@ public class StockAndAccountSystem {
     }
     
     public static Connection getConnect(){
-        String connectionURL = "jdbc:derby://localhost:1527/StockSystem";
+        String connectionURL = "jdbc:derby://localhost:1527/MyTrying";
         //ConnectionURL, username and password should be specified in getConnection()
         try {
-            Connection conn = DriverManager.getConnection(connectionURL, "app", "123");
+            Connection conn = DriverManager.getConnection(connectionURL, "tiny", "1234");
+            System.out.println("Connect successful ! ");
             return conn; 
             //conn.close();
         } catch (SQLException ex) {

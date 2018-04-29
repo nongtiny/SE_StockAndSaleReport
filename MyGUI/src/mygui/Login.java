@@ -3,6 +3,7 @@ import javax.swing.JOptionPane;
 import java.awt.Toolkit;
 import java.awt.event.WindowEvent;
 import mygui.Menu;
+import java.awt.Color;
 /**
  *
  * @author Administrator
@@ -179,7 +180,7 @@ public class Login extends javax.swing.JFrame {
     }//GEN-LAST:event_logInButtonActionPerformed
 
     private void jTextUsernameActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextUsernameActionPerformed
-        // TODO add your handling code here:
+          // TODO add your handling code here:
     }//GEN-LAST:event_jTextUsernameActionPerformed
 
     

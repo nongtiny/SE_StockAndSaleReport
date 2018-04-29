@@ -354,7 +354,7 @@ public class Stock extends javax.swing.JFrame {
     
     public void showData(){
         //this.clearTable(stockTable);
-        String sql = "select * from stock";
+        String sql = "select * from APP.STOCK";
         try {
             Connection con = StockAndAccountSystem.getConnect();
             Statement stm =con.createStatement();

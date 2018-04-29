@@ -132,6 +132,11 @@ public class AddProduct extends javax.swing.JFrame {
                 cancelButtonMouseClicked(evt);
             }
         });
+        cancelButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cancelButtonActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -258,8 +263,12 @@ public class AddProduct extends javax.swing.JFrame {
     }//GEN-LAST:event_proIDActionPerformed
 
     private void SubmitButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_SubmitButtonActionPerformed
-        //.addProduct(ProID.getText(), proName.getText(), amount.getText(), price.getText(), proType.getText(), date.getText());
-       // this.setVisible(false);
+        if(proID.getText().equals("") || proName.getText().equals("") || amount.getText().equals("") || price.getText().equals("") || proType.getText().equals("") || date.getText().equals("")){
+            JOptionPane.showMessageDialog(null,"Please fill in all information!");
+        } else {
+            this.addProduct(proID.getText(), proName.getText(), amount.getText(), price.getText(), proType.getText(), date.getText());
+            this.setVisible(false);
+        }
     }//GEN-LAST:event_SubmitButtonActionPerformed
 
     private void SubmitButtonMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_SubmitButtonMouseClicked
@@ -274,6 +283,10 @@ public class AddProduct extends javax.swing.JFrame {
     private void cancelButtonMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_cancelButtonMouseClicked
         this.setVisible(false);
     }//GEN-LAST:event_cancelButtonMouseClicked
+
+    private void cancelButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cancelButtonActionPerformed
+        this.setVisible(false);
+    }//GEN-LAST:event_cancelButtonActionPerformed
 
     /**
      * @param args the command line arguments

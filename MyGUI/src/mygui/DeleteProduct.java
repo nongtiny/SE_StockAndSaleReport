@@ -175,7 +175,7 @@ public class DeleteProduct extends javax.swing.JFrame {
     
     public void deleteProduct(String proID){
         
-        String sql = "delete from Stock "
+        String sql = "delete from APP.STOCK "
                 + "where productID = '" + proID + "'";
         System.out.println(proID);
         try {
