@@ -29,6 +29,7 @@ public class DeleteProduct extends javax.swing.JFrame {
     public DeleteProduct(String proID1, String proName1){
         initComponents();
         productInfo.setText("- Product ID : " + proID1 + ", Product Name = " + proName1);
+        pdID=proID1;
     }
     
     /**
@@ -175,15 +176,16 @@ public class DeleteProduct extends javax.swing.JFrame {
     
     public void deleteProduct(String proID){
         
-        String sql = "delete from APP.STOCK "
+        String sql = "delete from Stock "
                 + "where productID = '" + proID + "'";
         System.out.println(proID);
+        System.out.println(sql);
         try {
             Connection con = StockAndAccountSystem.getConnect();
             Statement stm =con.createStatement();
             stm.executeUpdate(sql);
             JOptionPane.showMessageDialog(null,"Record Deleted Successfully");
-    }   catch (SQLException ex) {
+        } catch (SQLException ex) {
             Logger.getLogger(AddProduct.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
