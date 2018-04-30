@@ -178,8 +178,6 @@ public class DeleteProduct extends javax.swing.JFrame {
         
         String sql = "delete from Stock "
                 + "where productID = '" + proID + "'";
-        System.out.println(proID);
-        System.out.println(sql);
         try {
             Connection con = StockAndAccountSystem.getConnect();
             Statement stm =con.createStatement();

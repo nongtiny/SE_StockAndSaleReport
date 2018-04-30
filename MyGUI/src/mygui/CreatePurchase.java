@@ -59,6 +59,7 @@ public class CreatePurchase extends javax.swing.JFrame {
         backButton = new javax.swing.JButton();
         moveUpButton = new javax.swing.JButton();
         moveDownButton = new javax.swing.JButton();
+        jLabel3 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -85,33 +86,32 @@ public class CreatePurchase extends javax.swing.JFrame {
 
         chooseTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null},
-                {null},
-                {null},
-                {null},
-                {null},
-                {null},
-                {null},
-                {null},
-                {null},
-                {null},
-                {null},
-                {null},
-                {null},
-                {null},
-                {null},
-                {null},
-                {null},
-                {null},
-                {null},
-                {null}
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null}
             },
             new String [] {
-                "Product"
+                "ID", "Name", "Type", "Price"
             }
         ) {
             Class[] types = new Class [] {
-                java.lang.String.class
+                java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class
             };
 
             public Class getColumnClass(int columnIndex) {
@@ -143,7 +143,6 @@ public class CreatePurchase extends javax.swing.JFrame {
 
         quantityTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null},
                 {null},
                 {null},
                 {null},
@@ -206,6 +205,9 @@ public class CreatePurchase extends javax.swing.JFrame {
             }
         });
 
+        jLabel3.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
+        jLabel3.setText("Purchase List");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -231,7 +233,10 @@ public class CreatePurchase extends javax.swing.JFrame {
                                         .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 348, javax.swing.GroupLayout.PREFERRED_SIZE)
                                         .addGap(29, 29, 29)
                                         .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 82, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                    .addComponent(searchList, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                                    .addComponent(searchList, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addGap(139, 139, 139)
+                                        .addComponent(jLabel3)))
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addGroup(layout.createSequentialGroup()
                                         .addGap(34, 34, 34)
@@ -245,8 +250,8 @@ public class CreatePurchase extends javax.swing.JFrame {
                                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                                         .addGap(33, 33, 33)
                                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                            .addComponent(confirmButton, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 88, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                            .addComponent(backButton, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 87, javax.swing.GroupLayout.PREFERRED_SIZE))))))))
+                                            .addComponent(confirmButton, javax.swing.GroupLayout.PREFERRED_SIZE, 88, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                            .addComponent(backButton, javax.swing.GroupLayout.PREFERRED_SIZE, 87, javax.swing.GroupLayout.PREFERRED_SIZE))))))))
                 .addContainerGap(37, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
@@ -278,9 +283,13 @@ public class CreatePurchase extends javax.swing.JFrame {
                         .addComponent(confirmButton)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(backButton))
-                    .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 366, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 366, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(29, Short.MAX_VALUE))
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 340, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGroup(layout.createSequentialGroup()
+                            .addComponent(jLabel3)
+                            .addGap(4, 4, 4)
+                            .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 340, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                .addContainerGap(36, Short.MAX_VALUE))
         );
 
         pack();
@@ -308,7 +317,17 @@ public class CreatePurchase extends javax.swing.JFrame {
     }//GEN-LAST:event_backButtonActionPerformed
 
     private void chooseButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_chooseButtonActionPerformed
-        this.addToTable((String) searchList.getSelectedItem());
+        String chooseId="";
+        chooseId=(String) searchList.getSelectedItem();
+        int end = 0;
+        for(int i=0; i<chooseId.length(); i++){
+            if(chooseId.charAt(i) == 32){
+                end=i;
+                break;
+            } 
+        }
+        chooseId=chooseId.substring(0, end);
+        this.addToTable(chooseId);
     }//GEN-LAST:event_chooseButtonActionPerformed
 
     private void deleteButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_deleteButtonActionPerformed
@@ -361,7 +380,29 @@ public class CreatePurchase extends javax.swing.JFrame {
     public void addToTable(String data) {
         int showCol = 0;
         int input = Integer.parseInt(JOptionPane.showInputDialog("Please input the quantity"));
-        chooseTable.getModel().setValueAt(data, showRow, showCol);
+        
+        String sql = "select * from Stock where productID = '" + data + "'";  
+        System.out.println(sql);
+        try {
+            Connection con = StockAndAccountSystem.getConnect();
+            Statement stm =con.createStatement();
+            results=stm.executeQuery(sql);
+            String proId, proName, price, type;
+            while(results.next()){
+                int j=0;
+                proId=results.getString(1);             proName=results.getString(2);
+                price=results.getString(4);             type=results.getString(5);           
+                chooseTable.setValueAt(proId, showRow, j); j++;
+                chooseTable.setValueAt(proName, showRow, j); j++;
+                chooseTable.setValueAt(type, showRow, j); j++;
+                chooseTable.setValueAt(price, showRow, j); j++;
+            }
+            
+            JOptionPane.showMessageDialog(null,"Record Inserted Successfully");
+        }   catch (SQLException ex) {
+            Logger.getLogger(AddProduct.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
         quantityTable.getModel().setValueAt(input, showRow, showCol);
         showRow++;
     }
@@ -436,14 +477,14 @@ public class CreatePurchase extends javax.swing.JFrame {
                 amount = results.getString(3);
                 price = results.getString(4);
                 type = results.getString(5);
-                searchList.addItem(proId + "    " + proName + "    " + amount
-                        + "    " + price + "    " + type);
+                searchList.addItem(proId + "    " + proName);
             }
         } catch (Exception e) {
             System.out.println("Connect failed ! ");
         }
     }
-
+    
+    String proId, proName, amount, price, type;
     public void setForSearch(String searchBy, String word) {
         searchList.removeAllItems();
         String sql = "";
@@ -493,6 +534,7 @@ public class CreatePurchase extends javax.swing.JFrame {
     private javax.swing.JButton editButton;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JButton moveDownButton;
