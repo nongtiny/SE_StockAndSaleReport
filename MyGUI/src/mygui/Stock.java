@@ -302,6 +302,7 @@ public class Stock extends javax.swing.JFrame {
     }//GEN-LAST:event_searchButtonActionPerformed
 
     private void exitButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_exitButtonActionPerformed
+        new Menu().setVisible(true);
         this.setVisible(false);
     }//GEN-LAST:event_exitButtonActionPerformed
 
