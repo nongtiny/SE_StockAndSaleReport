@@ -282,7 +282,7 @@
                         <Column editable="true" title="ID" type="java.lang.String"/>
                         <Column editable="true" title="Name" type="java.lang.String"/>
                         <Column editable="true" title="Amount" type="java.lang.String"/>
-                        <Column editable="true" title="Price" type="java.lang.String"/>
+                        <Column editable="true" title="Price (baht)" type="java.lang.String"/>
                         <Column editable="true" title="Type" type="java.lang.String"/>
                         <Column editable="true" title="AddedDate" type="java.lang.String"/>
                       </Table>

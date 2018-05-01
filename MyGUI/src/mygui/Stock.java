@@ -170,7 +170,7 @@ public class Stock extends javax.swing.JFrame {
                 {null, null, null, null, null, null}
             },
             new String [] {
-                "ID", "Name", "Amount", "Price", "Type", "AddedDate"
+                "ID", "Name", "Amount", "Price (baht)", "Type", "AddedDate"
             }
         ) {
             Class[] types = new Class [] {
