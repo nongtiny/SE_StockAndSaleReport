@@ -70,7 +70,10 @@ public class Login extends javax.swing.JFrame {
             }
         });
 
+        logInButton.setBackground(new java.awt.Color(255, 255, 255));
+        logInButton.setFont(new java.awt.Font("Sukhumvit Set", 0, 14)); // NOI18N
         logInButton.setText("Login");
+        logInButton.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         logInButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 logInButtonActionPerformed(evt);
@@ -115,9 +118,9 @@ public class Login extends javax.swing.JFrame {
                 .addComponent(jPasswordField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(38, 38, 38)
-                .addComponent(logInButton)
-                .addContainerGap(54, Short.MAX_VALUE))
+                .addGap(34, 34, 34)
+                .addComponent(logInButton, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(50, Short.MAX_VALUE))
         );
 
         jLabel2.setFont(new java.awt.Font("Sukhumvit Set", 1, 18)); // NOI18N
