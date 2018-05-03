@@ -21,6 +21,8 @@ public class EditProduct extends javax.swing.JFrame {
     /**
      * Creates new form EditProduct
      */
+    String temp="";
+    
     public EditProduct() {
         initComponents();
     }
@@ -28,7 +30,7 @@ public class EditProduct extends javax.swing.JFrame {
     public EditProduct(String proID1, String proName1, String amount1, String price1, String proType1, String date1){
         initComponents();
         setLocationRelativeTo(null);
-        
+        temp=proID1;
         this.proID.setText(proID1);
         this.proName.setText(proName1);
         this.amount.setText(amount1);
@@ -71,6 +73,7 @@ public class EditProduct extends javax.swing.JFrame {
         setSize(new java.awt.Dimension(500, 360));
 
         jPanel1.setBackground(new java.awt.Color(51, 51, 51));
+        jPanel1.setForeground(new java.awt.Color(255, 255, 255));
         jPanel1.setPreferredSize(new java.awt.Dimension(500, 360));
 
         jLabel1.setFont(new java.awt.Font("Sukhumvit Set", 1, 24)); // NOI18N
@@ -356,10 +359,9 @@ public class EditProduct extends javax.swing.JFrame {
     public void updateProduct(String proID, String proName, String amount, String price, String type, String date){
         int amountInt = Integer.parseInt(amount);
         double priceDouble = Double.parseDouble(price);
-        
         String sql = "update Stock "
                 + "set productID = '" + proID + "', productName = '" + proName + "', amount = " + amountInt + ", price = " + priceDouble + ", productType = '" + type + "', currentAddedDate = '"+ date + "' "
-                + "where productID = '" + proID + "'";
+                + "where productID = '" + temp + "'";
         //System.out.println(sql);
         try {
             Connection con = StockAndAccountSystem.getConnect();

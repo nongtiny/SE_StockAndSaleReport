@@ -6,7 +6,10 @@
 package mygui;
 
 import java.sql.*;
+import java.util.ArrayList;
 import java.util.Vector;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
@@ -148,21 +151,6 @@ public class Stock extends javax.swing.JFrame {
         stockTable.setForeground(new java.awt.Color(255, 255, 255));
         stockTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
                 {null, null, null, null, null, null},
                 {null, null, null, null, null, null},
                 {null, null, null, null, null, null}
@@ -402,15 +390,17 @@ public class Stock extends javax.swing.JFrame {
     }
     
     public void showData(){
-        //this.clearTable(stockTable);
+        clearTable(stockTable);
+        setTableRow();
         String sql = "select * from APP.STOCK";
         try {
             Connection con = StockAndAccountSystem.getConnect();
             Statement stm =con.createStatement();
             results=stm.executeQuery(sql);
+
             String proId, proName, amount, price, type, addedDate;
             int i=0;
-            while(results.next() && i<20){
+            while(results.next()){
                 int j=0;
                 proId=results.getString(1);             proName=results.getString(2);
                 amount=results.getString(3);            price=results.getString(4);
@@ -428,6 +418,33 @@ public class Stock extends javax.swing.JFrame {
         }   
     } 
 
+    public void setTableRow(){
+        String sql = "select count(*) from APP.STOCK";
+        try {
+            System.out.println(sql);
+            Connection con = StockAndAccountSystem.getConnect();
+            Statement stm =con.createStatement();
+            ResultSet countResult = stm.executeQuery(sql);
+            countResult.next();
+            int row = countResult.getInt(1);
+            
+            Object[][] r = new Object[row][6];
+            for(int i=0; i<row; i++){
+                for(int j=0; j<6; j++){
+                    r[i][j] = null;
+                }
+            }
+             
+            stockTable.setModel(new javax.swing.table.DefaultTableModel(r ,
+                    new String [] {
+                        "ID", "Name", "Amount", "Price (baht)", "Type", "AddedDate"
+                    }
+            ));
+        } catch (SQLException ex) {
+            Logger.getLogger(Stock.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    } 
+    
     public static void clearTable(JTable table) {
         for (int i = 0; i < table.getRowCount(); i++)
             for(int j = 0; j < table.getColumnCount(); j++) {
