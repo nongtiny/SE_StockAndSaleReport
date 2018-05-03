@@ -69,7 +69,7 @@ public class DeleteProduct extends javax.swing.JFrame {
 
         productInfo.setText("jLabel3");
 
-        cancelButton.setBackground(new java.awt.Color(0, 102, 102));
+        cancelButton.setBackground(new java.awt.Color(204, 0, 0));
         cancelButton.setFont(new java.awt.Font("Sukhumvit Set", 1, 14)); // NOI18N
         cancelButton.setForeground(new java.awt.Color(255, 255, 255));
         cancelButton.setText("Cancel");

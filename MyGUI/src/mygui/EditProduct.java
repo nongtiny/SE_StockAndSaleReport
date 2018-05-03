@@ -131,7 +131,7 @@ public class EditProduct extends javax.swing.JFrame {
         jLabel8.setForeground(new java.awt.Color(255, 0, 0));
         jLabel8.setText("Ex. 08/04/2018");
 
-        cancelButton.setBackground(new java.awt.Color(0, 102, 102));
+        cancelButton.setBackground(new java.awt.Color(204, 0, 0));
         cancelButton.setFont(new java.awt.Font("Sukhumvit Set", 0, 14)); // NOI18N
         cancelButton.setForeground(new java.awt.Color(255, 255, 255));
         cancelButton.setText("Cancel");
