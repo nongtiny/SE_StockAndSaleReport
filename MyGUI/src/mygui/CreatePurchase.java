@@ -119,7 +119,7 @@ public class CreatePurchase extends javax.swing.JFrame {
             }
         });
 
-        confirmButton.setText("Confirm");
+        confirmButton.setText("Next");
         confirmButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 confirmButtonActionPerformed(evt);
@@ -219,7 +219,9 @@ public class CreatePurchase extends javax.swing.JFrame {
     }//GEN-LAST:event_searchButtonActionPerformed
 
     private void confirmButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_confirmButtonActionPerformed
-        // TODO add your handling code here:
+        this.addToDatabase();
+        new PurchaseConfirmation().show();
+        this.dispose();
     }//GEN-LAST:event_confirmButtonActionPerformed
 
     private void backButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_backButtonActionPerformed
@@ -408,10 +410,17 @@ public class CreatePurchase extends javax.swing.JFrame {
         String sql;
         for (int i = 0; i < chooseTable.getRowCount(); i++) {
             int j = 0;
+            String receiptIdAsString = new Integer(recieptID).toString();
             while (j < chooseTable.getColumnCount()) {
+                String proID;
+                proID = ""+chooseTable.getValueAt(i, j+=3).toString();
+                String proPrice;
+                proPrice = ""+chooseTable.getValueAt(i, j++).toString();
+                String purQuan;
+                purQuan = ""+chooseTable.getValueAt(i, j++).toString();
                 sql = "insert into APP.CREATEPURCHASE values ('"
-                        + recieptID + "', '" + chooseTable.getValueAt(i, j+=3) + "', " + chooseTable.getValueAt(i, j++) + ", "
-                        + chooseTable.getValueAt(i, j++) + ", '" + getCurrentDate() + "')";
+                        + receiptIdAsString + "', '" + proID + "', '" + proPrice + "', '"
+                        + purQuan + "', '" + getCurrentDate() + "')";
                 try {
                     Connection con = StockAndAccountSystem.getConnect();
                     Statement stm = con.createStatement();
