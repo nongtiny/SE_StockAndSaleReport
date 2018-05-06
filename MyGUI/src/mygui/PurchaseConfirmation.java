@@ -5,6 +5,8 @@
  */
 package mygui;
 
+import java.sql.Connection;
+import java.sql.Statement;
 import java.util.Date;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableModel;
@@ -18,49 +20,44 @@ public class PurchaseConfirmation extends javax.swing.JFrame {
     /**
      * Creates new form PurchaseConfirmation
      */
-    DefaultTableModel tableFromCreatePurcahse ;
+    DefaultTableModel tableFromCreatePurcahse;
+    double payable;
     //public PurchaseConfirmation() {
-      //  initComponents();
+    //  initComponents();
     //}
-    public PurchaseConfirmation(DefaultTableModel model){
+    public PurchaseConfirmation(DefaultTableModel model) {
         initComponents();
         this.tableFromCreatePurcahse = model;
         DefaultTableModel table = tableFromCreatePurcahse;
-         System.out.println(table.getValueAt(0,0));
-         System.out.println(table.getValueAt(0,1));
-         System.out.println(table.getValueAt(0,2));
-         System.out.println(table.getValueAt(0,3));
-         System.out.println(table.getValueAt(0,4));
-         System.out.println(table.getRowCount());
+        System.out.println(table.getRowCount());
         DefaultTableModel conTable = (DefaultTableModel) purchaseTable.getModel();
         conTable.setRowCount(table.getRowCount());
-        int row=0;
+        int row = 0;
         double payable = 0.0;
-        while(row < table.getRowCount()){
-            String id = (String)table.getValueAt(row, 0);
-            String name = (String)table.getValueAt(row, 1);
-            double price = Double.parseDouble((String)table.getValueAt(row, 3));
-            int quan = (Integer)table.getValueAt(row, 4);
+        while (row < table.getRowCount()) {
+            String id = (String) table.getValueAt(row, 0);
+            String name = (String) table.getValueAt(row, 1);
+            double price = Double.parseDouble((String) table.getValueAt(row, 3));
+            int quan = (Integer) table.getValueAt(row, 4);
             double totalPrice = price * quan;
-            payable+=totalPrice;
-            conTable.setValueAt(id,row,0);
-            conTable.setValueAt(name,row,1);
-            conTable.setValueAt(price,row,2);
-            conTable.setValueAt(quan,row,3);
-            conTable.setValueAt(totalPrice,row,4);
-            
-        row++;
+            payable += totalPrice;
+            conTable.setValueAt(id, row, 0);
+            conTable.setValueAt(name, row, 1);
+            conTable.setValueAt(price, row, 2);
+            conTable.setValueAt(quan, row, 3);
+            conTable.setValueAt(totalPrice, row, 4);
+
+            row++;
         }
         payableAmount.setText("" + payable);
         Date date = new Date();
-        purchaseID.setText(""+date.getDay()+""+date.getMonth()+""+date.getYear()+""+CreatePurchase.recieptID);
+        purchaseID.setText("" + date.getDay() + "" + date.getMonth() + "" + date.getYear() + "" + CreatePurchase.recieptID);
         System.out.println(payable);
         //System.out.println(model.getValueAt(0,0));
     }
-    
-    public void addToDatabase(){
-    
-    
+
+    public void addToDatabase() {
+
     }
 
     /**
@@ -120,6 +117,11 @@ public class PurchaseConfirmation extends javax.swing.JFrame {
         jButton1.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 jButton1MouseClicked(evt);
+            }
+        });
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
             }
         });
 
@@ -203,26 +205,30 @@ public class PurchaseConfirmation extends javax.swing.JFrame {
     private void jButton3MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton3MouseClicked
         // TODO add your handling code here:
         // ดึงข้อมูลจาก createPurchase มา สร้าง sql แล้ว insert ลง data base
-        DefaultTableModel table = tableFromCreatePurcahse;
+        String reciptID = ""+CreatePurchase.recieptID;
+        CreatePurchase.recieptID++;
         DefaultTableModel conTable = (DefaultTableModel) purchaseTable.getModel();
-        int row=0;
-        double payable = 0.0;
-        while(row < table.getRowCount()){
-            String id = (String)table.getValueAt(row, 0);
-            String name = (String)table.getValueAt(row, 1);
-            double price = (Double)table.getValueAt(row, 3);
-            int quan = (Integer)table.getValueAt(row, 4);
-            double totalPrice = price * quan;
-            payable+=totalPrice;
-            conTable.setValueAt(id, row,0);
-            conTable.setValueAt(name, row,1);
-            conTable.setValueAt(price, row,2);
-            conTable.setValueAt(quan, row,3);
-            conTable.setValueAt(totalPrice, row,4);
-            
-        row++;
+        int row = 0;
+         Date date = new Date();
+        while (row < purchaseTable.getRowCount()) {
+            String proid = (String) conTable.getValueAt(row, 0);
+            String name = (String) conTable.getValueAt(row, 1);
+            double price = Double.parseDouble((String)conTable.getValueAt(row, 2));
+            int quan = (Integer) conTable.getValueAt(row, 3);
+            double totalPrice = Double.parseDouble((String)conTable.getValueAt(row,4));
+             String sql = "insert into SALEREPORT values ('" 
+                + reciptID + "', '" + proid + "', '" +  price + "', '" + totalPrice + "', '" + payable + "', '"+ quan + "', '"+ date + "')";
+            try {
+                Connection con = StockAndAccountSystem.getConnect();
+                Statement stm = con.createStatement();
+                stm.executeUpdate(sql);
+                //Statement results = stm.executeQuery(sql);
+            } catch (Exception e) {
+                System.out.println("Connect failed ! ");
+            }
+            row++;
         }
-        System.out.println(payable);
+        
     }//GEN-LAST:event_jButton3MouseClicked
 
     private void jButton1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton1MouseClicked
@@ -233,9 +239,11 @@ public class PurchaseConfirmation extends javax.swing.JFrame {
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
         // TODO add your handling code here:
-        CreatePurchase.recieptID++;
-        
     }//GEN-LAST:event_jButton3ActionPerformed
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jButton1ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -267,7 +275,7 @@ public class PurchaseConfirmation extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                
+
                 //new PurchaseConfirmation().setVisible(true);
             }
         });

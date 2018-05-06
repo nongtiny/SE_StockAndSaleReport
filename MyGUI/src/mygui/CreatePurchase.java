@@ -254,7 +254,7 @@ public class CreatePurchase extends javax.swing.JFrame {
 
     private void nextButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_nextButtonActionPerformed
         new PurchaseConfirmation((DefaultTableModel)this.getTable()).show();
-        this.dispose();
+        //this.dispose();
     }//GEN-LAST:event_nextButtonActionPerformed
 
 //=======
