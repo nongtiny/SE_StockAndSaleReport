@@ -5,6 +5,10 @@
  */
 package mygui;
 
+import java.util.Date;
+import javax.swing.table.DefaultTableModel;
+import javax.swing.table.TableModel;
+
 /**
  *
  * @author Dell
@@ -14,8 +18,49 @@ public class PurchaseConfirmation extends javax.swing.JFrame {
     /**
      * Creates new form PurchaseConfirmation
      */
-    public PurchaseConfirmation() {
+    DefaultTableModel tableFromCreatePurcahse ;
+    //public PurchaseConfirmation() {
+      //  initComponents();
+    //}
+    public PurchaseConfirmation(DefaultTableModel model){
         initComponents();
+        this.tableFromCreatePurcahse = model;
+        DefaultTableModel table = tableFromCreatePurcahse;
+         System.out.println(table.getValueAt(0,0));
+         System.out.println(table.getValueAt(0,1));
+         System.out.println(table.getValueAt(0,2));
+         System.out.println(table.getValueAt(0,3));
+         System.out.println(table.getValueAt(0,4));
+         System.out.println(table.getRowCount());
+        DefaultTableModel conTable = (DefaultTableModel) purchaseTable.getModel();
+        conTable.setRowCount(table.getRowCount());
+        int row=0;
+        double payable = 0.0;
+        while(row < table.getRowCount()){
+            String id = (String)table.getValueAt(row, 0);
+            String name = (String)table.getValueAt(row, 1);
+            double price = Double.parseDouble((String)table.getValueAt(row, 3));
+            int quan = (Integer)table.getValueAt(row, 4);
+            double totalPrice = price * quan;
+            payable+=totalPrice;
+            conTable.setValueAt(id,row,0);
+            conTable.setValueAt(name,row,1);
+            conTable.setValueAt(price,row,2);
+            conTable.setValueAt(quan,row,3);
+            conTable.setValueAt(totalPrice,row,4);
+            
+        row++;
+        }
+        payableAmount.setText("" + payable);
+        Date date = new Date();
+        purchaseID.setText(""+date.getDay()+""+date.getMonth()+""+date.getYear()+""+CreatePurchase.recieptID);
+        System.out.println(payable);
+        //System.out.println(model.getValueAt(0,0));
+    }
+    
+    public void addToDatabase(){
+    
+    
     }
 
     /**
@@ -27,14 +72,18 @@ public class PurchaseConfirmation extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        jLabel3 = new javax.swing.JLabel();
         jLabel1 = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
         purchaseTable = new javax.swing.JTable();
         jButton1 = new javax.swing.JButton();
-        jButton2 = new javax.swing.JButton();
         jButton3 = new javax.swing.JButton();
         jLabel2 = new javax.swing.JLabel();
-        jLabel3 = new javax.swing.JLabel();
+        payableAmount = new javax.swing.JLabel();
+        jLabel4 = new javax.swing.JLabel();
+        purchaseID = new javax.swing.JLabel();
+
+        jLabel3.setText("jLabel3");
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -43,8 +92,6 @@ public class PurchaseConfirmation extends javax.swing.JFrame {
 
         purchaseTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null, null},
-                {null, null, null, null, null},
                 {null, null, null, null, null},
                 {null, null, null, null, null}
             },
@@ -55,70 +102,140 @@ public class PurchaseConfirmation extends javax.swing.JFrame {
             Class[] types = new Class [] {
                 java.lang.String.class, java.lang.String.class, java.lang.Double.class, java.lang.Integer.class, java.lang.Double.class
             };
+            boolean[] canEdit = new boolean [] {
+                false, false, false, false, false
+            };
 
             public Class getColumnClass(int columnIndex) {
                 return types [columnIndex];
+            }
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
             }
         });
         jScrollPane1.setViewportView(purchaseTable);
 
         jButton1.setText("BACK");
+        jButton1.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jButton1MouseClicked(evt);
+            }
+        });
 
-        jButton2.setText("SAVE & PRINT");
-
-        jButton3.setText("SAVE & EXIT");
+        jButton3.setText("CONFIRM");
+        jButton3.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jButton3MouseClicked(evt);
+            }
+        });
+        jButton3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton3ActionPerformed(evt);
+            }
+        });
 
         jLabel2.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabel2.setText("Payable amount :");
 
-        jLabel3.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        jLabel3.setText("ราคารวม");
+        payableAmount.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        payableAmount.setText("ราคารวม");
+
+        jLabel4.setText("Purchase ID :");
+
+        purchaseID.setText("------------");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jLabel1)
-                .addGap(184, 184, 184))
-            .addGroup(layout.createSequentialGroup()
-                .addGap(58, 58, 58)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 424, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(13, 13, 13)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(jLabel1)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jLabel4)
+                        .addGap(18, 18, 18)
+                        .addComponent(purchaseID, javax.swing.GroupLayout.PREFERRED_SIZE, 97, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 424, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(0, 0, Short.MAX_VALUE))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addComponent(jButton1)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(jLabel2)
-                            .addComponent(jButton3))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(jButton2)
-                            .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 84, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                .addContainerGap(75, Short.MAX_VALUE))
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                                .addComponent(jLabel2)
+                                .addGap(27, 27, 27)
+                                .addComponent(payableAmount, javax.swing.GroupLayout.PREFERRED_SIZE, 84, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(jButton3, javax.swing.GroupLayout.Alignment.TRAILING))))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jLabel1)
-                .addGap(18, 18, 18)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(jLabel1)
+                        .addGap(18, 18, 18))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel4)
+                            .addComponent(purchaseID))
+                        .addGap(8, 8, 8)))
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 221, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel2)
-                    .addComponent(jLabel3))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 42, Short.MAX_VALUE)
+                    .addComponent(payableAmount))
+                .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jButton1)
-                    .addComponent(jButton2)
-                    .addComponent(jButton3))
-                .addContainerGap())
+                    .addComponent(jButton3)
+                    .addComponent(jButton1))
+                .addContainerGap(21, Short.MAX_VALUE))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void jButton3MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton3MouseClicked
+        // TODO add your handling code here:
+        // ดึงข้อมูลจาก createPurchase มา สร้าง sql แล้ว insert ลง data base
+        DefaultTableModel table = tableFromCreatePurcahse;
+        DefaultTableModel conTable = (DefaultTableModel) purchaseTable.getModel();
+        int row=0;
+        double payable = 0.0;
+        while(row < table.getRowCount()){
+            String id = (String)table.getValueAt(row, 0);
+            String name = (String)table.getValueAt(row, 1);
+            double price = (Double)table.getValueAt(row, 3);
+            int quan = (Integer)table.getValueAt(row, 4);
+            double totalPrice = price * quan;
+            payable+=totalPrice;
+            conTable.setValueAt(id, row,0);
+            conTable.setValueAt(name, row,1);
+            conTable.setValueAt(price, row,2);
+            conTable.setValueAt(quan, row,3);
+            conTable.setValueAt(totalPrice, row,4);
+            
+        row++;
+        }
+        System.out.println(payable);
+    }//GEN-LAST:event_jButton3MouseClicked
+
+    private void jButton1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton1MouseClicked
+        // TODO add your handling code here:
+        this.dispose();
+        purchaseTable.clearSelection();
+    }//GEN-LAST:event_jButton1MouseClicked
+
+    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
+        // TODO add your handling code here:
+        CreatePurchase.recieptID++;
+        
+    }//GEN-LAST:event_jButton3ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -150,19 +267,22 @@ public class PurchaseConfirmation extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new PurchaseConfirmation().setVisible(true);
+                
+                //new PurchaseConfirmation().setVisible(true);
             }
         });
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel4;
     private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JLabel payableAmount;
+    private javax.swing.JLabel purchaseID;
     private javax.swing.JTable purchaseTable;
     // End of variables declaration//GEN-END:variables
 }

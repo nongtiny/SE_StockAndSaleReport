@@ -23,6 +23,7 @@ import javax.swing.DefaultComboBoxModel;
 import javax.swing.JOptionPane;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
+import javax.swing.table.TableModel;
 
 /**
  *
@@ -119,7 +120,16 @@ public class CreatePurchase extends javax.swing.JFrame {
             }
         });
 
+<<<<<<< HEAD
         confirmButton.setText("Next");
+=======
+        confirmButton.setText("Confirm");
+        confirmButton.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                confirmButtonMouseClicked(evt);
+            }
+        });
+>>>>>>> 794fcd35c9c5a0a3d3921ba6d9f469b97d2df181
         confirmButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 confirmButtonActionPerformed(evt);
@@ -247,6 +257,24 @@ public class CreatePurchase extends javax.swing.JFrame {
         this.removeSelectedRows();
     }//GEN-LAST:event_deleteButtonActionPerformed
 
+//<<<<<<< HEAD
+    private void moveUpButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_moveUpButtonActionPerformed
+        //this.moveUpwards();
+    }//GEN-LAST:event_moveUpButtonActionPerformed
+
+    private void moveDownButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_moveDownButtonActionPerformed
+        //this.moveDownwards();
+    }//GEN-LAST:event_moveDownButtonActionPerformed
+
+    private void confirmButtonMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_confirmButtonMouseClicked
+        // TODO add your handling code here:
+        //เรียกหน้า purchase confirmation ma 
+        
+        new PurchaseConfirmation((DefaultTableModel) this.getTable()).setVisible(true);
+    }//GEN-LAST:event_confirmButtonMouseClicked
+
+//=======
+//>>>>>>> 5bf371d0428e6e05d2f38c07de66f5210f938d1f
     /**
      * @param args the command line arguments
      */
@@ -312,14 +340,18 @@ public class CreatePurchase extends javax.swing.JFrame {
                 j++;
                 chooseTable.setValueAt(input, showRow, j);
                 j++;
+                //System.out.println(chooseTable.getValueAt(showRow,0));
             }
 
-            JOptionPane.showMessageDialog(null, "Record Inserted Successfully");
+            //JOptionPane.showMessageDialog(null, "Record Inserted Successfully");
         } catch (SQLException ex) {
             Logger.getLogger(AddProduct.class.getName()).log(Level.SEVERE, null, ex);
         }
 
         showRow++;
+    }
+    public TableModel getTable(){
+        return chooseTable.getModel();
     }
 
  

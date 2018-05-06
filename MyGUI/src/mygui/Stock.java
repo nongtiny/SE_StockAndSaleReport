@@ -72,7 +72,7 @@ public class Stock extends javax.swing.JFrame {
         jLabel2.setText("Search By");
 
         searchByList.setFont(new java.awt.Font("Sukhumvit Set", 0, 12)); // NOI18N
-        searchByList.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "All", "ID", "Name", "Amount", "Price", "Type", "AddedDate" }));
+        searchByList.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "...", "ID", "Name", "Amount", "Price", "Type", "AddedDate" }));
         searchByList.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 searchByListActionPerformed(evt);
@@ -259,7 +259,7 @@ public class Stock extends javax.swing.JFrame {
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap(29, Short.MAX_VALUE)
                 .addComponent(jLabel1)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -380,6 +380,9 @@ public class Stock extends javax.swing.JFrame {
             java.util.logging.Logger.getLogger(Stock.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
         //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
@@ -457,7 +460,7 @@ public class Stock extends javax.swing.JFrame {
         this.clearTable(stockTable);
         
         String sql="";
-        if (searchBy.equalsIgnoreCase("All")){
+        if (searchBy.equalsIgnoreCase("...")){
             sql = "select * from stock";
         } else if (searchBy.equalsIgnoreCase("ID")){
             sql = "select * from stock where productID like '%" + word + "%' order by productID";
