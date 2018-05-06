@@ -479,7 +479,7 @@ public class CreatePurchase extends javax.swing.JFrame {
             int j = 0;
             while (j < chooseTable.getColumnCount()) {
                 sql = "insert into APP.CREATEPURCHASE values ('"
-                        + recieptID + "', '" + chooseTable.getValueAt(i, j+=2) + "', " + chooseTable.getValueAt(i, j++) + ", "
+                        + recieptID + "', '" + chooseTable.getValueAt(i, j+=3) + "', " + chooseTable.getValueAt(i, j++) + ", "
                         + chooseTable.getValueAt(i, j++) + ", '" + getCurrentDate() + "')";
                 try {
                     Connection con = StockAndAccountSystem.getConnect();
