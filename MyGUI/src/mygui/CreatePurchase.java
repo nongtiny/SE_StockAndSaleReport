@@ -284,7 +284,7 @@ public class CreatePurchase extends javax.swing.JFrame {
     }//GEN-LAST:event_chooseButtonActionPerformed
 
     private void deleteButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_deleteButtonActionPerformed
-        this.deleteSelectedRow();
+        this.removeSelectedRows();
     }//GEN-LAST:event_deleteButtonActionPerformed
 
     private void moveUpButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_moveUpButtonActionPerformed
@@ -334,7 +334,7 @@ public class CreatePurchase extends javax.swing.JFrame {
         int showCol = 0;
         int input = Integer.parseInt(JOptionPane.showInputDialog("Please input the quantity"));
 
-        String sql = "select * from Stock where productID = '" + data + "'";
+        String sql = "select * from APP.STOCK where productID = '" + data + "'";
         System.out.println(sql);
         try {
             Connection con = StockAndAccountSystem.getConnect();
@@ -369,13 +369,11 @@ public class CreatePurchase extends javax.swing.JFrame {
 
  
 
-    public void deleteSelectedRow() {
-        int row = chooseTable.getSelectedRow();
-        if (row == -1) {
-            JOptionPane.showMessageDialog(null, "Please select a record!");
-        } else {
-            chooseTable.setValueAt("", row, 0);
-
+    public void removeSelectedRows(){
+        DefaultTableModel model = (DefaultTableModel) chooseTable.getModel();
+        int[] rows = chooseTable.getSelectedRows();
+        for(int i=0;i<rows.length;i++){
+            model.removeRow(rows[i]-i);
         }
     }
 
