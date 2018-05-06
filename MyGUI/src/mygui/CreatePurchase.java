@@ -5,10 +5,16 @@
  */
 package mygui;
 
+import java.awt.List;
 import java.sql.Connection;
+import java.sql.Date;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.DefaultComboBoxModel;
@@ -27,7 +33,8 @@ public class CreatePurchase extends javax.swing.JFrame {
      */
     ResultSet results;
     int showRow = 0;
-
+    public static int recieptID=1;
+    
     public CreatePurchase() {
         initComponents();
         showData();
@@ -520,6 +527,33 @@ public class CreatePurchase extends javax.swing.JFrame {
             }
         } catch (Exception e) {
             System.out.println("Connection failed ! ");
+        }
+    }
+    
+//    public String getCurrentDate(){
+//        DateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
+//	Calendar cal = Calendar.getInstance();
+//	System.out.println(dateFormat.format(cal)); //2016/11/16 12:08:43
+//    }
+    
+    public void addToDatabase(String proID, String purQuan, String proPrice, String totalEach, String totalPur){
+        int productID = Integer.parseInt(proID);
+        int purchaseQuantity = Integer.parseInt(purQuan);
+        double productPrice = Double.parseDouble(proPrice);
+        double totalEachProduct = Double.parseDouble(totalEach);
+        double totalPurchase = Double.parseDouble(totalPur);
+        
+        String sql = "insert into APP.SALEREPORT2 values ('" 
+                + recieptID + "', '" + productID + "', " + purchaseQuantity + ", " + productPrice + ", '" + totalEachProduct 
+                + "', '"+ totalPurchase + "', '" + purDate +"')";
+        //System.out.println(sql);
+        try {
+            Connection con = StockAndAccountSystem.getConnect();
+            Statement stm =con.createStatement();
+            stm.executeUpdate(sql);
+            JOptionPane.showMessageDialog(null,"Record Inserted Successfully");
+    }   catch (SQLException ex) {
+            Logger.getLogger(AddProduct.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
 
