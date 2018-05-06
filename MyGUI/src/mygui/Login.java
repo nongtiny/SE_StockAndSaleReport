@@ -199,8 +199,7 @@ public class Login extends javax.swing.JFrame {
             jPasswordField.setText(null);
             systemExit();
             
-            Menu info = new Menu();
-            info.setVisible(true);
+            new Menu().show();
         }
         else{
             JOptionPane.showMessageDialog(null,"Invalid Login Details", "Error!", JOptionPane.ERROR_MESSAGE);
@@ -248,8 +247,7 @@ public class Login extends javax.swing.JFrame {
     }
     
     private void systemExit(){
-        WindowEvent winClosing = new WindowEvent(this, WindowEvent.WINDOW_CLOSING);
-        winClosing.getWindow().setVisible(false);
+        this.dispose();
     }
     
         

@@ -127,7 +127,7 @@ public class Menu extends javax.swing.JFrame {
             .addGroup(jPanel5Layout.createSequentialGroup()
                 .addGap(19, 19, 19)
                 .addComponent(jLabel1)
-                .addContainerGap(37, Short.MAX_VALUE))
+                .addContainerGap(19, Short.MAX_VALUE))
         );
 
         logoutButton.setBackground(new java.awt.Color(255, 255, 255));
@@ -146,7 +146,7 @@ public class Menu extends javax.swing.JFrame {
             .addComponent(jPanel5, javax.swing.GroupLayout.DEFAULT_SIZE, 730, Short.MAX_VALUE)
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 151, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 91, Short.MAX_VALUE)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(stockButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(logoutButton, javax.swing.GroupLayout.DEFAULT_SIZE, 210, Short.MAX_VALUE))
@@ -218,7 +218,8 @@ public class Menu extends javax.swing.JFrame {
     }//GEN-LAST:event_stockButtonActionPerformed
 
     private void saleReportButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_saleReportButtonActionPerformed
-        new SaleReport().setVisible(true);
+        this.dispose();
+        new SaleReport().show();
     }//GEN-LAST:event_saleReportButtonActionPerformed
 
     /**
