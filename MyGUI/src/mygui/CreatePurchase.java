@@ -34,7 +34,6 @@ public class CreatePurchase extends javax.swing.JFrame {
      * Creates new form CreatePurchase
      */
     ResultSet results;
-    int showRow = 0;
     public static int recieptID = 1;
 
     public CreatePurchase() {
@@ -92,25 +91,7 @@ public class CreatePurchase extends javax.swing.JFrame {
 
         chooseTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null}
+
             },
             new String [] {
                 "ID", "Name", "Type", "Price", "Quantity"
@@ -333,9 +314,11 @@ public class CreatePurchase extends javax.swing.JFrame {
     public void addToTable(String data) {
         int showCol = 0;
         int input = Integer.parseInt(JOptionPane.showInputDialog("Please input the quantity"));
-
         String sql = "select * from APP.STOCK where productID = '" + data + "'";
         System.out.println(sql);
+        DefaultTableModel model = (DefaultTableModel) chooseTable.getModel();
+        model.addRow(new Object[]{"", "", "", "", ""});
+        int showRow = model.getRowCount()-1;
         try {
             Connection con = StockAndAccountSystem.getConnect();
             Statement stm = con.createStatement();
@@ -347,6 +330,7 @@ public class CreatePurchase extends javax.swing.JFrame {
                 proName = results.getString(2);
                 price = results.getString(4);
                 type = results.getString(5);
+                
                 chooseTable.setValueAt(proId, showRow, j);
                 j++;
                 chooseTable.setValueAt(proName, showRow, j);
