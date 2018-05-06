@@ -23,6 +23,7 @@ import javax.swing.DefaultComboBoxModel;
 import javax.swing.JOptionPane;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
+import javax.swing.table.TableModel;
 
 /**
  *
@@ -122,6 +123,11 @@ public class CreatePurchase extends javax.swing.JFrame {
         });
 
         confirmButton.setText("Confirm");
+        confirmButton.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                confirmButtonMouseClicked(evt);
+            }
+        });
         confirmButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 confirmButtonActionPerformed(evt);
@@ -276,6 +282,13 @@ public class CreatePurchase extends javax.swing.JFrame {
         this.moveDownwards();
     }//GEN-LAST:event_moveDownButtonActionPerformed
 
+    private void confirmButtonMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_confirmButtonMouseClicked
+        // TODO add your handling code here:
+        //เรียกหน้า purchase confirmation ma 
+        
+        new PurchaseConfirmation((DefaultTableModel) this.getTable()).setVisible(true);
+    }//GEN-LAST:event_confirmButtonMouseClicked
+
     /**
      * @param args the command line arguments
      */
@@ -341,14 +354,18 @@ public class CreatePurchase extends javax.swing.JFrame {
                 j++;
                 chooseTable.setValueAt(input, showRow, j);
                 j++;
+                //System.out.println(chooseTable.getValueAt(showRow,0));
             }
 
-            JOptionPane.showMessageDialog(null, "Record Inserted Successfully");
+            //JOptionPane.showMessageDialog(null, "Record Inserted Successfully");
         } catch (SQLException ex) {
             Logger.getLogger(AddProduct.class.getName()).log(Level.SEVERE, null, ex);
         }
 
         showRow++;
+    }
+    public TableModel getTable(){
+        return chooseTable.getModel();
     }
 
  

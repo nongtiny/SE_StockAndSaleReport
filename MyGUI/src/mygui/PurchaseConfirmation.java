@@ -5,6 +5,9 @@
  */
 package mygui;
 
+import javax.swing.table.DefaultTableModel;
+import javax.swing.table.TableModel;
+
 /**
  *
  * @author Dell
@@ -14,8 +17,42 @@ public class PurchaseConfirmation extends javax.swing.JFrame {
     /**
      * Creates new form PurchaseConfirmation
      */
-    public PurchaseConfirmation() {
+    DefaultTableModel tableFromCreatePurcahse ;
+    //public PurchaseConfirmation() {
+      //  initComponents();
+    //}
+    public PurchaseConfirmation(DefaultTableModel model){
         initComponents();
+        this.tableFromCreatePurcahse = model;
+        DefaultTableModel table = tableFromCreatePurcahse;
+         System.out.println(table.getValueAt(0,0));
+         System.out.println(table.getValueAt(0,1));
+         System.out.println(table.getValueAt(0,2));
+         System.out.println(table.getValueAt(0,3));
+         System.out.println(table.getValueAt(0,4));
+         System.out.println(table.getRowCount());
+        DefaultTableModel conTable = (DefaultTableModel) purchaseTable.getModel();
+        conTable.setRowCount(table.getRowCount());
+        int row=0;
+        double payable = 0.0;
+        while(row < table.getRowCount()){
+            String id = (String)table.getValueAt(row, 0);
+            String name = (String)table.getValueAt(row, 1);
+            double price = Double.parseDouble((String)table.getValueAt(row, 3));
+            int quan = (Integer)table.getValueAt(row, 4);
+            double totalPrice = price * quan;
+            payable+=totalPrice;
+            conTable.setValueAt(id,row,0);
+            conTable.setValueAt(name,row,1);
+            conTable.setValueAt(price,row,2);
+            conTable.setValueAt(quan,row,3);
+            conTable.setValueAt(totalPrice,row,4);
+            
+        row++;
+        }
+        payableAmount.setText("" + payable);
+        System.out.println(payable);
+        //System.out.println(model.getValueAt(0,0));
     }
 
     /**
@@ -34,7 +71,7 @@ public class PurchaseConfirmation extends javax.swing.JFrame {
         jButton2 = new javax.swing.JButton();
         jButton3 = new javax.swing.JButton();
         jLabel2 = new javax.swing.JLabel();
-        jLabel3 = new javax.swing.JLabel();
+        payableAmount = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -43,8 +80,6 @@ public class PurchaseConfirmation extends javax.swing.JFrame {
 
         purchaseTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null, null},
-                {null, null, null, null, null},
                 {null, null, null, null, null},
                 {null, null, null, null, null}
             },
@@ -63,16 +98,31 @@ public class PurchaseConfirmation extends javax.swing.JFrame {
         jScrollPane1.setViewportView(purchaseTable);
 
         jButton1.setText("BACK");
+        jButton1.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jButton1MouseClicked(evt);
+            }
+        });
 
         jButton2.setText("SAVE & PRINT");
 
         jButton3.setText("SAVE & EXIT");
+        jButton3.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jButton3MouseClicked(evt);
+            }
+        });
+        jButton3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton3ActionPerformed(evt);
+            }
+        });
 
         jLabel2.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabel2.setText("Payable amount :");
 
-        jLabel3.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        jLabel3.setText("ราคารวม");
+        payableAmount.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        payableAmount.setText("ราคารวม");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -95,7 +145,7 @@ public class PurchaseConfirmation extends javax.swing.JFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                             .addComponent(jButton2)
-                            .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 84, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                            .addComponent(payableAmount, javax.swing.GroupLayout.PREFERRED_SIZE, 84, javax.swing.GroupLayout.PREFERRED_SIZE))))
                 .addContainerGap(75, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
@@ -108,7 +158,7 @@ public class PurchaseConfirmation extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel2)
-                    .addComponent(jLabel3))
+                    .addComponent(payableAmount))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 42, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jButton1)
@@ -119,6 +169,41 @@ public class PurchaseConfirmation extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void jButton3MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton3MouseClicked
+        // TODO add your handling code here:
+        // ดึงข้อมูลจาก createPurchase มา สร้าง sql แล้ว insert ลง data base
+        DefaultTableModel table = tableFromCreatePurcahse;
+        DefaultTableModel conTable = (DefaultTableModel) purchaseTable.getModel();
+        int row=0;
+        double payable = 0.0;
+        while(row < table.getRowCount()){
+            String id = (String)table.getValueAt(row, 0);
+            String name = (String)table.getValueAt(row, 1);
+            double price = (Double)table.getValueAt(row, 3);
+            int quan = (Integer)table.getValueAt(row, 4);
+            double totalPrice = price * quan;
+            payable+=totalPrice;
+            conTable.setValueAt(id, row,0);
+            conTable.setValueAt(name, row,1);
+            conTable.setValueAt(price, row,2);
+            conTable.setValueAt(quan, row,3);
+            conTable.setValueAt(totalPrice, row,4);
+            
+        row++;
+        }
+        System.out.println(payable);
+    }//GEN-LAST:event_jButton3MouseClicked
+
+    private void jButton1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton1MouseClicked
+        // TODO add your handling code here:
+        this.dispose();
+        purchaseTable.clearSelection();
+    }//GEN-LAST:event_jButton1MouseClicked
+
+    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jButton3ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -150,7 +235,8 @@ public class PurchaseConfirmation extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new PurchaseConfirmation().setVisible(true);
+                
+                //new PurchaseConfirmation().setVisible(true);
             }
         });
     }
@@ -161,8 +247,8 @@ public class PurchaseConfirmation extends javax.swing.JFrame {
     private javax.swing.JButton jButton3;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
-    private javax.swing.JLabel jLabel3;
     private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JLabel payableAmount;
     private javax.swing.JTable purchaseTable;
     // End of variables declaration//GEN-END:variables
 }
