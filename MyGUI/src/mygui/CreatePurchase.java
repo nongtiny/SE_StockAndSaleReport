@@ -61,9 +61,9 @@ public class CreatePurchase extends javax.swing.JFrame {
         searchList = new javax.swing.JComboBox<>();
         chooseButton = new javax.swing.JButton();
         deleteButton = new javax.swing.JButton();
-        confirmButton = new javax.swing.JButton();
         backButton = new javax.swing.JButton();
         jLabel3 = new javax.swing.JLabel();
+        nextButton = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -120,18 +120,6 @@ public class CreatePurchase extends javax.swing.JFrame {
             }
         });
 
-        confirmButton.setText("Confirm");
-        confirmButton.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                confirmButtonMouseClicked(evt);
-            }
-        });
-        confirmButton.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                confirmButtonActionPerformed(evt);
-            }
-        });
-
         backButton.setText("Back");
         backButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -141,6 +129,13 @@ public class CreatePurchase extends javax.swing.JFrame {
 
         jLabel3.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         jLabel3.setText("Purchase List");
+
+        nextButton.setText("Next");
+        nextButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                nextButtonActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -176,9 +171,10 @@ public class CreatePurchase extends javax.swing.JFrame {
                                             .addComponent(chooseButton, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 87, javax.swing.GroupLayout.PREFERRED_SIZE)))
                                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                                         .addGap(33, 33, 33)
-                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                            .addComponent(confirmButton, javax.swing.GroupLayout.PREFERRED_SIZE, 88, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                            .addComponent(backButton, javax.swing.GroupLayout.PREFERRED_SIZE, 87, javax.swing.GroupLayout.PREFERRED_SIZE))))))))
+                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                            .addComponent(backButton, javax.swing.GroupLayout.DEFAULT_SIZE, 87, Short.MAX_VALUE)
+                                            .addComponent(nextButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                                        .addGap(1, 1, 1)))))))
                 .addContainerGap(37, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
@@ -196,13 +192,13 @@ public class CreatePurchase extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(searchList, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(chooseButton))
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addGroup(layout.createSequentialGroup()
                         .addGap(59, 59, 59)
                         .addComponent(deleteButton)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(confirmButton)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(nextButton)
+                        .addGap(18, 18, 18)
                         .addComponent(backButton))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(11, 11, 11)
@@ -223,10 +219,6 @@ public class CreatePurchase extends javax.swing.JFrame {
     private void searchButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_searchButtonActionPerformed
         this.setForSearch((String) searchByList.getSelectedItem(), searchBox.getText());
     }//GEN-LAST:event_searchButtonActionPerformed
-
-    private void confirmButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_confirmButtonActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_confirmButtonActionPerformed
 
     private void backButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_backButtonActionPerformed
         this.dispose();
@@ -260,12 +252,10 @@ public class CreatePurchase extends javax.swing.JFrame {
         //this.moveDownwards();
     }//GEN-LAST:event_moveDownButtonActionPerformed
 
-    private void confirmButtonMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_confirmButtonMouseClicked
-        // TODO add your handling code here:
-        //เรียกหน้า purchase confirmation ma 
-        
-        new PurchaseConfirmation((DefaultTableModel) this.getTable()).setVisible(true);
-    }//GEN-LAST:event_confirmButtonMouseClicked
+    private void nextButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_nextButtonActionPerformed
+        new PurchaseConfirmation((DefaultTableModel)this.getTable()).show();
+        //this.dispose();
+    }//GEN-LAST:event_nextButtonActionPerformed
 
 //=======
 //>>>>>>> 5bf371d0428e6e05d2f38c07de66f5210f938d1f
@@ -436,10 +426,17 @@ public class CreatePurchase extends javax.swing.JFrame {
         String sql;
         for (int i = 0; i < chooseTable.getRowCount(); i++) {
             int j = 0;
+            String receiptIdAsString = new Integer(recieptID).toString();
             while (j < chooseTable.getColumnCount()) {
+                String proID;
+                proID = ""+chooseTable.getValueAt(i, j+=3).toString();
+                String proPrice;
+                proPrice = ""+chooseTable.getValueAt(i, j++).toString();
+                String purQuan;
+                purQuan = ""+chooseTable.getValueAt(i, j++).toString();
                 sql = "insert into APP.CREATEPURCHASE values ('"
-                        + recieptID + "', '" + chooseTable.getValueAt(i, j+=3) + "', " + chooseTable.getValueAt(i, j++) + ", "
-                        + chooseTable.getValueAt(i, j++) + ", '" + getCurrentDate() + "')";
+                        + receiptIdAsString + "', '" + proID + "', '" + proPrice + "', '"
+                        + purQuan + "', '" + getCurrentDate() + "')";
                 try {
                     Connection con = StockAndAccountSystem.getConnect();
                     Statement stm = con.createStatement();
@@ -460,12 +457,12 @@ public class CreatePurchase extends javax.swing.JFrame {
     private javax.swing.JButton backButton;
     private javax.swing.JButton chooseButton;
     private javax.swing.JTable chooseTable;
-    private javax.swing.JButton confirmButton;
     private javax.swing.JButton deleteButton;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JScrollPane jScrollPane2;
+    private javax.swing.JButton nextButton;
     private javax.swing.JTextField searchBox;
     private javax.swing.JButton searchButton;
     private javax.swing.JComboBox<String> searchByList;
