@@ -367,19 +367,7 @@ public class CreatePurchase extends javax.swing.JFrame {
         showRow++;
     }
 
-    public void editQuantity() {
-//        int row1 = chooseTable.getSelectedRow();
-//        int row2 = quantityTable.getSelectedRow();
-//        if (row1 > -1) {
-//            int input = Integer.parseInt(JOptionPane.showInputDialog("Please input the quantity"));
-//            quantityTable.setValueAt(input, row1, 0);
-//        } else if (row2 > -1) {
-//            int input = Integer.parseInt(JOptionPane.showInputDialog("Please input the quantity"));
-//            quantityTable.setValueAt(input, row2, 0);
-//        } else {
-//            JOptionPane.showMessageDialog(null, "Please select a record!");
-//        }
-    }
+ 
 
     public void deleteSelectedRow() {
         int row = chooseTable.getSelectedRow();
@@ -490,8 +478,8 @@ public class CreatePurchase extends javax.swing.JFrame {
         for (int i = 0; i < chooseTable.getRowCount(); i++) {
             int j = 0;
             while (j < chooseTable.getColumnCount()) {
-                sql = "insert into APP.SALEREPORT2 values ('"
-                        + recieptID + "', '" + chooseTable.getValueAt(i, j++) + "', " + chooseTable.getValueAt(i, j++) + ", "
+                sql = "insert into APP.CREATEPURCHASE values ('"
+                        + recieptID + "', '" + chooseTable.getValueAt(i, j+=2) + "', " + chooseTable.getValueAt(i, j++) + ", "
                         + chooseTable.getValueAt(i, j++) + ", '" + getCurrentDate() + "')";
                 try {
                     Connection con = StockAndAccountSystem.getConnect();
