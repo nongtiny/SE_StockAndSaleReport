@@ -62,8 +62,6 @@ public class CreatePurchase extends javax.swing.JFrame {
         deleteButton = new javax.swing.JButton();
         confirmButton = new javax.swing.JButton();
         backButton = new javax.swing.JButton();
-        moveUpButton = new javax.swing.JButton();
-        moveDownButton = new javax.swing.JButton();
         jLabel3 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -135,20 +133,6 @@ public class CreatePurchase extends javax.swing.JFrame {
             }
         });
 
-        moveUpButton.setText("Move up");
-        moveUpButton.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                moveUpButtonActionPerformed(evt);
-            }
-        });
-
-        moveDownButton.setText("Move down");
-        moveDownButton.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                moveDownButtonActionPerformed(evt);
-            }
-        });
-
         jLabel3.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         jLabel3.setText("Purchase List");
 
@@ -182,10 +166,7 @@ public class CreatePurchase extends javax.swing.JFrame {
                                     .addGroup(layout.createSequentialGroup()
                                         .addGap(34, 34, 34)
                                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                                .addComponent(moveDownButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                                .addComponent(moveUpButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                                .addComponent(deleteButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                                            .addComponent(deleteButton, javax.swing.GroupLayout.PREFERRED_SIZE, 89, javax.swing.GroupLayout.PREFERRED_SIZE)
                                             .addComponent(chooseButton, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 87, javax.swing.GroupLayout.PREFERRED_SIZE)))
                                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                                         .addGap(33, 33, 33)
@@ -213,10 +194,6 @@ public class CreatePurchase extends javax.swing.JFrame {
                     .addGroup(layout.createSequentialGroup()
                         .addGap(59, 59, 59)
                         .addComponent(deleteButton)
-                        .addGap(24, 24, 24)
-                        .addComponent(moveUpButton)
-                        .addGap(18, 18, 18)
-                        .addComponent(moveDownButton)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(confirmButton)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
@@ -267,14 +244,6 @@ public class CreatePurchase extends javax.swing.JFrame {
     private void deleteButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_deleteButtonActionPerformed
         this.removeSelectedRows();
     }//GEN-LAST:event_deleteButtonActionPerformed
-
-    private void moveUpButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_moveUpButtonActionPerformed
-        this.moveUpwards();
-    }//GEN-LAST:event_moveUpButtonActionPerformed
-
-    private void moveDownButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_moveDownButtonActionPerformed
-        this.moveDownwards();
-    }//GEN-LAST:event_moveDownButtonActionPerformed
 
     /**
      * @param args the command line arguments
@@ -361,26 +330,6 @@ public class CreatePurchase extends javax.swing.JFrame {
         }
     }
 
-    public void moveUpwards() {
-        moveRowBy(-1);
-    }
-
-    public void moveDownwards() {
-        moveRowBy(1);
-    }
-
-    private void moveRowBy(int by) {
-        DefaultTableModel model = (DefaultTableModel) chooseTable.getModel();
-        int[] rows = chooseTable.getSelectedRows();
-        int destination = rows[0] + by;
-        int rowCount = model.getRowCount();
-        if (destination < 0 || destination >= rowCount) {
-            return;
-        }
-
-        model.moveRow(rows[0], rows[rows.length - 1], destination);
-        chooseTable.setRowSelectionInterval(rows[0] + by, rows[rows.length - 1] + by);
-    }
 
     public static void clearTable(JTable table) {
         for (int i = 0; i < table.getRowCount(); i++) {
@@ -489,8 +438,6 @@ public class CreatePurchase extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JScrollPane jScrollPane2;
-    private javax.swing.JButton moveDownButton;
-    private javax.swing.JButton moveUpButton;
     private javax.swing.JTextField searchBox;
     private javax.swing.JButton searchButton;
     private javax.swing.JComboBox<String> searchByList;
