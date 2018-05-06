@@ -13,6 +13,8 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.logging.Level;
@@ -33,8 +35,8 @@ public class CreatePurchase extends javax.swing.JFrame {
      */
     ResultSet results;
     int showRow = 0;
-    public static int recieptID=1;
-    
+    public static int recieptID = 1;
+
     public CreatePurchase() {
         initComponents();
         showData();
@@ -59,9 +61,6 @@ public class CreatePurchase extends javax.swing.JFrame {
         searchList = new javax.swing.JComboBox<>();
         chooseButton = new javax.swing.JButton();
         deleteButton = new javax.swing.JButton();
-        editButton = new javax.swing.JButton();
-        jScrollPane1 = new javax.swing.JScrollPane();
-        quantityTable = new javax.swing.JTable();
         confirmButton = new javax.swing.JButton();
         backButton = new javax.swing.JButton();
         moveUpButton = new javax.swing.JButton();
@@ -93,32 +92,32 @@ public class CreatePurchase extends javax.swing.JFrame {
 
         chooseTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null}
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null}
             },
             new String [] {
-                "ID", "Name", "Type", "Price"
+                "ID", "Name", "Type", "Price", "Quantity"
             }
         ) {
             Class[] types = new Class [] {
-                java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class
+                java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.Integer.class
             };
 
             public Class getColumnClass(int columnIndex) {
@@ -140,49 +139,6 @@ public class CreatePurchase extends javax.swing.JFrame {
                 deleteButtonActionPerformed(evt);
             }
         });
-
-        editButton.setText("Edit");
-        editButton.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                editButtonActionPerformed(evt);
-            }
-        });
-
-        quantityTable.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
-                {null},
-                {null},
-                {null},
-                {null},
-                {null},
-                {null},
-                {null},
-                {null},
-                {null},
-                {null},
-                {null},
-                {null},
-                {null},
-                {null},
-                {null},
-                {null},
-                {null},
-                {null},
-                {null}
-            },
-            new String [] {
-                "Quantity"
-            }
-        ) {
-            Class[] types = new Class [] {
-                java.lang.Integer.class
-            };
-
-            public Class getColumnClass(int columnIndex) {
-                return types [columnIndex];
-            }
-        });
-        jScrollPane1.setViewportView(quantityTable);
 
         confirmButton.setText("Confirm");
         confirmButton.addActionListener(new java.awt.event.ActionListener() {
@@ -236,13 +192,10 @@ public class CreatePurchase extends javax.swing.JFrame {
                                 .addComponent(searchButton))
                             .addGroup(layout.createSequentialGroup()
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                    .addComponent(searchList, 0, 459, Short.MAX_VALUE)
+                                    .addComponent(jScrollPane2)
                                     .addGroup(layout.createSequentialGroup()
-                                        .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 348, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addGap(29, 29, 29)
-                                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 82, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                    .addComponent(searchList, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                    .addGroup(layout.createSequentialGroup()
-                                        .addGap(139, 139, 139)
+                                        .addGap(177, 177, 177)
                                         .addComponent(jLabel3)))
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addGroup(layout.createSequentialGroup()
@@ -251,8 +204,7 @@ public class CreatePurchase extends javax.swing.JFrame {
                                             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                                                 .addComponent(moveDownButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                                 .addComponent(moveUpButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                                .addComponent(deleteButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                                .addComponent(editButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                                                .addComponent(deleteButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                                             .addComponent(chooseButton, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 87, javax.swing.GroupLayout.PREFERRED_SIZE)))
                                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                                         .addGap(33, 33, 33)
@@ -276,11 +228,9 @@ public class CreatePurchase extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(searchList, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(chooseButton))
-                .addGap(18, 18, 18)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(editButton)
-                        .addGap(18, 18, 18)
+                        .addGap(59, 59, 59)
                         .addComponent(deleteButton)
                         .addGap(24, 24, 24)
                         .addComponent(moveUpButton)
@@ -290,12 +240,11 @@ public class CreatePurchase extends javax.swing.JFrame {
                         .addComponent(confirmButton)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(backButton))
-                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 340, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGroup(layout.createSequentialGroup()
-                            .addComponent(jLabel3)
-                            .addGap(4, 4, 4)
-                            .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 340, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(11, 11, 11)
+                        .addComponent(jLabel3)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 340, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap(36, Short.MAX_VALUE))
         );
 
@@ -311,10 +260,6 @@ public class CreatePurchase extends javax.swing.JFrame {
         this.setForSearch((String) searchByList.getSelectedItem(), searchBox.getText());
     }//GEN-LAST:event_searchButtonActionPerformed
 
-    private void editButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_editButtonActionPerformed
-        this.editQuantity();
-    }//GEN-LAST:event_editButtonActionPerformed
-
     private void confirmButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_confirmButtonActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_confirmButtonActionPerformed
@@ -325,16 +270,16 @@ public class CreatePurchase extends javax.swing.JFrame {
     }//GEN-LAST:event_backButtonActionPerformed
 
     private void chooseButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_chooseButtonActionPerformed
-        String chooseId="";
-        chooseId=(String) searchList.getSelectedItem();
+        String chooseId = "";
+        chooseId = (String) searchList.getSelectedItem();
         int end = 0;
-        for(int i=0; i<chooseId.length(); i++){
-            if(chooseId.charAt(i) == 32){
-                end=i;
+        for (int i = 0; i < chooseId.length(); i++) {
+            if (chooseId.charAt(i) == 32) {
+                end = i;
                 break;
-            } 
+            }
         }
-        chooseId=chooseId.substring(0, end);
+        chooseId = chooseId.substring(0, end);
         this.addToTable(chooseId);
     }//GEN-LAST:event_chooseButtonActionPerformed
 
@@ -388,45 +333,52 @@ public class CreatePurchase extends javax.swing.JFrame {
     public void addToTable(String data) {
         int showCol = 0;
         int input = Integer.parseInt(JOptionPane.showInputDialog("Please input the quantity"));
-        
-        String sql = "select * from Stock where productID = '" + data + "'";  
+
+        String sql = "select * from Stock where productID = '" + data + "'";
         System.out.println(sql);
         try {
             Connection con = StockAndAccountSystem.getConnect();
-            Statement stm =con.createStatement();
-            results=stm.executeQuery(sql);
+            Statement stm = con.createStatement();
+            results = stm.executeQuery(sql);
             String proId, proName, price, type;
-            while(results.next()){
-                int j=0;
-                proId=results.getString(1);             proName=results.getString(2);
-                price=results.getString(4);             type=results.getString(5);           
-                chooseTable.setValueAt(proId, showRow, j); j++;
-                chooseTable.setValueAt(proName, showRow, j); j++;
-                chooseTable.setValueAt(type, showRow, j); j++;
-                chooseTable.setValueAt(price, showRow, j); j++;
+            while (results.next()) {
+                int j = 0;
+                proId = results.getString(1);
+                proName = results.getString(2);
+                price = results.getString(4);
+                type = results.getString(5);
+                chooseTable.setValueAt(proId, showRow, j);
+                j++;
+                chooseTable.setValueAt(proName, showRow, j);
+                j++;
+                chooseTable.setValueAt(type, showRow, j);
+                j++;
+                chooseTable.setValueAt(price, showRow, j);
+                j++;
+                chooseTable.setValueAt(input, showRow, j);
+                j++;
             }
-            
-            JOptionPane.showMessageDialog(null,"Record Inserted Successfully");
-        }   catch (SQLException ex) {
+
+            JOptionPane.showMessageDialog(null, "Record Inserted Successfully");
+        } catch (SQLException ex) {
             Logger.getLogger(AddProduct.class.getName()).log(Level.SEVERE, null, ex);
         }
-        
-        quantityTable.getModel().setValueAt(input, showRow, showCol);
+
         showRow++;
     }
 
     public void editQuantity() {
-        int row1 = chooseTable.getSelectedRow();
-        int row2 = quantityTable.getSelectedRow();
-        if (row1 > -1) {
-            int input = Integer.parseInt(JOptionPane.showInputDialog("Please input the quantity"));
-            quantityTable.setValueAt(input, row1, 0);
-        } else if (row2 > -1) {
-            int input = Integer.parseInt(JOptionPane.showInputDialog("Please input the quantity"));
-            quantityTable.setValueAt(input, row2, 0);
-        } else {
-            JOptionPane.showMessageDialog(null, "Please select a record!");
-        }
+//        int row1 = chooseTable.getSelectedRow();
+//        int row2 = quantityTable.getSelectedRow();
+//        if (row1 > -1) {
+//            int input = Integer.parseInt(JOptionPane.showInputDialog("Please input the quantity"));
+//            quantityTable.setValueAt(input, row1, 0);
+//        } else if (row2 > -1) {
+//            int input = Integer.parseInt(JOptionPane.showInputDialog("Please input the quantity"));
+//            quantityTable.setValueAt(input, row2, 0);
+//        } else {
+//            JOptionPane.showMessageDialog(null, "Please select a record!");
+//        }
     }
 
     public void deleteSelectedRow() {
@@ -435,7 +387,7 @@ public class CreatePurchase extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(null, "Please select a record!");
         } else {
             chooseTable.setValueAt("", row, 0);
-            quantityTable.setValueAt("", row, 0);
+
         }
     }
 
@@ -449,7 +401,6 @@ public class CreatePurchase extends javax.swing.JFrame {
 
     private void moveRowBy(int by) {
         DefaultTableModel model = (DefaultTableModel) chooseTable.getModel();
-        DefaultTableModel model2 = (DefaultTableModel) quantityTable.getModel();
         int[] rows = chooseTable.getSelectedRows();
         int destination = rows[0] + by;
         int rowCount = model.getRowCount();
@@ -458,9 +409,7 @@ public class CreatePurchase extends javax.swing.JFrame {
         }
 
         model.moveRow(rows[0], rows[rows.length - 1], destination);
-        model2.moveRow(rows[0], rows[rows.length - 1], destination);
         chooseTable.setRowSelectionInterval(rows[0] + by, rows[rows.length - 1] + by);
-        quantityTable.setRowSelectionInterval(rows[0] + by, rows[rows.length - 1] + by);
     }
 
     public static void clearTable(JTable table) {
@@ -491,8 +440,9 @@ public class CreatePurchase extends javax.swing.JFrame {
             System.out.println("Connect failed ! ");
         }
     }
-    
+
     String proId, proName, amount, price, type;
+
     public void setForSearch(String searchBy, String word) {
         searchList.removeAllItems();
         String sql = "";
@@ -529,35 +479,34 @@ public class CreatePurchase extends javax.swing.JFrame {
             System.out.println("Connection failed ! ");
         }
     }
-    
-//    public String getCurrentDate(){
-//        DateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
-//	Calendar cal = Calendar.getInstance();
-//	System.out.println(dateFormat.format(cal)); //2016/11/16 12:08:43
-//    }
-    
-    public void addToDatabase(String proID, String purQuan, String proPrice, String totalEach, String totalPur){
-        int productID = Integer.parseInt(proID);
-        int purchaseQuantity = Integer.parseInt(purQuan);
-        double productPrice = Double.parseDouble(proPrice);
-        double totalEachProduct = Double.parseDouble(totalEach);
-        double totalPurchase = Double.parseDouble(totalPur);
-        
-        String sql = "insert into APP.SALEREPORT2 values ('" 
-                + recieptID + "', '" + productID + "', " + purchaseQuantity + ", " + productPrice + ", '" + totalEachProduct 
-                + "', '"+ totalPurchase + "', '" + purDate +"')";
-        //System.out.println(sql);
-        try {
-            Connection con = StockAndAccountSystem.getConnect();
-            Statement stm =con.createStatement();
-            stm.executeUpdate(sql);
-            JOptionPane.showMessageDialog(null,"Record Inserted Successfully");
-    }   catch (SQLException ex) {
-            Logger.getLogger(AddProduct.class.getName()).log(Level.SEVERE, null, ex);
-        }
+
+    public String getCurrentDate() {
+        LocalDate localDate = LocalDate.now();
+        return DateTimeFormatter.ofPattern("dd/MM/yyyy").format(localDate);
     }
 
-    
+    public void addToDatabase() {
+        String sql;
+        for (int i = 0; i < chooseTable.getRowCount(); i++) {
+            int j = 0;
+            while (j < chooseTable.getColumnCount()) {
+                sql = "insert into APP.SALEREPORT2 values ('"
+                        + recieptID + "', '" + chooseTable.getValueAt(i, j++) + "', " + chooseTable.getValueAt(i, j++) + ", "
+                        + chooseTable.getValueAt(i, j++) + ", '" + getCurrentDate() + "')";
+                try {
+                    Connection con = StockAndAccountSystem.getConnect();
+                    Statement stm = con.createStatement();
+                    stm.executeUpdate(sql);
+                    JOptionPane.showMessageDialog(null, "Record Inserted Successfully");
+                } catch (SQLException ex) {
+                    Logger.getLogger(CreatePurchase.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            }
+        }
+
+        //System.out.println(sql);
+        
+    }
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -566,15 +515,12 @@ public class CreatePurchase extends javax.swing.JFrame {
     private javax.swing.JTable chooseTable;
     private javax.swing.JButton confirmButton;
     private javax.swing.JButton deleteButton;
-    private javax.swing.JButton editButton;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
-    private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JButton moveDownButton;
     private javax.swing.JButton moveUpButton;
-    private javax.swing.JTable quantityTable;
     private javax.swing.JTextField searchBox;
     private javax.swing.JButton searchButton;
     private javax.swing.JComboBox<String> searchByList;
