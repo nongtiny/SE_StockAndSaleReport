@@ -79,6 +79,11 @@ public class Menu extends javax.swing.JFrame {
         saleReportButton.setFont(new java.awt.Font("supermarket", 0, 24)); // NOI18N
         saleReportButton.setForeground(new java.awt.Color(0, 102, 102));
         saleReportButton.setText("SALE REPORT");
+        saleReportButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                saleReportButtonActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
@@ -122,7 +127,7 @@ public class Menu extends javax.swing.JFrame {
             .addGroup(jPanel5Layout.createSequentialGroup()
                 .addGap(19, 19, 19)
                 .addComponent(jLabel1)
-                .addContainerGap(19, Short.MAX_VALUE))
+                .addContainerGap(37, Short.MAX_VALUE))
         );
 
         logoutButton.setBackground(new java.awt.Color(255, 255, 255));
@@ -141,7 +146,7 @@ public class Menu extends javax.swing.JFrame {
             .addComponent(jPanel5, javax.swing.GroupLayout.DEFAULT_SIZE, 730, Short.MAX_VALUE)
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 91, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 151, Short.MAX_VALUE)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(stockButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(logoutButton, javax.swing.GroupLayout.DEFAULT_SIZE, 210, Short.MAX_VALUE))
@@ -211,6 +216,10 @@ public class Menu extends javax.swing.JFrame {
     private void stockButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_stockButtonActionPerformed
 
     }//GEN-LAST:event_stockButtonActionPerformed
+
+    private void saleReportButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_saleReportButtonActionPerformed
+        new SaleReport().setVisible(true);
+    }//GEN-LAST:event_saleReportButtonActionPerformed
 
     /**
      * @param args the command line arguments

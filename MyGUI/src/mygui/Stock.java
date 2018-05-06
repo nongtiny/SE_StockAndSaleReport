@@ -41,7 +41,7 @@ public class Stock extends javax.swing.JFrame {
         jLabel1 = new javax.swing.JLabel();
         jPanel2 = new javax.swing.JPanel();
         jLabel2 = new javax.swing.JLabel();
-        searchByList = new javax.swing.JComboBox<>();
+        searchByList = new javax.swing.JComboBox<String>();
         searchBox = new javax.swing.JTextField();
         searchButton = new javax.swing.JButton();
         editBotton = new javax.swing.JButton();
@@ -72,7 +72,7 @@ public class Stock extends javax.swing.JFrame {
         jLabel2.setText("Search By");
 
         searchByList.setFont(new java.awt.Font("Sukhumvit Set", 0, 12)); // NOI18N
-        searchByList.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "...", "ID", "Name", "Amount", "Price", "Type", "AddedDate" }));
+        searchByList.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "...", "ID", "Name", "Amount", "Price", "Type", "AddedDate" }));
         searchByList.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 searchByListActionPerformed(evt);
@@ -259,7 +259,7 @@ public class Stock extends javax.swing.JFrame {
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addContainerGap(29, Short.MAX_VALUE)
+                .addContainerGap(28, Short.MAX_VALUE)
                 .addComponent(jLabel1)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
