@@ -10,6 +10,7 @@ import java.sql.Statement;
 import java.util.Date;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableModel;
+import com.itextpdf.text.pdf.PdfWriter;
 
 /**
  *
@@ -74,7 +75,7 @@ public class PurchaseConfirmation extends javax.swing.JFrame {
         jScrollPane1 = new javax.swing.JScrollPane();
         purchaseTable = new javax.swing.JTable();
         jButton1 = new javax.swing.JButton();
-        jButton3 = new javax.swing.JButton();
+        confirmButton = new javax.swing.JButton();
         jLabel2 = new javax.swing.JLabel();
         payableAmount = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
@@ -125,15 +126,15 @@ public class PurchaseConfirmation extends javax.swing.JFrame {
             }
         });
 
-        jButton3.setText("CONFIRM");
-        jButton3.addMouseListener(new java.awt.event.MouseAdapter() {
+        confirmButton.setText("CONFIRM");
+        confirmButton.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                jButton3MouseClicked(evt);
+                confirmButtonMouseClicked(evt);
             }
         });
-        jButton3.addActionListener(new java.awt.event.ActionListener() {
+        confirmButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton3ActionPerformed(evt);
+                confirmButtonActionPerformed(evt);
             }
         });
 
@@ -171,7 +172,7 @@ public class PurchaseConfirmation extends javax.swing.JFrame {
                                 .addComponent(jLabel2)
                                 .addGap(27, 27, 27)
                                 .addComponent(payableAmount, javax.swing.GroupLayout.PREFERRED_SIZE, 84, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addComponent(jButton3, javax.swing.GroupLayout.Alignment.TRAILING))))
+                            .addComponent(confirmButton, javax.swing.GroupLayout.Alignment.TRAILING))))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
@@ -194,7 +195,7 @@ public class PurchaseConfirmation extends javax.swing.JFrame {
                     .addComponent(payableAmount))
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jButton3)
+                    .addComponent(confirmButton)
                     .addComponent(jButton1))
                 .addContainerGap(21, Short.MAX_VALUE))
         );
@@ -202,7 +203,7 @@ public class PurchaseConfirmation extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jButton3MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton3MouseClicked
+    private void confirmButtonMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_confirmButtonMouseClicked
         // TODO add your handling code here:
         // ดึงข้อมูลจาก createPurchase มา สร้าง sql แล้ว insert ลง data base
         String reciptID = ""+CreatePurchase.recieptID;
@@ -216,7 +217,7 @@ public class PurchaseConfirmation extends javax.swing.JFrame {
             double price = Double.parseDouble((String)conTable.getValueAt(row, 2));
             int quan = (Integer) conTable.getValueAt(row, 3);
             double totalPrice = Double.parseDouble((String)conTable.getValueAt(row,4));
-             String sql = "insert into SALEREPORT values ('" 
+            String sql = "insert into SALEREPORT values ('" 
                 + reciptID + "', '" + proid + "', '" +  price + "', '" + totalPrice + "', '" + payable + "', '"+ quan + "', '"+ date + "')";
             try {
                 Connection con = StockAndAccountSystem.getConnect();
@@ -229,7 +230,7 @@ public class PurchaseConfirmation extends javax.swing.JFrame {
             row++;
         }
         
-    }//GEN-LAST:event_jButton3MouseClicked
+    }//GEN-LAST:event_confirmButtonMouseClicked
 
     private void jButton1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton1MouseClicked
         // TODO add your handling code here:
@@ -237,9 +238,9 @@ public class PurchaseConfirmation extends javax.swing.JFrame {
         purchaseTable.clearSelection();
     }//GEN-LAST:event_jButton1MouseClicked
 
-    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
+    private void confirmButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_confirmButtonActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jButton3ActionPerformed
+    }//GEN-LAST:event_confirmButtonActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
@@ -282,8 +283,8 @@ public class PurchaseConfirmation extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton confirmButton;
     private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton3;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;

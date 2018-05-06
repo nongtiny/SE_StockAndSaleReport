@@ -187,8 +187,7 @@ public class Login extends javax.swing.JFrame {
             jPasswordField.setText(null);
             systemExit();
             
-            Menu info = new Menu();
-            info.setVisible(true);
+            new Menu().show();
         }
         else{
             JOptionPane.showMessageDialog(null,"Invalid Login Details", "Error!", JOptionPane.ERROR_MESSAGE);
