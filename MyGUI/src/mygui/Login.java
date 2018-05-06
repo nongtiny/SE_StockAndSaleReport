@@ -236,8 +236,7 @@ public class Login extends javax.swing.JFrame {
     }
     
     private void systemExit(){
-        WindowEvent winClosing = new WindowEvent(this, WindowEvent.WINDOW_CLOSING);
-        winClosing.getWindow().setVisible(false);
+        this.dispose();
     }
     
         
