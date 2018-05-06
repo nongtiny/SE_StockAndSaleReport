@@ -251,13 +251,13 @@ public class CreatePurchase extends javax.swing.JFrame {
         this.removeSelectedRows();
     }//GEN-LAST:event_deleteButtonActionPerformed
 
-<<<<<<< HEAD
+//<<<<<<< HEAD
     private void moveUpButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_moveUpButtonActionPerformed
-        this.moveUpwards();
+        //this.moveUpwards();
     }//GEN-LAST:event_moveUpButtonActionPerformed
 
     private void moveDownButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_moveDownButtonActionPerformed
-        this.moveDownwards();
+        //this.moveDownwards();
     }//GEN-LAST:event_moveDownButtonActionPerformed
 
     private void confirmButtonMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_confirmButtonMouseClicked
@@ -267,8 +267,8 @@ public class CreatePurchase extends javax.swing.JFrame {
         new PurchaseConfirmation((DefaultTableModel) this.getTable()).setVisible(true);
     }//GEN-LAST:event_confirmButtonMouseClicked
 
-=======
->>>>>>> 5bf371d0428e6e05d2f38c07de66f5210f938d1f
+//=======
+//>>>>>>> 5bf371d0428e6e05d2f38c07de66f5210f938d1f
     /**
      * @param args the command line arguments
      */
