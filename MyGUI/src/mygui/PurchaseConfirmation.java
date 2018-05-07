@@ -5,12 +5,29 @@
  */
 package mygui;
 
+import com.itextpdf.text.BaseColor;
+import com.itextpdf.text.Chunk;
+import com.itextpdf.text.PageSize;
 import java.sql.Connection;
 import java.sql.Statement;
 import java.util.Date;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableModel;
 import com.itextpdf.text.pdf.PdfWriter;
+import java.io.File;
+import com.itextpdf.text.Document;
+import com.itextpdf.text.Element;
+import com.itextpdf.text.FontFactory;
+import com.itextpdf.text.Image;
+import com.itextpdf.text.Paragraph;
+import com.itextpdf.text.Phrase;
+import com.itextpdf.text.pdf.PdfPCell;
+import com.itextpdf.text.pdf.PdfPTable;
+import com.itextpdf.text.Font;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.OutputStream;
+import static javax.swing.text.StyleConstants.FontFamily;
 
 /**
  *
@@ -23,6 +40,13 @@ public class PurchaseConfirmation extends javax.swing.JFrame {
      */
     DefaultTableModel tableFromCreatePurcahse;
     double payable;
+    //===================== PDF ===============================
+    public String DEST;
+    public static final String REGULAR = "C:\\Windows\\Fonts\\ccalibri.ttf";
+    public static final String BOLD = "C:\\Windows\\Fonts\\calibrib.ttf";
+    public static final String NEWLINE = "\n";
+    String recieptID;
+    //=========================================================
     //public PurchaseConfirmation() {
     //  initComponents();
     //}
@@ -34,7 +58,7 @@ public class PurchaseConfirmation extends javax.swing.JFrame {
         DefaultTableModel conTable = (DefaultTableModel) purchaseTable.getModel();
         conTable.setRowCount(table.getRowCount());
         int row = 0;
-        double payable = 0.0;
+        payable = 0.0;
         while (row < table.getRowCount()) {
             String id = (String) table.getValueAt(row, 0);
             String name = (String) table.getValueAt(row, 1);
@@ -52,10 +76,19 @@ public class PurchaseConfirmation extends javax.swing.JFrame {
         }
         payableAmount.setText("" + payable);
         Date date = new Date();
-        purchaseID.setText("" + date.getDay() + "" + date.getMonth() + "" + date.getYear() + "" + CreatePurchase.recieptID);
+        recieptID = "" + date.getDay() + "" + date.getMonth() + "" + date.getYear() + "" + CreatePurchase.recieptIDIncrement;
+        purchaseID.setText(recieptID);
         System.out.println(payable);
         //System.out.println(model.getValueAt(0,0));
     }
+
+    public double getPayable() {
+        return payable;
+    }
+
+    
+    
+    
 
     public void addToDatabase() {
 
@@ -206,30 +239,148 @@ public class PurchaseConfirmation extends javax.swing.JFrame {
     private void confirmButtonMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_confirmButtonMouseClicked
         // TODO add your handling code here:
         // ดึงข้อมูลจาก createPurchase มา สร้าง sql แล้ว insert ลง data base
-        String reciptID = ""+CreatePurchase.recieptID;
-        CreatePurchase.recieptID++;
+        String reciptID = recieptID;
+        CreatePurchase.recieptIDIncrement++;
         DefaultTableModel conTable = (DefaultTableModel) purchaseTable.getModel();
         int row = 0;
-         Date date = new Date();
-        while (row < purchaseTable.getRowCount()) {
-            String proid = (String) conTable.getValueAt(row, 0);
-            String name = (String) conTable.getValueAt(row, 1);
-            double price = Double.parseDouble((String)conTable.getValueAt(row, 2));
-            int quan = (Integer) conTable.getValueAt(row, 3);
-            double totalPrice = Double.parseDouble((String)conTable.getValueAt(row,4));
-            String sql = "insert into SALEREPORT values ('" 
-                + reciptID + "', '" + proid + "', '" +  price + "', '" + totalPrice + "', '" + payable + "', '"+ quan + "', '"+ date + "')";
-            try {
-                Connection con = StockAndAccountSystem.getConnect();
-                Statement stm = con.createStatement();
-                stm.executeUpdate(sql);
-                //Statement results = stm.executeQuery(sql);
-            } catch (Exception e) {
-                System.out.println("Connect failed ! ");
+        Date date = new Date();
+        //===================== PDF ===============================
+        DEST = "D:\\เรียน\\Sophomore\\Term2\\SE\\receiptID" + reciptID + ".pdf";
+        try {
+            FileOutputStream out = new FileOutputStream(DEST);
+            Document doc = new Document();
+            PdfWriter writer = PdfWriter.getInstance(doc, out);
+            doc.open();
+            Font font14pt = FontFactory.getFont(BOLD, 14, com.itextpdf.text.Font.NORMAL, BaseColor.BLACK);
+            Font font10pt = FontFactory.getFont(REGULAR, 10, com.itextpdf.text.Font.NORMAL, BaseColor.BLACK);
+            Font font8pt = FontFactory.getFont(REGULAR, 8, com.itextpdf.text.Font.NORMAL, BaseColor.BLACK);
+            Font font8ptB = FontFactory.getFont(REGULAR, 8, com.itextpdf.text.Font.BOLD, BaseColor.BLACK);
+            Font th = FontFactory.getFont(BOLD, 14, com.itextpdf.text.Font.NORMAL, BaseColor.WHITE);
+            Font td = FontFactory.getFont(REGULAR, 10, com.itextpdf.text.Font.NORMAL, BaseColor.BLACK);
+
+            Image logo = Image.getInstance("D:\\เรียน\\Sophomore\\Term2\\SE\\minato.jpg");
+            logo.setAlignment(Image.ALIGN_RIGHT);
+            logo.setAbsolutePosition(450f, 10f);
+            logo.scalePercent(13, 13);
+            Chunk pic = new Chunk(logo, 350, -70);
+            Paragraph receiptID = new Paragraph();
+            receiptID.add(new Phrase("RECEIPT", font14pt));
+            receiptID.add(new Phrase("\t\t\t\t\t\t\t\t\t\t\t"));
+            receiptID.add(new Phrase("\t\t\t\t\t\t\t\t\t\t\t"));
+            receiptID.add(new Phrase("No: "+reciptID, font10pt));
+            receiptID.add(pic);
+
+            Paragraph storeAddress = new Paragraph();
+            storeAddress.add(NEWLINE);
+            storeAddress.add("DEE CHAROEN CO.,LTD");
+            storeAddress.add(NEWLINE);
+            storeAddress.add(new Phrase("364-366  Charoenruk Rd.  "
+                                      + "Klong tonsai  Klongsan\n"
+                                      + "Bangkok  10600",font8pt ));
+            storeAddress.add(NEWLINE);
+            storeAddress.add(new Phrase("Tel: 02-457-1455\n"
+                           + "Phone: 085-155-9313\n"
+                           + "Fax: 02-438-1290",font8pt));
+             storeAddress.add(NEWLINE);
+            storeAddress.add(new Phrase("LINE: Kritboonchai"
+                           + "E-mail: Kritboonchai@gmail.com",font8ptB));
+            storeAddress.add(NEWLINE);
+            storeAddress.add(NEWLINE);
+            storeAddress.add(NEWLINE);
+            storeAddress.add(NEWLINE);
+
+            PdfPTable table = new PdfPTable(2);
+            table.setTotalWidth(new float[]{380, 150});
+            table.setLockedWidth(true);
+            // first row
+            PdfPCell cell = new PdfPCell(new Phrase("Description", th));
+            cell.setFixedHeight(30);
+            cell.setColspan(1);
+            cell.setVerticalAlignment(Element.ALIGN_CENTER);
+            cell.setHorizontalAlignment(Element.ALIGN_CENTER);
+            cell.setBackgroundColor(BaseColor.BLACK);
+            cell.setBorderColor(BaseColor.WHITE);
+            table.addCell(cell);
+            cell = new PdfPCell(new Phrase("Amount", th));
+            cell.setFixedHeight(30);
+            cell.setColspan(1);
+            cell.setVerticalAlignment(Element.ALIGN_CENTER);
+            cell.setHorizontalAlignment(Element.ALIGN_CENTER);
+            cell.setBackgroundColor(BaseColor.BLACK);
+            cell.setBorderColor(BaseColor.WHITE);
+            table.addCell(cell);
+
+            //=========================================================
+            while (row < purchaseTable.getRowCount()) {
+                String proid = (String) conTable.getValueAt(row, 0);
+                String name = (String) conTable.getValueAt(row, 1);
+                double price = (double)Double.parseDouble(conTable.getValueAt(row, 2).toString());
+                int quan = (Integer) conTable.getValueAt(row, 3);
+                double totalPrice = (double)Double.parseDouble(conTable.getValueAt(row, 4).toString());
+                //===================== PDF ===============================
+                String descrp = "\t\t\t\t\t\t\t\t\t\t" + proid + "\t\t\t" + name + "\t\t\t\t\t\t\t\t\t\t" 
+                        + "\t\t\t\t\t\t\t\t\t\t" +quan+ " @" + "\t\t\t\t\t\t\t\t\t\t" 
+                        + "\t\t\t\t\t\t\t\t\t\t" + conTable.getValueAt(row, 2).toString();
+                String amount = "" + totalPrice;
+                
+                cell = new PdfPCell(new Phrase(descrp, td));
+                cell.setFixedHeight(30);
+                cell.setColspan(1);
+                cell.setVerticalAlignment(Element.ALIGN_CENTER);
+                cell.setHorizontalAlignment(Element.ALIGN_LEFT);
+                cell.setBackgroundColor(BaseColor.GRAY);
+                cell.setBorderColor(BaseColor.WHITE);
+                table.addCell(cell);
+                
+                cell = new PdfPCell(new Phrase(amount, td));
+                cell.setFixedHeight(30);
+                cell.setColspan(1);
+                cell.setVerticalAlignment(Element.ALIGN_CENTER);
+                cell.setHorizontalAlignment(Element.ALIGN_CENTER);
+                cell.setBackgroundColor(BaseColor.GRAY);
+                cell.setBorderColor(BaseColor.WHITE);
+                table.addCell(cell);
+                //=========================================================
+                String sql = "insert into SALEREPORT values ('"
+                        + reciptID + "', '" + proid + "', '" + price + "', '" + totalPrice + "', '" + payable + "', '" + quan + "', '" + date + "')";
+                try {
+                    Connection con = StockAndAccountSystem.getConnect();
+                    Statement stm = con.createStatement();
+                    stm.executeUpdate(sql);
+                    //Statement results = stm.executeQuery(sql);
+                } catch (Exception e) {
+                    System.out.println("Connect failed ! ");
+                }
+                row++;
             }
-            row++;
+            //===================== PDF ===============================
+            Paragraph total = new Paragraph();
+            String totalAmnt = ""+getPayable();
+            total.setAlignment(Element.ALIGN_CENTER);
+            total.add(NEWLINE);total.add(NEWLINE);
+            total.add(new Phrase("\t\t\t\t\t\t\t\t\t\t\t"));
+            total.add(new Phrase("\t\t\t\t\t\t\t\t\t\t\t"));
+            total.add(new Phrase("Total Amount: ",font10pt));
+            total.add(new Phrase("\t\t\t\t\t\t\t\t\t\t\t"));
+            total.add(new Phrase("\t\t\t\t\t\t\t\t\t\t\t"));
+            total.add(new Phrase("\t\t"));
+            total.add(new Phrase(totalAmnt,font10pt));
+            
+            Paragraph dateNow = new Paragraph();
+            dateNow.add(NEWLINE);dateNow.add(NEWLINE);
+            dateNow.add(new Phrase("" + date.getDay() + "/" + date.getMonth() + "/" + date.getYear(),font10pt));
+            
+            doc.add(receiptID);
+            doc.add(storeAddress);
+            doc.add(table);
+            doc.add(total);
+            doc.add(dateNow);
+            doc.close();
+        } catch (Exception e) {
+            e.printStackTrace();
         }
-        
+        //=========================================================
+
     }//GEN-LAST:event_confirmButtonMouseClicked
 
     private void jButton1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton1MouseClicked

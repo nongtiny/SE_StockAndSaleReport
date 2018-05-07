@@ -35,7 +35,7 @@ public class CreatePurchase extends javax.swing.JFrame {
      * Creates new form CreatePurchase
      */
     ResultSet results;
-    public static int recieptID = 1;
+    public static int recieptIDIncrement = 1;
 
     public CreatePurchase() {
         initComponents();
@@ -295,11 +295,21 @@ public class CreatePurchase extends javax.swing.JFrame {
     }
 
     public void addToTable(String data) {
-        int showCol = 0;
+        DefaultTableModel model = (DefaultTableModel) chooseTable.getModel();
+        int tmp=0;
+        while(tmp<model.getRowCount()){
+            if(model.getValueAt(tmp, 0).equals(data)){
+                int input = Integer.parseInt(JOptionPane.showInputDialog("Please input the quantity"));
+                int newInput = (int)model.getValueAt(tmp, 4)+input;
+                chooseTable.setValueAt(newInput, tmp, 4);
+                return;
+            }
+            tmp++;
+        }
+        
         int input = Integer.parseInt(JOptionPane.showInputDialog("Please input the quantity"));
         String sql = "select * from APP.STOCK where productID = '" + data + "'";
         System.out.println(sql);
-        DefaultTableModel model = (DefaultTableModel) chooseTable.getModel();
         model.addRow(new Object[]{"", "", "", "", ""});
         int showRow = model.getRowCount()-1;
         try {
@@ -426,7 +436,7 @@ public class CreatePurchase extends javax.swing.JFrame {
         String sql;
         for (int i = 0; i < chooseTable.getRowCount(); i++) {
             int j = 0;
-            String receiptIdAsString = new Integer(recieptID).toString();
+            String receiptIdAsString = new Integer(recieptIDIncrement).toString();
             while (j < chooseTable.getColumnCount()) {
                 String proID;
                 proID = ""+chooseTable.getValueAt(i, j+=3).toString();
