@@ -13,7 +13,6 @@ import java.sql.Statement;
 import java.util.Date;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableModel;
-<<<<<<< HEAD
 import com.itextpdf.text.pdf.PdfWriter;
 import java.io.File;
 import com.itextpdf.text.Document;
@@ -29,9 +28,8 @@ import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.OutputStream;
 import static javax.swing.text.StyleConstants.FontFamily;
-=======
+
 //import com.itextpdf.text.pdf.PdfWriter;
->>>>>>> 3b9c8d320cbd2e12c2654fbc0108cba840d53d71
 
 /**
  *
