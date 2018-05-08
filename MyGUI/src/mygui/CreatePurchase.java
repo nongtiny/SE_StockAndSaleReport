@@ -390,6 +390,7 @@ public class CreatePurchase extends javax.swing.JFrame {
 
         showRow++;
     }
+    
     public TableModel getTable(){
         return chooseTable.getModel();
     }

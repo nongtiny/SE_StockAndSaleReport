@@ -27,10 +27,12 @@ import com.itextpdf.text.Font;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.OutputStream;
+import java.sql.SQLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import static javax.swing.text.StyleConstants.FontFamily;
 
 //import com.itextpdf.text.pdf.PdfWriter;
-
 /**
  *
  * @author Dell
@@ -41,13 +43,14 @@ public class PurchaseConfirmation extends javax.swing.JFrame {
      * Creates new form PurchaseConfirmation
      */
     DefaultTableModel tableFromCreatePurcahse;
-    double payable;
+    public double payable;
     //===================== PDF ===============================
     public String DEST;
     public static final String REGULAR = "C:\\Windows\\Fonts\\ccalibri.ttf";
     public static final String BOLD = "C:\\Windows\\Fonts\\calibrib.ttf";
     public static final String NEWLINE = "\n";
     String recieptID;
+
     //=========================================================
     //public PurchaseConfirmation() {
     //  initComponents();
@@ -88,12 +91,57 @@ public class PurchaseConfirmation extends javax.swing.JFrame {
         return payable;
     }
 
-    
-    
-    
+    public void insertIntoSaleReport() {
+        DefaultTableModel table = this.tableFromCreatePurcahse;
+        int row = 0;
+        Date date = new Date();
+        try {
+            Connection con = StockAndAccountSystem.getConnect();
+            Statement stm = con.createStatement();
+            while (row < table.getRowCount()) {
+                int id =  Integer.parseInt(table.getValueAt(row,0).toString());
+                //String name = (String) table.getValueAt(row, 1);
+                double price = Double.parseDouble(table.getValueAt(row, 3).toString());
+                int quan = (Integer) table.getValueAt(row, 4);
+                double totalPrice = price * quan;
+                String sql = "insert into salereport values( " + recieptID + ", "
+                        + "" + id + ", " + quan + ", " + price + ", " + totalPrice + " , "
+                        + "" + payable + ", " + date + ")" ; 
+                stm.executeUpdate(sql);
+                System.out.println("insert saleReport id = " + recieptID + "and stock id = " + id + " inserted");
+                row++;
+            }    //JOptionPane.showMessageDialog(null, "Record Inserted Successfully");
+            System.out.println("SALE REPORT ID " + recieptID + "INSERTED");
+        } catch (SQLException ex) {
+                System.out.println("Connection fails");
+            Logger.getLogger(AddProduct.class.getName()).log(Level.SEVERE, null, ex);
+        }
 
-    public void addToDatabase() {
-
+    }
+    public void kuy(){
+    
+    }
+    public void updateStock(){
+        //code complited
+    DefaultTableModel confTable = this.tableFromCreatePurcahse;
+        int row = 0;
+        try {
+            Connection con = StockAndAccountSystem.getConnect();
+            Statement stm = con.createStatement();
+            while (row < confTable.getRowCount()) {
+                String id = (String) confTable.getValueAt(row, 0);
+                int quan = Integer.parseInt(confTable.getValueAt(row,4).toString());
+                String sql = "update stock set amount = amount - " + quan + " where productid = " + "'" + id +"'" ;
+                stm.executeUpdate(sql);
+                
+                System.out.println("stock id = " + id + " amount updated");
+                row++;
+            }    //JOptionPane.showMessageDialog(null, "Record Inserted Successfully");
+        } catch (SQLException ex) {
+                System.out.println("Connection failed");
+            Logger.getLogger(AddProduct.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    
     }
 
     /**
@@ -122,14 +170,21 @@ public class PurchaseConfirmation extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setBackground(new java.awt.Color(153, 153, 153));
+        setPreferredSize(new java.awt.Dimension(700, 600));
 
         jPanel1.setBackground(new java.awt.Color(0, 102, 102));
+        jPanel1.setPreferredSize(new java.awt.Dimension(700, 600));
 
+        jLabel4.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
+        jLabel4.setForeground(new java.awt.Color(255, 255, 255));
         jLabel4.setText("Purchase ID :");
 
+        purchaseID.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
+        purchaseID.setForeground(new java.awt.Color(255, 255, 255));
         purchaseID.setText("------------");
 
-        jLabel1.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        jLabel1.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
+        jLabel1.setForeground(new java.awt.Color(255, 255, 255));
         jLabel1.setText("Purchase Confirmation");
 
         purchaseTable.setModel(new javax.swing.table.DefaultTableModel(
@@ -227,48 +282,36 @@ public class PurchaseConfirmation extends javax.swing.JFrame {
                         .addComponent(jLabel1)
                         .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                        .addComponent(jLabel2)
-                        .addGap(28, 28, 28)
-                        .addComponent(payableAmount, javax.swing.GroupLayout.PREFERRED_SIZE, 84, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(58, 58, 58))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 498, Short.MAX_VALUE)
+                            .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 621, Short.MAX_VALUE)
                             .addGroup(jPanel1Layout.createSequentialGroup()
                                 .addComponent(jLabel4)
                                 .addGap(35, 35, 35)
                                 .addComponent(purchaseID, javax.swing.GroupLayout.PREFERRED_SIZE, 97, javax.swing.GroupLayout.PREFERRED_SIZE)))
                         .addGap(48, 48, 48))))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jLabel2)
+                .addGap(42, 42, 42)
+                .addComponent(payableAmount, javax.swing.GroupLayout.PREFERRED_SIZE, 84, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(56, 56, 56))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGap(31, 31, 31)
                 .addComponent(jLabel1)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGap(3, 3, 3)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(purchaseID)
                     .addComponent(jLabel4))
-<<<<<<< HEAD
-<<<<<<< HEAD
-                .addGap(18, 18, 18)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 273, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-=======
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 364, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 36, Short.MAX_VALUE)
-=======
-                .addGap(18, 18, 18)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 273, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
->>>>>>> parent of f23c838... [created methods inserintosalereport and updatestock
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
->>>>>>> f23c838ddcaab4b280782f18b568d31f8bf0ca0a
                     .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 17, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(payableAmount))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGap(35, 35, 35)
                 .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
 
@@ -284,27 +327,25 @@ public class PurchaseConfirmation extends javax.swing.JFrame {
         );
 
         pack();
+        setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
     private void confirmButtonMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_confirmButtonMouseClicked
         // TODO add your handling code here:
         // ดึงข้อมูลจาก createPurchase มา สร้าง sql แล้ว insert ลง data base
-<<<<<<< HEAD
         updateStock();
         System.out.println("update stock completed");
-        insertIntoSaleReport();
+        //insertIntoSaleReport();
         System.out.println("insert sale report completed");
-     
+      
         //updateSaleReport();
-=======
->>>>>>> parent of f23c838... [created methods inserintosalereport and updatestock
         String reciptID = recieptID;
         CreatePurchase.recieptIDIncrement++;
         DefaultTableModel conTable = (DefaultTableModel) purchaseTable.getModel();
         int row = 0;
         Date date = new Date();
         //===================== PDF ===============================
-        DEST = "D:\\เรียน\\Sophomore\\Term2\\SE\\receiptID" + reciptID + ".pdf";
+        DEST = "F:\\CS Year2\\receiptID" + reciptID + ".pdf";
         try {
             FileOutputStream out = new FileOutputStream(DEST);
             Document doc = new Document();
@@ -317,7 +358,7 @@ public class PurchaseConfirmation extends javax.swing.JFrame {
             Font th = FontFactory.getFont(BOLD, 14, com.itextpdf.text.Font.NORMAL, BaseColor.WHITE);
             Font td = FontFactory.getFont(REGULAR, 10, com.itextpdf.text.Font.NORMAL, BaseColor.BLACK);
 
-            Image logo = Image.getInstance("D:\\เรียน\\Sophomore\\Term2\\SE\\minato.jpg");
+            Image logo = Image.getInstance("F:\\CS Year2\\dodo.jpg");
             logo.setAlignment(Image.ALIGN_RIGHT);
             logo.setAbsolutePosition(450f, 10f);
             logo.scalePercent(13, 13);
@@ -326,7 +367,7 @@ public class PurchaseConfirmation extends javax.swing.JFrame {
             receiptID.add(new Phrase("RECEIPT", font14pt));
             receiptID.add(new Phrase("\t\t\t\t\t\t\t\t\t\t\t"));
             receiptID.add(new Phrase("\t\t\t\t\t\t\t\t\t\t\t"));
-            receiptID.add(new Phrase("No: "+reciptID, font10pt));
+            receiptID.add(new Phrase("No: " + reciptID, font10pt));
             receiptID.add(pic);
 
             Paragraph storeAddress = new Paragraph();
@@ -334,15 +375,15 @@ public class PurchaseConfirmation extends javax.swing.JFrame {
             storeAddress.add("DEE CHAROEN CO.,LTD");
             storeAddress.add(NEWLINE);
             storeAddress.add(new Phrase("364-366  Charoenruk Rd.  "
-                                      + "Klong tonsai  Klongsan\n"
-                                      + "Bangkok  10600",font8pt ));
+                    + "Klong tonsai  Klongsan\n"
+                    + "Bangkok  10600", font8pt));
             storeAddress.add(NEWLINE);
             storeAddress.add(new Phrase("Tel: 02-457-1455\n"
-                           + "Phone: 085-155-9313\n"
-                           + "Fax: 02-438-1290",font8pt));
-             storeAddress.add(NEWLINE);
+                    + "Phone: 085-155-9313\n"
+                    + "Fax: 02-438-1290", font8pt));
+            storeAddress.add(NEWLINE);
             storeAddress.add(new Phrase("LINE: Kritboonchai"
-                           + "E-mail: Kritboonchai@gmail.com",font8ptB));
+                    + "E-mail: Kritboonchai@gmail.com", font8ptB));
             storeAddress.add(NEWLINE);
             storeAddress.add(NEWLINE);
             storeAddress.add(NEWLINE);
@@ -373,21 +414,14 @@ public class PurchaseConfirmation extends javax.swing.JFrame {
             while (row < purchaseTable.getRowCount()) {
                 String proid = (String) conTable.getValueAt(row, 0);
                 String name = (String) conTable.getValueAt(row, 1);
-                double price = (double)Double.parseDouble(conTable.getValueAt(row, 2).toString());
+                double price = (double) Double.parseDouble(conTable.getValueAt(row, 2).toString());
                 int quan = (Integer) conTable.getValueAt(row, 3);
-                double totalPrice = (double)Double.parseDouble(conTable.getValueAt(row, 4).toString());
+                double totalPrice = (double) Double.parseDouble(conTable.getValueAt(row, 4).toString());
                 //===================== PDF ===============================
-<<<<<<< HEAD
-               
                 String descrp = String.format("%-20s%-40s%d %-20s%s", proid,name,quan,"@",
                                                conTable.getValueAt(row, 2).toString());
-=======
-                String descrp = "\t\t\t\t\t\t\t\t\t\t" + proid + "\t\t\t" + name + "\t\t\t\t\t\t\t\t\t\t" 
-                        + "\t\t\t\t\t\t\t\t\t\t" +quan+ " @" + "\t\t\t\t\t\t\t\t\t\t" 
-                        + "\t\t\t\t\t\t\t\t\t\t" + conTable.getValueAt(row, 2).toString();
->>>>>>> parent of f23c838... [created methods inserintosalereport and updatestock
                 String amount = "" + totalPrice;
-                
+
                 cell = new PdfPCell(new Phrase(descrp, td));
                 cell.setFixedHeight(30);
                 cell.setColspan(1);
@@ -396,7 +430,7 @@ public class PurchaseConfirmation extends javax.swing.JFrame {
                 cell.setBackgroundColor(BaseColor.GRAY);
                 cell.setBorderColor(BaseColor.WHITE);
                 table.addCell(cell);
-                
+
                 cell = new PdfPCell(new Phrase(amount, td));
                 cell.setFixedHeight(30);
                 cell.setColspan(1);
@@ -420,21 +454,23 @@ public class PurchaseConfirmation extends javax.swing.JFrame {
             }
             //===================== PDF ===============================
             Paragraph total = new Paragraph();
-            String totalAmnt = ""+getPayable();
+            String totalAmnt = "" + getPayable();
             total.setAlignment(Element.ALIGN_CENTER);
-            total.add(NEWLINE);total.add(NEWLINE);
+            total.add(NEWLINE);
+            total.add(NEWLINE);
             total.add(new Phrase("\t\t\t\t\t\t\t\t\t\t\t"));
             total.add(new Phrase("\t\t\t\t\t\t\t\t\t\t\t"));
-            total.add(new Phrase("Total Amount: ",font10pt));
+            total.add(new Phrase("Total Amount: ", font10pt));
             total.add(new Phrase("\t\t\t\t\t\t\t\t\t\t\t"));
             total.add(new Phrase("\t\t\t\t\t\t\t\t\t\t\t"));
             total.add(new Phrase("\t\t"));
-            total.add(new Phrase(totalAmnt,font10pt));
-            
+            total.add(new Phrase(totalAmnt, font10pt));
+
             Paragraph dateNow = new Paragraph();
-            dateNow.add(NEWLINE);dateNow.add(NEWLINE);
-            dateNow.add(new Phrase("" + date.getDay() + "/" + date.getMonth() + "/" + date.getYear(),font10pt));
-            
+            dateNow.add(NEWLINE);
+            dateNow.add(NEWLINE);
+            dateNow.add(new Phrase("" + date.getDay() + "/" + date.getMonth() + "/" + date.getYear(), font10pt));
+
             doc.add(receiptID);
             doc.add(storeAddress);
             doc.add(table);
@@ -445,7 +481,7 @@ public class PurchaseConfirmation extends javax.swing.JFrame {
             e.printStackTrace();
         }
         //=========================================================
-
+       
     }//GEN-LAST:event_confirmButtonMouseClicked
 
     private void jButton1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton1MouseClicked
