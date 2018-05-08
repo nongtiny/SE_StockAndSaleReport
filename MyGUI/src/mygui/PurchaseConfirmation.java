@@ -342,8 +342,8 @@ public class PurchaseConfirmation extends javax.swing.JFrame {
         System.out.println("update stock completed");
         insertIntoSaleReport();
         System.out.println("insert sale report completed");
- /*     
-        updateSaleReport();
+     
+        //updateSaleReport();
         String reciptID = recieptID;
         CreatePurchase.recieptIDIncrement++;
         DefaultTableModel conTable = (DefaultTableModel) purchaseTable.getModel();
@@ -423,15 +423,9 @@ public class PurchaseConfirmation extends javax.swing.JFrame {
                 int quan = (Integer) conTable.getValueAt(row, 3);
                 double totalPrice = (double) Double.parseDouble(conTable.getValueAt(row, 4).toString());
                 //===================== PDF ===============================
-<<<<<<< HEAD
                
                 String descrp = String.format("%-20s%-40s%d %-20s%s", proid,name,quan,"@",
                                                conTable.getValueAt(row, 2).toString());
-=======
-                String descrp = "\t\t\t\t\t\t\t\t\t\t" + proid + "\t\t\t" + name + "\t\t\t\t\t\t\t\t\t\t"
-                        + "\t\t\t\t\t\t\t\t\t\t" + quan + " @" + "\t\t\t\t\t\t\t\t\t\t"
-                        + "\t\t\t\t\t\t\t\t\t\t" + conTable.getValueAt(row, 2).toString();
->>>>>>> f23c838ddcaab4b280782f18b568d31f8bf0ca0a
                 String amount = "" + totalPrice;
 
                 cell = new PdfPCell(new Phrase(descrp, td));
