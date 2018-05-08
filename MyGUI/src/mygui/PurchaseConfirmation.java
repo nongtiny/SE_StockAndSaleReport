@@ -252,7 +252,7 @@ public class PurchaseConfirmation extends javax.swing.JFrame {
                 .addGap(18, 18, 18)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 273, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 17, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(payableAmount))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
@@ -355,9 +355,9 @@ public class PurchaseConfirmation extends javax.swing.JFrame {
                 int quan = (Integer) conTable.getValueAt(row, 3);
                 double totalPrice = (double)Double.parseDouble(conTable.getValueAt(row, 4).toString());
                 //===================== PDF ===============================
-                String descrp = "\t\t\t\t\t\t\t\t\t\t" + proid + "\t\t\t" + name + "\t\t\t\t\t\t\t\t\t\t" 
-                        + "\t\t\t\t\t\t\t\t\t\t" +quan+ " @" + "\t\t\t\t\t\t\t\t\t\t" 
-                        + "\t\t\t\t\t\t\t\t\t\t" + conTable.getValueAt(row, 2).toString();
+               
+                String descrp = String.format("%-20s%-40s%d %-20s%s", proid,name,quan,"@",
+                                               conTable.getValueAt(row, 2).toString());
                 String amount = "" + totalPrice;
                 
                 cell = new PdfPCell(new Phrase(descrp, td));
