@@ -48,6 +48,7 @@ public class PurchaseConfirmation extends javax.swing.JFrame {
      */
     DefaultTableModel tableFromCreatePurcahse;
     public double payable;
+    public static boolean confirmisDone;
     //===================== PDF ===============================
     public String DEST;
     public static final String REGULAR = "C:\\Windows\\Fonts\\ccalibri.ttf";
@@ -56,6 +57,7 @@ public class PurchaseConfirmation extends javax.swing.JFrame {
     String recieptID;
     Date utilDate;
     java.sql.Date sqlDate;
+    
 
     //=========================================================
     //public PurchaseConfirmation() {
