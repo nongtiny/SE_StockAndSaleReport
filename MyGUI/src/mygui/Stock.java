@@ -41,7 +41,7 @@ public class Stock extends javax.swing.JFrame {
         jLabel1 = new javax.swing.JLabel();
         jPanel2 = new javax.swing.JPanel();
         jLabel2 = new javax.swing.JLabel();
-        searchByList = new javax.swing.JComboBox<String>();
+        searchByList = new javax.swing.JComboBox<>();
         searchBox = new javax.swing.JTextField();
         searchButton = new javax.swing.JButton();
         editBotton = new javax.swing.JButton();
@@ -72,7 +72,7 @@ public class Stock extends javax.swing.JFrame {
         jLabel2.setText("Search By");
 
         searchByList.setFont(new java.awt.Font("Sukhumvit Set", 0, 12)); // NOI18N
-        searchByList.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "...", "ID", "Name", "Amount", "Price", "Type", "AddedDate" }));
+        searchByList.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "...", "ID", "Name", "Amount", "Price", "Type", "AddedDate" }));
         searchByList.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 searchByListActionPerformed(evt);
@@ -186,6 +186,11 @@ public class Stock extends javax.swing.JFrame {
         exitButton.setBackground(new java.awt.Color(255, 255, 255));
         exitButton.setFont(new java.awt.Font("Sukhumvit Set", 0, 14)); // NOI18N
         exitButton.setText("Back");
+        exitButton.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                exitButtonMouseClicked(evt);
+            }
+        });
         exitButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 exitButtonActionPerformed(evt);
@@ -259,7 +264,7 @@ public class Stock extends javax.swing.JFrame {
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addContainerGap(28, Short.MAX_VALUE)
+                .addContainerGap(29, Short.MAX_VALUE)
                 .addComponent(jLabel1)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -273,7 +278,7 @@ public class Stock extends javax.swing.JFrame {
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
 
         pack();
@@ -289,8 +294,7 @@ public class Stock extends javax.swing.JFrame {
     }//GEN-LAST:event_searchButtonActionPerformed
 
     private void exitButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_exitButtonActionPerformed
-        new Menu().setVisible(true);
-        this.setVisible(false);
+        
     }//GEN-LAST:event_exitButtonActionPerformed
 
     private void deleteButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_deleteButtonActionPerformed
@@ -354,6 +358,11 @@ public class Stock extends javax.swing.JFrame {
         this.showData();
     }//GEN-LAST:event_refreshButtonMouseClicked
 
+    private void exitButtonMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_exitButtonMouseClicked
+        this.setVisible(false);
+        new Menu().setVisible(true);
+    }//GEN-LAST:event_exitButtonMouseClicked
+
     /**
      * @param args the command line arguments
      */
@@ -398,6 +407,7 @@ public class Stock extends javax.swing.JFrame {
         String sql = "select * from APP.STOCK";
         try {
             Connection con = StockAndAccountSystem.getConnect();
+            System.out.println("come on eiei");
             Statement stm =con.createStatement();
             results=stm.executeQuery(sql);
 
@@ -422,11 +432,13 @@ public class Stock extends javax.swing.JFrame {
     } 
 
     public void setTableRow(){
-        String sql = "select count(*) from APP.STOCK";
+        String sql = "select count(*) from STOCK";
         try {
             System.out.println(sql);
             Connection con = StockAndAccountSystem.getConnect();
+            System.out.println("afterCon");
             Statement stm =con.createStatement();
+            System.out.println("afterSTM");
             ResultSet countResult = stm.executeQuery(sql);
             countResult.next();
             int row = countResult.getInt(1);
