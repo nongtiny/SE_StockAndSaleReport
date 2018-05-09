@@ -484,7 +484,7 @@ public class SaleReport extends javax.swing.JFrame {
              results=stm.executeQuery(sql);
              
                 //*** for Excel Report ***//
-            String fileName = "C:\\Users\\Diamond\\Desktop\\Report\\saleReport.xls";
+            String fileName = "C:\\Users\\PS\\Desktop\\report\\saleReport.xls";
  
             
             WritableWorkbook workbook = Workbook.createWorkbook(new java.io.File(fileName));
@@ -572,25 +572,6 @@ public class SaleReport extends javax.swing.JFrame {
         String sql="select * from salereport where purchaseDate between '"+ dateFrom +"' and '"+ dateTo +"'";
         
         System.out.println("eiei yoyo"+sql);
-        
-//        year = date.substring(6, 10);
-//        month = date.substring(3,5);
-//        day = date.substring(0, 2);
-//         System.out.println(day);
-         
-//        if (day.equalsIgnoreCase("...")){
-//            date = "select * APP.SALEREPORT";
-//        }else if (month.equalsIgnoreCase("...")){
-//            date = "select * APP.SALEREPORT";
-//        }else if (year.equalsIgnoreCase("...")){
-//            date = "select * APP.SALEREPORT";
-//        }else if (!day.equalsIgnoreCase("...")){
-//            
-//        }else if (!month.equalsIgnoreCase("...")){
-//            
-//        }else if (!year.equalsIgnoreCase("...")){
-//            
-//        }
         
         try{
             Connection con = StockAndAccountSystem.getConnect();

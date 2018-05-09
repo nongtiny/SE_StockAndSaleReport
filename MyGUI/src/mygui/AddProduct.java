@@ -325,7 +325,6 @@ public class AddProduct extends javax.swing.JFrame {
             this.addProduct(proID.getText(), proName.getText(), amount.getText(), price.getText(), (String) proType.getSelectedItem(), date);
             this.setVisible(false);
         }
-        new Stock().showData();
     }//GEN-LAST:event_SubmitButtonActionPerformed
 
     private void SubmitButtonMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_SubmitButtonMouseClicked
