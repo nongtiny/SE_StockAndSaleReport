@@ -81,6 +81,7 @@ public class PurchaseConfirmation extends javax.swing.JFrame {
         }
         payableAmount.setText("" + payable);
         Date date = new Date();
+        // reciptID incorrect pattern, solving needed
         recieptID = "" + date.getDay() + "" + date.getMonth() + "" + date.getYear() + "" + CreatePurchase.recieptIDIncrement;
         purchaseID.setText(recieptID);
         System.out.println(payable);
@@ -95,32 +96,31 @@ public class PurchaseConfirmation extends javax.swing.JFrame {
         DefaultTableModel table = this.tableFromCreatePurcahse;
         int row = 0;
         Date date = new Date();
+        String today = "" + date.getDay() + "" + date.getMonth() +""+ date.getYear();
         try {
             Connection con = StockAndAccountSystem.getConnect();
             Statement stm = con.createStatement();
             while (row < table.getRowCount()) {
-                int id =  Integer.parseInt(table.getValueAt(row,0).toString());
+                String id = table.getValueAt(row,0).toString();
                 //String name = (String) table.getValueAt(row, 1);
                 double price = Double.parseDouble(table.getValueAt(row, 3).toString());
                 int quan = (Integer) table.getValueAt(row, 4);
                 double totalPrice = price * quan;
-                String sql = "insert into salereport values( " + recieptID + ", "
-                        + "" + id + ", " + quan + ", " + price + ", " + totalPrice + " , "
-                        + "" + payable + ", " + date + ")" ; 
+                String sql = "insert into salereport values('" + recieptID + "', "
+                        + "'" + id + "', " + quan + ", " + price + ", " + totalPrice + " , "
+                        + "" + payable + ", '" + today + "')" ; 
                 stm.executeUpdate(sql);
-                System.out.println("insert saleReport id = " + recieptID + "and stock id = " + id + " inserted");
+                System.out.println("insert saleReport id = " + recieptID + " and stock id = " + id + " inserted");
                 row++;
             }    //JOptionPane.showMessageDialog(null, "Record Inserted Successfully");
             System.out.println("SALE REPORT ID " + recieptID + "INSERTED");
         } catch (SQLException ex) {
-                System.out.println("Connection fails");
+                System.out.println("insert Connection failed");
             Logger.getLogger(AddProduct.class.getName()).log(Level.SEVERE, null, ex);
         }
 
     }
-    public void kuy(){
     
-    }
     public void updateStock(){
         //code complited
     DefaultTableModel confTable = this.tableFromCreatePurcahse;
@@ -170,7 +170,6 @@ public class PurchaseConfirmation extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setBackground(new java.awt.Color(153, 153, 153));
-        setPreferredSize(new java.awt.Dimension(700, 600));
 
         jPanel1.setBackground(new java.awt.Color(0, 102, 102));
         jPanel1.setPreferredSize(new java.awt.Dimension(700, 600));
@@ -335,7 +334,7 @@ public class PurchaseConfirmation extends javax.swing.JFrame {
         // ดึงข้อมูลจาก createPurchase มา สร้าง sql แล้ว insert ลง data base
         updateStock();
         System.out.println("update stock completed");
-        //insertIntoSaleReport();
+        insertIntoSaleReport();
         System.out.println("insert sale report completed");
       
         //updateSaleReport();
@@ -440,16 +439,16 @@ public class PurchaseConfirmation extends javax.swing.JFrame {
                 cell.setBorderColor(BaseColor.WHITE);
                 table.addCell(cell);
                 //=========================================================
-                String sql = "insert into SALEREPORT values ('"
-                        + reciptID + "', '" + proid + "', '" + price + "', '" + totalPrice + "', '" + payable + "', '" + quan + "', '" + date + "')";
-                try {
-                    Connection con = StockAndAccountSystem.getConnect();
-                    Statement stm = con.createStatement();
-                    stm.executeUpdate(sql);
-                    //Statement results = stm.executeQuery(sql);
-                } catch (Exception e) {
-                    System.out.println("Connect failed ! ");
-                }
+//                String sql = "insert into SALEREPORT values ('"
+//                        + reciptID + "', '" + proid + "', '" + price + "', '" + totalPrice + "', '" + payable + "', '" + quan + "', '" + date + "')";
+//                try {
+//                    Connection con = StockAndAccountSystem.getConnect();
+//                    Statement stm = con.createStatement();
+//                    stm.executeUpdate(sql);
+//                    //Statement results = stm.executeQuery(sql);
+//                } catch (Exception e) {
+//                    System.out.println("Connect failed ! ");
+//                }
                 row++;
             }
             //===================== PDF ===============================
@@ -481,7 +480,8 @@ public class PurchaseConfirmation extends javax.swing.JFrame {
             e.printStackTrace();
         }
         //=========================================================
-       
+        System.out.println("The recipt has been recorded in your local address");
+        this.dispose();
     }//GEN-LAST:event_confirmButtonMouseClicked
 
     private void jButton1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton1MouseClicked
