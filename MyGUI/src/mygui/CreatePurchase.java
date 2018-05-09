@@ -529,6 +529,7 @@ public class CreatePurchase extends javax.swing.JFrame {
         //System.out.println(sql);
         
     }
+    
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

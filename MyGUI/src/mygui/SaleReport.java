@@ -437,7 +437,7 @@ public class SaleReport extends javax.swing.JFrame {
     ResultSet results;
     public void showData() {
         
-        String sql = "select * from APP.SALEREPORT order by receiptid";
+        String sql = "select * from APP.SALEREPORT ";    //order by receiptid
         System.out.println("eieiei after search");
         try{
             Connection con = StockAndAccountSystem.getConnect();
