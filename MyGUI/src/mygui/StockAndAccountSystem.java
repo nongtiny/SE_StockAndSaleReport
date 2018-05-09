@@ -33,7 +33,7 @@ public class StockAndAccountSystem {
             return conn; 
             //conn.close();
         } catch (SQLException ex) {
-            System.out.println("Connect failed ! ");
+            System.out.println("Connect failed !!! ");
         }
         return null;
     }
