@@ -453,10 +453,10 @@ public class SaleReport extends javax.swing.JFrame {
                 receiptID = results.getString(1);       
                 
                 proID=results.getString(2);             
-                proPrice =results.getDouble(3);         
-                totalEachPro = results.getDouble(4);
-                totalPurchase =results.getDouble(5);
-                purQuantity = results.getInt(6);
+                proPrice =results.getDouble(4);         
+                totalEachPro = results.getDouble(5);
+                totalPurchase =results.getDouble(6);
+                purQuantity = results.getInt(3);
                 Date=results.getString(7);
                 SaleReportTable.setValueAt(receiptID, i, j); j++;
                 SaleReportTable.setValueAt(Date, i, j); j++;
@@ -564,8 +564,8 @@ public class SaleReport extends javax.swing.JFrame {
         
         System.out.println(dayFrom +" " +dayTo +" "+monthFrom +" "+monthTo+" "+yearFrom+" "+yearTo );
         
-        String dateFrom = yearFrom+"-"+monthFrom+"-"+dayFrom;
-        String dateTo = yearTo+"-"+monthTo+"-"+dayTo;
+        String dateFrom = dayFrom+"-"+monthFrom+"-"+yearFrom;
+        String dateTo = dayTo+"-"+monthTo+"-"+yearTo;
         
         System.out.println(dateFrom + " "+ dateTo);
         
@@ -607,10 +607,10 @@ public class SaleReport extends javax.swing.JFrame {
                 int j=0;
                 receiptID = rs.getString(1);                    
                 proID=rs.getString(2);             
-                proPrice =rs.getDouble(3);         
-                totalEachPro = rs.getDouble(4);
-                totalPurchase =rs.getDouble(5);
-                purQuantity = rs.getInt(6);
+                proPrice =rs.getDouble(4);         
+                totalEachPro = rs.getDouble(5);
+                totalPurchase =rs.getDouble(6);
+                purQuantity = rs.getInt(3);
                 date=rs.getString(7);
                 System.out.println("receiptID ("+i+") :"+receiptID);
                 SaleReportTable.setValueAt(receiptID, i, j); j++;

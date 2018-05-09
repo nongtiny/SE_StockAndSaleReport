@@ -12,6 +12,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.text.DateFormat;
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
@@ -312,8 +313,12 @@ public class CreatePurchase extends javax.swing.JFrame {
     }//GEN-LAST:event_moveDownButtonActionPerformed
 
     private void nextButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_nextButtonActionPerformed
-        new PurchaseConfirmation((DefaultTableModel)this.getTable()).show();
-        //this.dispose();
+        try {
+            new PurchaseConfirmation((DefaultTableModel)this.getTable()).show();
+            //this.dispose();
+        } catch (ParseException ex) {
+            Logger.getLogger(CreatePurchase.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }//GEN-LAST:event_nextButtonActionPerformed
 
     private void searchByListActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_searchByListActionPerformed
@@ -497,7 +502,7 @@ public class CreatePurchase extends javax.swing.JFrame {
 
     public String getCurrentDate() {
         LocalDate localDate = LocalDate.now();
-        return DateTimeFormatter.ofPattern("dd/MM/yyyy").format(localDate);
+        return DateTimeFormatter.ofPattern("dd-MM-yyyy").format(localDate);
     }
 
     public void addToDatabase() {
