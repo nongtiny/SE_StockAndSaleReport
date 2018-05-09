@@ -3,10 +3,28 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
+<<<<<<< HEAD
             <file>file:/F:/NewGitHub/SE_StockAndSaleReport/MyGUI/src/mygui/CreatePurchase.java</file>
             <file>file:/F:/NewGitHub/SE_StockAndSaleReport/MyGUI/src/mygui/SaleReport.java</file>
             <file>file:/F:/NewGitHub/SE_StockAndSaleReport/MyGUI/src/mygui/AddProduct.java</file>
             <file>file:/F:/NewGitHub/SE_StockAndSaleReport/MyGUI/src/mygui/PurchaseConfirmation.java</file>
+=======
+<<<<<<< HEAD
+            <file>file:/C:/Users/PS/Documents/GitHub/SE_StockAndSaleReport/MyGUI/src/mygui/PurchaseConfirmation.java</file>
+            <file>file:/C:/Users/PS/Documents/GitHub/SE_StockAndSaleReport/MyGUI/src/mygui/SaleReport.java</file>
+=======
+<<<<<<< HEAD
+            <file>file:/C:/Users/Diamond/Documents/GitHub/SE_StockAndSaleReport/MyGUI/src/mygui/StockAndAccountSystem.java</file>
+            <file>file:/C:/Users/Diamond/Documents/GitHub/SE_StockAndSaleReport/MyGUI/src/mygui/PurchaseConfirmation.java</file>
+            <file>file:/C:/Users/Diamond/Documents/GitHub/SE_StockAndSaleReport/MyGUI/src/mygui/SaleReport.java</file>
+=======
+            <file>file:/C:/Users/PS/Documents/GitHub/SE_StockAndSaleReport/MyGUI/src/mygui/StockAndAccountSystem.java</file>
+            <file>file:/C:/Users/PS/Documents/GitHub/SE_StockAndSaleReport/MyGUI/src/mygui/Stock.java</file>
+            <file>file:/C:/Users/PS/Documents/GitHub/SE_StockAndSaleReport/MyGUI/src/mygui/Login.java</file>
+            <file>file:/C:/Users/PS/Documents/GitHub/SE_StockAndSaleReport/MyGUI/src/mygui/Menu.java</file>
+>>>>>>> c108bb9c0e8361cf00488eb8d162b74245ea3ab5
+>>>>>>> 5bcec346056e3a898d96df3833cc5eeef892f4c7
+>>>>>>> 2a054a9c937046cacc12d7cdab21304255c62289
         </group>
     </open-files>
 </project-private>

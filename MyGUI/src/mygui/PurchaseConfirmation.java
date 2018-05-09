@@ -127,7 +127,12 @@ public class PurchaseConfirmation extends javax.swing.JFrame {
                         + "'" + id + "', " + quan + ", " + price + ", " + totalPrice + " , "
                         + "" + payable + ", '" + today.toString() + "')" ; 
                 stm.executeUpdate(sql);
+<<<<<<< HEAD
+                System.out.println("sql = "+sql);
+                System.out.println("insert saleReport id = " + recieptID + "and stock id = " + id + " inserted");
+=======
                 System.out.println("insert saleReport id = " + recieptID + " and stock id = " + id + " inserted");
+>>>>>>> 5bcec346056e3a898d96df3833cc5eeef892f4c7
                 row++;
             }    //JOptionPane.showMessageDialog(null, "Record Inserted Successfully");
             System.out.println("SALE REPORT ID " + recieptID + "INSERTED");
