@@ -57,7 +57,6 @@ public class PurchaseConfirmation extends javax.swing.JFrame {
     String recieptID;
     Date utilDate;
     java.sql.Date sqlDate;
-    
 
     //=========================================================
     //public PurchaseConfirmation() {
@@ -88,14 +87,14 @@ public class PurchaseConfirmation extends javax.swing.JFrame {
             row++;
         }
         payableAmount.setText("" + payable);
-        
+
         utilDate = (Date) new SimpleDateFormat("dd-MM-yyyy").parse(getCurrentDate());
         this.sqlDate = new java.sql.Date(utilDate.getTime());
-        
+
         // reciptID incorrect pattern, solving needed
         LocalDate localDate = LocalDate.now();
         recieptID = "" + DateTimeFormatter.ofPattern("ddMMyyyy").format(localDate) + "" + CreatePurchase.recieptIDIncrement;
-        
+
         purchaseID.setText(recieptID);
         System.out.println(payable);
         //System.out.println(model.getValueAt(0,0));
@@ -104,7 +103,8 @@ public class PurchaseConfirmation extends javax.swing.JFrame {
     public double getPayable() {
         return payable;
     }
-    public java.sql.Date getSqlDate(){
+
+    public java.sql.Date getSqlDate() {
         return this.sqlDate;
     }
 
@@ -118,55 +118,54 @@ public class PurchaseConfirmation extends javax.swing.JFrame {
             Connection con = StockAndAccountSystem.getConnect();
             Statement stm = con.createStatement();
             while (row < table.getRowCount()) {
-                String id = table.getValueAt(row,0).toString();
+                String id = table.getValueAt(row, 0).toString();
                 //String name = (String) table.getValueAt(row, 1);
                 double price = Double.parseDouble(table.getValueAt(row, 3).toString());
                 int quan = (Integer) table.getValueAt(row, 4);
                 double totalPrice = price * quan;
                 String sql = "insert into salereport values('" + recieptID + "', "
                         + "'" + id + "', " + quan + ", " + price + ", " + totalPrice + " , "
-                        + "" + payable + ", '" + today.toString() + "')" ; 
+                        + "" + payable + ", '" + today.toString() + "')";
                 stm.executeUpdate(sql);
-<<<<<<< HEAD
-                System.out.println("sql = "+sql);
-                System.out.println("insert saleReport id = " + recieptID + "and stock id = " + id + " inserted");
-=======
+//<<<<<<< HEAD
+                System.out.println("sql = " + sql);
+                System.out.println("insert saleReport id = " + recieptID + "and stock id = " + id + " inserted");//
+//=======
                 System.out.println("insert saleReport id = " + recieptID + " and stock id = " + id + " inserted");
->>>>>>> 5bcec346056e3a898d96df3833cc5eeef892f4c7
+//>>>>>>> 5bcec346056e3a898d96df3833cc5eeef892f4c7
                 row++;
             }    //JOptionPane.showMessageDialog(null, "Record Inserted Successfully");
             System.out.println("SALE REPORT ID " + recieptID + "INSERTED");
         } catch (SQLException ex) {
-                System.out.println("insert Connection failed");
+            System.out.println("insert Connection failed");
             Logger.getLogger(AddProduct.class.getName()).log(Level.SEVERE, null, ex);
         }
 
     }
-    
-    public void updateStock(){
+
+    public void updateStock() {
         //code complited
-    DefaultTableModel confTable = this.tableFromCreatePurcahse;
+        DefaultTableModel confTable = this.tableFromCreatePurcahse;
         int row = 0;
         try {
             Connection con = StockAndAccountSystem.getConnect();
             Statement stm = con.createStatement();
             while (row < confTable.getRowCount()) {
                 String id = (String) confTable.getValueAt(row, 0);
-                int quan = Integer.parseInt(confTable.getValueAt(row,4).toString());
-                String sql = "update stock set amount = amount - " + quan + " where productid = " + "'" + id +"'" ;
+                int quan = Integer.parseInt(confTable.getValueAt(row, 4).toString());
+                String sql = "update stock set amount = amount - " + quan + " where productid = " + "'" + id + "'";
                 stm.executeUpdate(sql);
-                
+
                 System.out.println("stock id = " + id + " amount updated");
                 row++;
             }    //JOptionPane.showMessageDialog(null, "Record Inserted Successfully");
         } catch (SQLException ex) {
-                System.out.println("Connection failed");
+            System.out.println("Connection failed");
             Logger.getLogger(AddProduct.class.getName()).log(Level.SEVERE, null, ex);
         }
-    
+
     }
 
-    
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -361,7 +360,7 @@ public class PurchaseConfirmation extends javax.swing.JFrame {
         System.out.println("update stock completed");
         insertIntoSaleReport();
         System.out.println("insert sale report completed");
-      
+
         //updateSaleReport();
         String reciptID = recieptID;
         CreatePurchase.recieptIDIncrement++;
@@ -442,8 +441,8 @@ public class PurchaseConfirmation extends javax.swing.JFrame {
                 int quan = (Integer) conTable.getValueAt(row, 3);
                 double totalPrice = (double) Double.parseDouble(conTable.getValueAt(row, 4).toString());
                 //===================== PDF ===============================
-                String descrp = String.format("%-20s%-40s%d %-20s%s", proid,name,quan,"@",
-                                               conTable.getValueAt(row, 2).toString());
+                String descrp = String.format("%-20s%-40s%d %-20s%s", proid, name, quan, "@",
+                        conTable.getValueAt(row, 2).toString());
                 String amount = "" + totalPrice;
 
                 cell = new PdfPCell(new Phrase(descrp, td));
@@ -509,13 +508,12 @@ public class PurchaseConfirmation extends javax.swing.JFrame {
         this.dispose();
     }//GEN-LAST:event_confirmButtonMouseClicked
 
-     public String getCurrentDate() {
+    public String getCurrentDate() {
         LocalDate localDate = LocalDate.now();
         return DateTimeFormatter.ofPattern("dd-MM-yyyy").format(localDate);
-    }    
-     
-     
-    
+    }
+
+
     private void jButton1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton1MouseClicked
         // TODO add your handling code here:
         this.dispose();
