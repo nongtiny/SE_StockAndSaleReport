@@ -305,7 +305,6 @@ public class CreatePurchase extends javax.swing.JFrame {
     private void nextButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_nextButtonActionPerformed
         try {
             new PurchaseConfirmation((DefaultTableModel) this.getTable()).show();
-            //this.dispose();
         } catch (ParseException ex) {
             Logger.getLogger(CreatePurchase.class.getName()).log(Level.SEVERE, null, ex);
         }

@@ -7,14 +7,11 @@ package mygui;
 
 import com.itextpdf.text.BaseColor;
 import com.itextpdf.text.Chunk;
-import com.itextpdf.text.PageSize;
 import java.sql.Connection;
 import java.sql.Statement;
 import java.util.Date;
 import javax.swing.table.DefaultTableModel;
-import javax.swing.table.TableModel;
 import com.itextpdf.text.pdf.PdfWriter;
-import java.io.File;
 import com.itextpdf.text.Document;
 import com.itextpdf.text.Element;
 import com.itextpdf.text.FontFactory;
@@ -24,9 +21,9 @@ import com.itextpdf.text.Phrase;
 import com.itextpdf.text.pdf.PdfPCell;
 import com.itextpdf.text.pdf.PdfPTable;
 import com.itextpdf.text.Font;
-import java.io.FileNotFoundException;
+import java.awt.Desktop;
+import java.io.File;
 import java.io.FileOutputStream;
-import java.io.OutputStream;
 import java.sql.SQLException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -34,7 +31,10 @@ import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import static javax.swing.text.StyleConstants.FontFamily;
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 
 //import com.itextpdf.text.pdf.PdfWriter;
 /**
@@ -57,6 +57,7 @@ public class PurchaseConfirmation extends javax.swing.JFrame {
     String recieptID;
     Date utilDate;
     java.sql.Date sqlDate;
+    LocalDate localDate;
 
     //=========================================================
     //public PurchaseConfirmation() {
@@ -92,7 +93,7 @@ public class PurchaseConfirmation extends javax.swing.JFrame {
         this.sqlDate = new java.sql.Date(utilDate.getTime());
 
         // reciptID incorrect pattern, solving needed
-        LocalDate localDate = LocalDate.now();
+        localDate = LocalDate.now();
         recieptID = "" + DateTimeFormatter.ofPattern("ddMMyyyy").format(localDate) + "" + CreatePurchase.recieptIDIncrement;
 
         purchaseID.setText(recieptID);
@@ -118,27 +119,25 @@ public class PurchaseConfirmation extends javax.swing.JFrame {
             Connection con = StockAndAccountSystem.getConnect();
             Statement stm = con.createStatement();
             while (row < table.getRowCount()) {
-                String id = table.getValueAt(row, 0).toString();
+                int id = Integer.parseInt(table.getValueAt(row, 0) + "");
                 //String name = (String) table.getValueAt(row, 1);
-                double price = Double.parseDouble(table.getValueAt(row, 3).toString());
-                int quan = (Integer) table.getValueAt(row, 4);
+                double price = (double) Double.parseDouble(table.getValueAt(row, 3) + "");
+                int quan = (int) table.getValueAt(row, 4);
                 double totalPrice = price * quan;
-                String sql = "insert into salereport values('" + recieptID + "', "
-                        + "'" + id + "', " + quan + ", " + price + ", " + totalPrice + " , "
-                        + "" + payable + ", '" + today.toString() + "')";
+                double reID = (double) Double.parseDouble(recieptID);
+                String sql = "insert into salereport values(" + reID + ", "
+                        + id + ", " + quan + ", " + price + ", " + totalPrice + " , "
+                        + payable + ", '" + today.toString() + "')";
                 stm.executeUpdate(sql);
-<<<<<<< HEAD
-                 System.out.println("sql = "+sql);
+                System.out.println("sql = " + sql);
                 System.out.println("insert saleReport id = " + recieptID + "and stock id = " + id + " inserted");
                 System.out.println("insert saleReport id = " + recieptID + " and stock id = " + id + " inserted");
-=======
 //<<<<<<< HEAD
                 System.out.println("sql = " + sql);
                 System.out.println("insert saleReport id = " + recieptID + "and stock id = " + id + " inserted");//
 //=======
                 System.out.println("insert saleReport id = " + recieptID + " and stock id = " + id + " inserted");
 //>>>>>>> 5bcec346056e3a898d96df3833cc5eeef892f4c7
->>>>>>> 1954bdf0a3cf1b36adfff44d17a91097424f7701
                 row++;
             }    //JOptionPane.showMessageDialog(null, "Record Inserted Successfully");
             System.out.println("SALE REPORT ID " + recieptID + "INSERTED");
@@ -362,9 +361,9 @@ public class PurchaseConfirmation extends javax.swing.JFrame {
     private void confirmButtonMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_confirmButtonMouseClicked
         // TODO add your handling code here:
         // ดึงข้อมูลจาก createPurchase มา สร้าง sql แล้ว insert ลง data base
-        updateStock();
+        //updateStock();
         System.out.println("update stock completed");
-        insertIntoSaleReport();
+        //insertIntoSaleReport();
         System.out.println("insert sale report completed");
 
         //updateSaleReport();
@@ -374,7 +373,19 @@ public class PurchaseConfirmation extends javax.swing.JFrame {
         int row = 0;
         Date date = new Date();
         //===================== PDF ===============================
-        DEST = "F:\\CS Year2\\receiptID" + reciptID + ".pdf";
+        String dest = StockAndAccountSystem.class.getResource("").toString().substring(6);
+        String folderName = "Reciept " + DateTimeFormatter.ofPattern("dd-MM-yyyy").format(localDate);
+        String folderDest = dest.substring(0, dest.indexOf("build")) + folderName;
+
+        Path path = Paths.get(folderDest);
+        if (!Files.exists(path)) {
+            try {
+                Files.createDirectories(path);
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
+        DEST = folderDest + "\\" + reciptID + ".pdf";
         try {
             FileOutputStream out = new FileOutputStream(DEST);
             Document doc = new Document();
@@ -387,11 +398,11 @@ public class PurchaseConfirmation extends javax.swing.JFrame {
             Font th = FontFactory.getFont(BOLD, 14, com.itextpdf.text.Font.NORMAL, BaseColor.WHITE);
             Font td = FontFactory.getFont(REGULAR, 10, com.itextpdf.text.Font.NORMAL, BaseColor.BLACK);
 
-            Image logo = Image.getInstance("F:\\CS Year2\\dodo.jpg");
+            Image logo = Image.getInstance(folderDest.substring(0, folderDest.indexOf(folderName)) + "\\dist\\logo.png");
             logo.setAlignment(Image.ALIGN_RIGHT);
-            logo.setAbsolutePosition(450f, 10f);
+            logo.setAbsolutePosition(420f, 8f);
             logo.scalePercent(13, 13);
-            Chunk pic = new Chunk(logo, 350, -70);
+            Chunk pic = new Chunk(logo, 280, -70);
             Paragraph receiptID = new Paragraph();
             receiptID.add(new Phrase("RECEIPT", font14pt));
             receiptID.add(new Phrase("\t\t\t\t\t\t\t\t\t\t\t"));
@@ -411,7 +422,7 @@ public class PurchaseConfirmation extends javax.swing.JFrame {
                     + "Phone: 085-155-9313\n"
                     + "Fax: 02-438-1290", font8pt));
             storeAddress.add(NEWLINE);
-            storeAddress.add(new Phrase("LINE: Kritboonchai"
+            storeAddress.add(new Phrase("LINE: Kritboonchai\n"
                     + "E-mail: Kritboonchai@gmail.com", font8ptB));
             storeAddress.add(NEWLINE);
             storeAddress.add(NEWLINE);
@@ -443,7 +454,6 @@ public class PurchaseConfirmation extends javax.swing.JFrame {
             while (row < purchaseTable.getRowCount()) {
                 String proid = (String) conTable.getValueAt(row, 0);
                 String name = (String) conTable.getValueAt(row, 1);
-                double price = (double) Double.parseDouble(conTable.getValueAt(row, 2).toString());
                 int quan = (Integer) conTable.getValueAt(row, 3);
                 double totalPrice = (double) Double.parseDouble(conTable.getValueAt(row, 4).toString());
                 //===================== PDF ===============================
@@ -469,16 +479,6 @@ public class PurchaseConfirmation extends javax.swing.JFrame {
                 cell.setBorderColor(BaseColor.WHITE);
                 table.addCell(cell);
                 //=========================================================
-//                String sql = "insert into SALEREPORT values ('"
-//                        + reciptID + "', '" + proid + "', '" + price + "', '" + totalPrice + "', '" + payable + "', '" + quan + "', '" + date + "')";
-//                try {
-//                    Connection con = StockAndAccountSystem.getConnect();
-//                    Statement stm = con.createStatement();
-//                    stm.executeUpdate(sql);
-//                    //Statement results = stm.executeQuery(sql);
-//                } catch (Exception e) {
-//                    System.out.println("Connect failed ! ");
-//                }
                 row++;
             }
             //===================== PDF ===============================
@@ -498,7 +498,7 @@ public class PurchaseConfirmation extends javax.swing.JFrame {
             Paragraph dateNow = new Paragraph();
             dateNow.add(NEWLINE);
             dateNow.add(NEWLINE);
-            dateNow.add(new Phrase("" + date.getDay() + "/" + date.getMonth() + "/" + date.getYear(), font10pt));
+            dateNow.add(new Phrase("" + DateTimeFormatter.ofPattern("dd/MM/yyyy").format(localDate), font10pt));
 
             doc.add(receiptID);
             doc.add(storeAddress);
@@ -511,6 +511,14 @@ public class PurchaseConfirmation extends javax.swing.JFrame {
         }
         //=========================================================
         System.out.println("The recipt has been recorded in your local address");
+        if (Desktop.isDesktopSupported()) {
+            try {
+                File myFile = new File(DEST);
+                Desktop.getDesktop().open(myFile);
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
         this.dispose();
     }//GEN-LAST:event_confirmButtonMouseClicked
 
