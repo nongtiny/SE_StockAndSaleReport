@@ -66,10 +66,12 @@ public class Login extends javax.swing.JFrame {
         jPasswordField.setBackground(new java.awt.Color(51, 51, 51));
         jPasswordField.setForeground(new java.awt.Color(255, 255, 255));
         jPasswordField.setBorder(null);
+        jPasswordField.setCaretColor(new java.awt.Color(255, 255, 255));
 
         jTextUsername.setBackground(new java.awt.Color(51, 51, 51));
         jTextUsername.setForeground(new java.awt.Color(255, 255, 255));
         jTextUsername.setBorder(null);
+        jTextUsername.setCaretColor(new java.awt.Color(255, 255, 255));
         jTextUsername.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jTextUsernameActionPerformed(evt);
@@ -157,7 +159,7 @@ public class Login extends javax.swing.JFrame {
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGap(65, 65, 65)
                         .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 211, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 19, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 57, Short.MAX_VALUE)
                 .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
         jPanel1Layout.setVerticalGroup(

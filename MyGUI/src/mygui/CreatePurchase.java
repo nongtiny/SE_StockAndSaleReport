@@ -5,22 +5,15 @@
  */
 package mygui;
 
-import java.awt.List;
 import java.sql.Connection;
-import java.sql.Date;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
-import java.text.DateFormat;
 import java.text.ParseException;
-import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
-import java.util.ArrayList;
-import java.util.Calendar;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import javax.swing.DefaultComboBoxModel;
 import javax.swing.JOptionPane;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
@@ -72,7 +65,6 @@ public class CreatePurchase extends javax.swing.JFrame {
         jCheckBox1.setText("jCheckBox1");
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        setPreferredSize(new java.awt.Dimension(700, 600));
 
         jPanel1.setBackground(new java.awt.Color(51, 51, 51));
         jPanel1.setForeground(new java.awt.Color(51, 51, 51));
@@ -179,37 +171,36 @@ public class CreatePurchase extends javax.swing.JFrame {
         jPanel2Layout.setHorizontalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
-                .addGap(36, 36, 36)
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addComponent(jLabel2)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(searchByList, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(searchBox, javax.swing.GroupLayout.PREFERRED_SIZE, 209, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(searchButton)
-                        .addContainerGap(244, Short.MAX_VALUE))
-                    .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addGap(0, 0, Short.MAX_VALUE)
-                        .addComponent(nextButton, javax.swing.GroupLayout.PREFERRED_SIZE, 83, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(backButton, javax.swing.GroupLayout.PREFERRED_SIZE, 73, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(36, 36, 36))
-                    .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addComponent(searchList, javax.swing.GroupLayout.PREFERRED_SIZE, 435, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(chooseButton)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(deleteButton)
-                        .addGap(0, 0, Short.MAX_VALUE))))
-            .addGroup(jPanel2Layout.createSequentialGroup()
                 .addGap(300, 300, 300)
                 .addComponent(jLabel3)
                 .addGap(0, 0, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 620, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addGap(44, 44, 44)
+                        .addComponent(jLabel2)
+                        .addGap(28, 28, 28)
+                        .addComponent(searchByList, javax.swing.GroupLayout.PREFERRED_SIZE, 51, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(29, 29, 29)
+                        .addComponent(searchBox)
+                        .addGap(18, 18, 18)
+                        .addComponent(searchButton, javax.swing.GroupLayout.PREFERRED_SIZE, 77, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(89, 89, 89))
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addContainerGap(46, Short.MAX_VALUE)
+                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addGroup(jPanel2Layout.createSequentialGroup()
+                                .addComponent(searchList, javax.swing.GroupLayout.PREFERRED_SIZE, 435, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(18, 18, 18)
+                                .addComponent(chooseButton)
+                                .addGap(18, 18, 18)
+                                .addComponent(deleteButton))
+                            .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                .addGroup(jPanel2Layout.createSequentialGroup()
+                                    .addComponent(backButton, javax.swing.GroupLayout.PREFERRED_SIZE, 73, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addComponent(nextButton, javax.swing.GroupLayout.PREFERRED_SIZE, 83, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 620, javax.swing.GroupLayout.PREFERRED_SIZE)))))
                 .addGap(34, 34, 34))
         );
         jPanel2Layout.setVerticalGroup(
@@ -230,11 +221,11 @@ public class CreatePurchase extends javax.swing.JFrame {
                 .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 21, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(2, 2, 2)
                 .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 276, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, Short.MAX_VALUE)
+                .addGap(27, 27, 27)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(nextButton, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(backButton, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(159, Short.MAX_VALUE))
+                    .addComponent(backButton, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(nextButton, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(150, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
@@ -302,8 +293,7 @@ public class CreatePurchase extends javax.swing.JFrame {
     private void deleteButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_deleteButtonActionPerformed
         this.removeSelectedRows();
     }//GEN-LAST:event_deleteButtonActionPerformed
-
-//<<<<<<< HEAD
+    /*
     private void moveUpButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_moveUpButtonActionPerformed
         //this.moveUpwards();
     }//GEN-LAST:event_moveUpButtonActionPerformed
@@ -311,10 +301,10 @@ public class CreatePurchase extends javax.swing.JFrame {
     private void moveDownButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_moveDownButtonActionPerformed
         //this.moveDownwards();
     }//GEN-LAST:event_moveDownButtonActionPerformed
-
+*/
     private void nextButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_nextButtonActionPerformed
         try {
-            new PurchaseConfirmation((DefaultTableModel)this.getTable()).show();
+            new PurchaseConfirmation((DefaultTableModel) this.getTable()).show();
             //this.dispose();
         } catch (ParseException ex) {
             Logger.getLogger(CreatePurchase.class.getName()).log(Level.SEVERE, null, ex);
@@ -329,8 +319,6 @@ public class CreatePurchase extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_searchListActionPerformed
 
-//=======
-//>>>>>>> 5bf371d0428e6e05d2f38c07de66f5210f938d1f
     /**
      * @param args the command line arguments
      */
@@ -368,22 +356,33 @@ public class CreatePurchase extends javax.swing.JFrame {
 
     public void addToTable(String data) {
         DefaultTableModel model = (DefaultTableModel) chooseTable.getModel();
-        int tmp=0;
-        while(tmp<model.getRowCount()){
-            if(model.getValueAt(tmp, 0).equals(data)){
-                int input = Integer.parseInt(JOptionPane.showInputDialog("Please input the quantity"));
-                int newInput = (int)model.getValueAt(tmp, 4)+input;
+        int tmp = 0;
+        while (tmp < model.getRowCount()) {
+            if (model.getValueAt(tmp, 0).equals(data)) {
+                int input = 0;
+                try {
+                    input = Integer.parseInt(JOptionPane.showInputDialog("Please input the quantity"));
+                } catch (NumberFormatException n) {
+                    JOptionPane.showMessageDialog(null, "Valid input! Please input number", "Error!", JOptionPane.ERROR_MESSAGE);
+                    return;
+                }
+                int newInput = (int) model.getValueAt(tmp, 4) + input;
                 chooseTable.setValueAt(newInput, tmp, 4);
                 return;
             }
             tmp++;
         }
-        
-        int input = Integer.parseInt(JOptionPane.showInputDialog("Please input the quantity"));
+        int input = 0;
+        try {
+            input = Integer.parseInt(JOptionPane.showInputDialog(null, "Insert quantity", "Quantity", JOptionPane.DEFAULT_OPTION));
+        } catch (NumberFormatException n) {
+            JOptionPane.showMessageDialog(null, "Valid input! Please input number", "Error!", JOptionPane.ERROR_MESSAGE);
+            return;
+        }
         String sql = "select * from APP.STOCK where productID = '" + data + "'";
         System.out.println(sql);
         model.addRow(new Object[]{"", "", "", "", ""});
-        int showRow = model.getRowCount()-1;
+        int showRow = model.getRowCount() - 1;
         try {
             Connection con = StockAndAccountSystem.getConnect();
             Statement stm = con.createStatement();
@@ -395,7 +394,7 @@ public class CreatePurchase extends javax.swing.JFrame {
                 proName = results.getString(2);
                 price = results.getString(4);
                 type = results.getString(5);
-                
+
                 chooseTable.setValueAt(proId, showRow, j);
                 j++;
                 chooseTable.setValueAt(proName, showRow, j);
@@ -416,21 +415,18 @@ public class CreatePurchase extends javax.swing.JFrame {
 
         showRow++;
     }
-    
-    public TableModel getTable(){
+
+    public TableModel getTable() {
         return chooseTable.getModel();
     }
 
- 
-
-    public void removeSelectedRows(){
+    public void removeSelectedRows() {
         DefaultTableModel model = (DefaultTableModel) chooseTable.getModel();
         int[] rows = chooseTable.getSelectedRows();
-        for(int i=0;i<rows.length;i++){
-            model.removeRow(rows[i]-i);
+        for (int i = 0; i < rows.length; i++) {
+            model.removeRow(rows[i] - i);
         }
     }
-
 
     public static void clearTable(JTable table) {
         for (int i = 0; i < table.getRowCount(); i++) {
@@ -512,11 +508,11 @@ public class CreatePurchase extends javax.swing.JFrame {
             String receiptIdAsString = new Integer(recieptIDIncrement).toString();
             while (j < chooseTable.getColumnCount()) {
                 String proID;
-                proID = ""+chooseTable.getValueAt(i, j+=3).toString();
+                proID = "" + chooseTable.getValueAt(i, j += 3).toString();
                 String proPrice;
-                proPrice = ""+chooseTable.getValueAt(i, j++).toString();
+                proPrice = "" + chooseTable.getValueAt(i, j++).toString();
                 String purQuan;
-                purQuan = ""+chooseTable.getValueAt(i, j++).toString();
+                purQuan = "" + chooseTable.getValueAt(i, j++).toString();
                 sql = "insert into APP.CREATEPURCHASE values ('"
                         + receiptIdAsString + "', '" + proID + "', '" + proPrice + "', '"
                         + purQuan + "', '" + getCurrentDate() + "')";
@@ -532,9 +528,7 @@ public class CreatePurchase extends javax.swing.JFrame {
         }
 
         //System.out.println(sql);
-        
     }
-    
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
