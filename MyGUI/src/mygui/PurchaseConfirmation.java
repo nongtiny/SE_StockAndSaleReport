@@ -361,9 +361,9 @@ public class PurchaseConfirmation extends javax.swing.JFrame {
     private void confirmButtonMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_confirmButtonMouseClicked
         // TODO add your handling code here:
         // ดึงข้อมูลจาก createPurchase มา สร้าง sql แล้ว insert ลง data base
-        //updateStock();
+        updateStock();
         System.out.println("update stock completed");
-        //insertIntoSaleReport();
+        insertIntoSaleReport();
         System.out.println("insert sale report completed");
 
         //updateSaleReport();
@@ -371,8 +371,9 @@ public class PurchaseConfirmation extends javax.swing.JFrame {
         CreatePurchase.recieptIDIncrement++;
         DefaultTableModel conTable = (DefaultTableModel) purchaseTable.getModel();
         int row = 0;
-        Date date = new Date();
         //===================== PDF ===============================
+        // ไม่ต้องแก้ destination folder นะ กู getResource มาแล้ว ใช้ได้ทุกคนๆ
+        // ห้ามแก้นะ ถ้ามีปัญหาอะไร ทักกูนะ (tiny)
         String dest = StockAndAccountSystem.class.getResource("").toString().substring(6);
         String folderName = "Reciept " + DateTimeFormatter.ofPattern("dd-MM-yyyy").format(localDate);
         String folderDest = dest.substring(0, dest.indexOf("build")) + folderName;
