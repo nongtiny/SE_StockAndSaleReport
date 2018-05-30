@@ -25,8 +25,10 @@ public class AddProduct extends javax.swing.JFrame {
     /**
      * Creates new form AddProductToStock
      */
-    public AddProduct() {
+    static Stock st;
+    public AddProduct(Stock s) {
         initComponents();
+        st=s;
         setTypeList();
         setDate();
     }
@@ -335,6 +337,8 @@ public class AddProduct extends javax.swing.JFrame {
             this.addProduct(proID.getText(), proName.getText(), amount.getText(), price.getText(), (String) proType.getSelectedItem(), date);
             this.setVisible(false);
         }
+        
+        st.showData();
     }//GEN-LAST:event_SubmitButtonMouseClicked
 
     private void cancelButtonMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_cancelButtonMouseClicked
@@ -386,7 +390,7 @@ public class AddProduct extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new AddProduct().setVisible(true);
+                new AddProduct(st).setVisible(true);
             }
         });
     }

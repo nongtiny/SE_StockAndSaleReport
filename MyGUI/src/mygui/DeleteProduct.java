@@ -11,6 +11,7 @@ import java.sql.Statement;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableModel;
 
 /**
  *
@@ -25,6 +26,7 @@ public class DeleteProduct extends javax.swing.JFrame {
         initComponents();
     }
     
+    public static int updateTable=0;
     String pdID="";
     public DeleteProduct(String proID1, String proName1){
         initComponents();
@@ -182,6 +184,7 @@ public class DeleteProduct extends javax.swing.JFrame {
 
     private void deleteButtonMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_deleteButtonMouseClicked
         this.deleteProduct(pdID);
+        updateTable =1;
         this.setVisible(false);
     }//GEN-LAST:event_deleteButtonMouseClicked
 
@@ -236,6 +239,9 @@ public class DeleteProduct extends javax.swing.JFrame {
         } catch (SQLException ex) {
             Logger.getLogger(AddProduct.class.getName()).log(Level.SEVERE, null, ex);
         }
+        
+        Stock s = new Stock();
+        s.showData();
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

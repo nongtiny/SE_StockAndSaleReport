@@ -38,7 +38,7 @@ public class EditProduct extends javax.swing.JFrame {
         this.price.setText(price1);
         setTypeList(proType1);
         //this.date.setText(date1);
-        setDate(date1);
+        setDateEdit(date1);
     }
 
     /**
@@ -190,7 +190,7 @@ public class EditProduct extends javax.swing.JFrame {
                         .addComponent(amount, javax.swing.GroupLayout.PREFERRED_SIZE, 83, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addGap(18, 23, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                             .addComponent(jLabel6)
                             .addComponent(jLabel5))
@@ -261,7 +261,7 @@ public class EditProduct extends javax.swing.JFrame {
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, 513, Short.MAX_VALUE)
+            .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, 508, Short.MAX_VALUE)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jLabel1)
@@ -280,7 +280,10 @@ public class EditProduct extends javax.swing.JFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 513, Short.MAX_VALUE)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 508, Short.MAX_VALUE)
+                .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -359,7 +362,7 @@ public class EditProduct extends javax.swing.JFrame {
         });
     }
     
-    public void updateProduct(String proID, String proName, String amount, String price, String type, String date){
+    public void updateProductEdit(String proID, String proName, String amount, String price, String type, String date){
         int amountInt = Integer.parseInt(amount);
         double priceDouble = Double.parseDouble(price);
         String sql = "update Stock "
@@ -376,7 +379,7 @@ public class EditProduct extends javax.swing.JFrame {
         }
     }
     
-    public void setTypeList(String dfType){
+    public void setTypeListEdit(String dfType){
         String defultType = dfType;
         try {
             String sqlCount = "select count(distinct productType) from stock";
@@ -406,7 +409,7 @@ public class EditProduct extends javax.swing.JFrame {
         }
     }
 
-    public void setDate(String d){
+    public void setDateEdit(String d){
         d = d+" ";
         String day = d.substring(0, 2);
         String month = d.substring(3, 5);
