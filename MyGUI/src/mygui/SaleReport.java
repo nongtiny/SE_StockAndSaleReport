@@ -7,6 +7,8 @@ package mygui;
 
 import static java.awt.Color.BLACK;
 import static java.awt.Color.BLUE;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import jxl.*;
 import jxl.write.*;
 import java.io.*;
@@ -23,6 +25,7 @@ import java.sql.DriverManager;
 import jxl.write.biff.RowsExceededException;
 import java.io.IOException;
 import java.util.Date;
+import javax.swing.JComboBox;
 import jxl.write.WritableWorkbook;
 import jxl.read.biff.File;
 
@@ -43,6 +46,22 @@ public class SaleReport extends javax.swing.JFrame {
         System.out.println("preconcon");
         initComponents();
         showData();
+//        searchByComboBox.addActionListener(new ActionListener() {
+//            public void actionPerformed(ActionEvent event) {
+//                //
+//                // Get the source of the component, which is our combo
+//                // box.
+//                //
+//                JComboBox comboBox = (JComboBox) event.getSource();
+//
+//                Object selected = comboBox.getSelectedItem();
+//                if(selected.toString().equals("item1"))
+//                field.setText("30");
+//                else if(selected.toString().equals("item2"))
+//                    field.setText("40");
+//
+//            }
+//        });
         System.out.println("concon");
     }
 
@@ -60,10 +79,6 @@ public class SaleReport extends javax.swing.JFrame {
         jPanel1 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
         jPanel2 = new javax.swing.JPanel();
-        jLabel2 = new javax.swing.JLabel();
-        day1 = new javax.swing.JComboBox();
-        month1 = new javax.swing.JComboBox();
-        year1 = new javax.swing.JComboBox();
         searchButton = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
         SaleReportTable = new javax.swing.JTable();
@@ -73,8 +88,10 @@ public class SaleReport extends javax.swing.JFrame {
         day2 = new javax.swing.JComboBox();
         month2 = new javax.swing.JComboBox();
         year2 = new javax.swing.JComboBox();
+        searchByComboBox = new javax.swing.JComboBox<>();
+        jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
-        jLabel8 = new javax.swing.JLabel();
+        jLabel4 = new javax.swing.JLabel();
 
         jComboBox6.setFont(new java.awt.Font("supermarket", 0, 14)); // NOI18N
         jComboBox6.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "...", "January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December" }));
@@ -94,34 +111,6 @@ public class SaleReport extends javax.swing.JFrame {
         jLabel1.setText("SALE REPORT");
 
         jPanel2.setBackground(new java.awt.Color(0, 102, 102));
-
-        jLabel2.setFont(new java.awt.Font("supermarket", 0, 14)); // NOI18N
-        jLabel2.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel2.setText("dd/mm/yyyy");
-
-        day1.setFont(new java.awt.Font("supermarket", 0, 14)); // NOI18N
-        day1.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "...", "01", "02", "03", "04", "05", "06", "07", "08", "09", "10", "11", "12", "13", "14", "15", "16", "17", "18", "19", "20", "21", "22", "23", "24", "25", "26", "27", "28", "29", "30", "31" }));
-        day1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                day1ActionPerformed(evt);
-            }
-        });
-
-        month1.setFont(new java.awt.Font("supermarket", 0, 14)); // NOI18N
-        month1.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "...", "01", "02", "03", "04", "05", "06", "07", "08", "09", "10", "11", "12" }));
-        month1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                month1ActionPerformed(evt);
-            }
-        });
-
-        year1.setFont(new java.awt.Font("supermarket", 0, 14)); // NOI18N
-        year1.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "...", "2016", "2017", "2018" }));
-        year1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                year1ActionPerformed(evt);
-            }
-        });
 
         searchButton.setBackground(new java.awt.Color(255, 255, 255));
         searchButton.setFont(new java.awt.Font("supermarket", 0, 14)); // NOI18N
@@ -205,12 +194,12 @@ public class SaleReport extends javax.swing.JFrame {
             }
         });
 
-        jLabel6.setFont(new java.awt.Font("supermarket", 0, 16)); // NOI18N
+        jLabel6.setFont(new java.awt.Font("supermarket", 0, 14)); // NOI18N
         jLabel6.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel6.setText("End Date");
+        jLabel6.setText("Search by");
 
         day2.setFont(new java.awt.Font("supermarket", 0, 14)); // NOI18N
-        day2.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "...", "01", "02", "03", "04", "05", "06", "07", "08", "09", "10", "11", "12", "13", "14", "15", "16", "17", "18", "19", "20", "21", "22", "23", "24", "25", "26", "27", "28", "29", "30", "31" }));
+        day2.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "-", "01", "02", "03", "04", "05", "06", "07", "08", "09", "10", "11", "12", "13", "14", "15", "16", "17", "18", "19", "20", "21", "22", "23", "24", "25", "26", "27", "28", "29", "30", "31" }));
         day2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 day2ActionPerformed(evt);
@@ -218,7 +207,7 @@ public class SaleReport extends javax.swing.JFrame {
         });
 
         month2.setFont(new java.awt.Font("supermarket", 0, 14)); // NOI18N
-        month2.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "...", "01", "02", "03", "04", "05", "06", "07", "08", "09", "10", "11", "12" }));
+        month2.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "-", "01", "02", "03", "04", "05", "06", "07", "08", "09", "10", "11", "12" }));
         month2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 month2ActionPerformed(evt);
@@ -226,86 +215,81 @@ public class SaleReport extends javax.swing.JFrame {
         });
 
         year2.setFont(new java.awt.Font("supermarket", 0, 14)); // NOI18N
-        year2.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "...", "2016", "2017", "2018" }));
+        year2.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "-", "2016", "2017", "2018" }));
         year2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 year2ActionPerformed(evt);
             }
         });
 
-        jLabel3.setFont(new java.awt.Font("supermarket", 0, 14)); // NOI18N
-        jLabel3.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel3.setText("dd/mm/yyyy");
+        searchByComboBox.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Day", "Month", "Year" }));
+        searchByComboBox.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                searchByComboBoxActionPerformed(evt);
+            }
+        });
 
-        jLabel8.setFont(new java.awt.Font("supermarket", 0, 16)); // NOI18N
-        jLabel8.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel8.setText("Begin Date");
+        jLabel2.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        jLabel2.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel2.setText("Date");
+
+        jLabel3.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        jLabel3.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel3.setText("Month");
+
+        jLabel4.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        jLabel4.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel4.setText("Year");
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                .addContainerGap(35, Short.MAX_VALUE)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jLabel8)
-                        .addGap(6, 6, 6)
-                        .addComponent(day1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(jPanel2Layout.createSequentialGroup()
-                                .addComponent(jLabel2)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(jLabel3)
-                                .addGap(0, 0, Short.MAX_VALUE))
-                            .addGroup(jPanel2Layout.createSequentialGroup()
-                                .addComponent(month1, javax.swing.GroupLayout.PREFERRED_SIZE, 47, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(year1, javax.swing.GroupLayout.PREFERRED_SIZE, 59, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(jLabel6)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(day2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(month2, javax.swing.GroupLayout.PREFERRED_SIZE, 51, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(year2, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(52, 52, 52)
-                                .addComponent(searchButton, javax.swing.GroupLayout.PREFERRED_SIZE, 77, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                        .addComponent(jLabel6)
+                        .addGap(18, 18, 18)
+                        .addComponent(searchByComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(jLabel2)
+                        .addGap(18, 18, 18)
+                        .addComponent(day2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(jLabel3)
+                        .addGap(18, 18, 18)
+                        .addComponent(month2, javax.swing.GroupLayout.PREFERRED_SIZE, 51, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(15, 15, 15)
+                        .addComponent(jLabel4)
+                        .addGap(18, 18, 18)
+                        .addComponent(year2, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(searchButton, javax.swing.GroupLayout.PREFERRED_SIZE, 77, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addContainerGap(35, Short.MAX_VALUE)
-                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addGroup(jPanel2Layout.createSequentialGroup()
-                                .addComponent(SealReportButton, javax.swing.GroupLayout.PREFERRED_SIZE, 66, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(FlieReport, javax.swing.GroupLayout.PREFERRED_SIZE, 167, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 637, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                        .addComponent(SealReportButton, javax.swing.GroupLayout.PREFERRED_SIZE, 66, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(FlieReport, javax.swing.GroupLayout.PREFERRED_SIZE, 167, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 637, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(28, 28, 28))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addGap(22, 22, 22)
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(day1, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(month1, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(year1, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(jLabel8))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(year2, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(month2, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(day2, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(jLabel6)
-                        .addComponent(searchButton, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addGap(4, 4, 4)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(year2, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(month2, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(day2, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel6)
+                    .addComponent(searchButton, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(searchByComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel2)
-                    .addComponent(jLabel3))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                    .addComponent(jLabel3)
+                    .addComponent(jLabel4))
+                .addGap(29, 29, 29)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 369, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 32, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 27, Short.MAX_VALUE)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(FlieReport, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(SealReportButton, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -325,9 +309,9 @@ public class SaleReport extends javax.swing.JFrame {
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addContainerGap(12, Short.MAX_VALUE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
 
@@ -348,10 +332,6 @@ public class SaleReport extends javax.swing.JFrame {
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
-    private void day1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_day1ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_day1ActionPerformed
-
     private void SealReportButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_SealReportButtonActionPerformed
         this.setVisible(false);
     }//GEN-LAST:event_SealReportButtonActionPerformed
@@ -362,14 +342,6 @@ public class SaleReport extends javax.swing.JFrame {
             this.setForSearch();
         
     }//GEN-LAST:event_searchButtonActionPerformed
-
-    private void month1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_month1ActionPerformed
-        
-    }//GEN-LAST:event_month1ActionPerformed
-
-    private void year1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_year1ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_year1ActionPerformed
 
     private void FlieReportActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_FlieReportActionPerformed
          this.InfoToExcel();
@@ -395,6 +367,10 @@ public class SaleReport extends javax.swing.JFrame {
         this.setVisible(false);
         new Menu().setVisible(true);
     }//GEN-LAST:event_SealReportButtonMouseClicked
+
+    private void searchByComboBoxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_searchByComboBoxActionPerformed
+        
+    }//GEN-LAST:event_searchByComboBoxActionPerformed
 
     /**
      * @param args the command line arguments
@@ -552,30 +528,18 @@ public class SaleReport extends javax.swing.JFrame {
     public void setForSearch(){
         this.clearTable(SaleReportTable);
         
-        String dayFrom,dayTo,monthFrom,monthTo,yearFrom,yearTo;
+        String day,month,year;
+        int yearTmp;
         
-        dayFrom = (String) day1.getSelectedItem();
-        dayTo = (String) day2.getSelectedItem();
-        monthFrom = (String) month1.getSelectedItem();
-        monthTo = (String) month2.getSelectedItem();
-        yearFrom = (String) year1.getSelectedItem();
-        yearTo = (String) year2.getSelectedItem();
+        day = (String) day2.getSelectedItem();
+        month = (String) month2.getSelectedItem();
+        yearTmp = Integer.parseInt((String) year2.getSelectedItem())+543;
         
-        System.out.println(dayFrom +" " +dayTo +" "+monthFrom +" "+monthTo+" "+yearFrom+" "+yearTo );
-        
-        String dateFrom = dayFrom+"-"+monthFrom+"-"+yearFrom;
-        String dateTo = dayTo+"-"+monthTo+"-"+yearTo;
-        
-        System.out.println(dateFrom + " "+ dateTo);
-        
-        String sql="select * from salereport where purchaseDate between '"+ dateFrom +"' and '"+ dateTo +"'";
-        
-        System.out.println("eiei yoyo"+sql);
         
         try{
             Connection con = StockAndAccountSystem.getConnect();
             Statement stm =con.createStatement();
-            ResultSet rs=stm.executeQuery("select * from salereport where purchaseDate between '"+ dateFrom +"' and '"+ dateTo +"'");
+            ResultSet rs=stm.executeQuery("select * from salereport");
 
             String receiptID, proID;
             double proPrice, totalEachPro, totalPurchase;
@@ -614,22 +578,20 @@ public class SaleReport extends javax.swing.JFrame {
     private javax.swing.JButton FlieReport;
     private javax.swing.JTable SaleReportTable;
     private javax.swing.JToggleButton SealReportButton;
-    private javax.swing.JComboBox day1;
     private javax.swing.JComboBox day2;
     public javax.swing.JComboBox jComboBox6;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
-    private javax.swing.JLabel jLabel8;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JScrollPane jScrollPane1;
-    public javax.swing.JComboBox month1;
     public javax.swing.JComboBox month2;
     private javax.swing.JButton searchButton;
-    private javax.swing.JComboBox year1;
+    private javax.swing.JComboBox<String> searchByComboBox;
     private javax.swing.JComboBox year2;
     // End of variables declaration//GEN-END:variables
 }
