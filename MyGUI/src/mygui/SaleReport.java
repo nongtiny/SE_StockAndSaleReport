@@ -51,37 +51,9 @@ public class SaleReport extends javax.swing.JFrame {
         System.out.println(getDate());
         dayBox.getModel().setSelectedItem(getDayOfMonth());
         monthBox.getModel().setSelectedItem(getMonth());
-        year2.getModel().setSelectedItem(getYear());
+        yearBox.getModel().setSelectedItem(getYear());
 
-        try {
-
-            searchByComboBox.addActionListener(new ActionListener() {
-                public void actionPerformed(ActionEvent event) {
-                    //
-                    // Get the source of the component, which is our combo
-                    // box.
-                    //
-                    JComboBox comboBox = (JComboBox) event.getSource();
-
-                    Object selected = comboBox.getSelectedItem();
-                    if (selected.toString().equals("Day")) {
-                        dayBox.getModel().setSelectedItem(getDayOfMonth());
-                        monthBox.getModel().setSelectedItem(getMonth());
-                        year2.getModel().setSelectedItem(getYear());
-                    } else if (selected.toString().equals("Month")) {
-                        dayBox.getModel().setSelectedItem("-");
-                        monthBox.getModel().setSelectedItem(getMonth());
-                        year2.getModel().setSelectedItem(getYear());
-                    } else if (selected.toString().equals("Year")) {
-                        dayBox.getModel().setSelectedItem("-");
-                        monthBox.getModel().setSelectedItem("-");
-                        year2.getModel().setSelectedItem(getYear());
-                    }
-
-                }
-            });
-        } catch (NullPointerException n) {
-        }
+        
         System.out.println("concon");
     }
 
@@ -103,12 +75,9 @@ public class SaleReport extends javax.swing.JFrame {
         jScrollPane1 = new javax.swing.JScrollPane();
         SaleReportTable = new javax.swing.JTable();
         SealReportButton = new javax.swing.JToggleButton();
-        FlieReport = new javax.swing.JButton();
-        jLabel6 = new javax.swing.JLabel();
         dayBox = new javax.swing.JComboBox();
         monthBox = new javax.swing.JComboBox();
         yearBox = new javax.swing.JComboBox();
-        searchByComboBox = new javax.swing.JComboBox<>();
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
@@ -151,31 +120,31 @@ public class SaleReport extends javax.swing.JFrame {
         SaleReportTable.setForeground(new java.awt.Color(255, 255, 255));
         SaleReportTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null}
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null}
             },
             new String [] {
-                "No.", "ID", "Name", "Price/Unit", "Sale Amount", "Total Sale"
+                "No.", "ID", "Sale Amount", "Total Sale"
             }
         ));
         SaleReportTable.setToolTipText("");
@@ -201,23 +170,6 @@ public class SaleReport extends javax.swing.JFrame {
             }
         });
 
-        FlieReport.setBackground(new java.awt.Color(255, 255, 255));
-        FlieReport.setFont(new java.awt.Font("supermarket", 0, 14)); // NOI18N
-        FlieReport.setText("Export to Excel");
-        FlieReport.setMaximumSize(new java.awt.Dimension(65, 25));
-        FlieReport.setMinimumSize(new java.awt.Dimension(65, 25));
-        FlieReport.setOpaque(false);
-        FlieReport.setPreferredSize(new java.awt.Dimension(65, 25));
-        FlieReport.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                FlieReportActionPerformed(evt);
-            }
-        });
-
-        jLabel6.setFont(new java.awt.Font("supermarket", 0, 14)); // NOI18N
-        jLabel6.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel6.setText("Search by");
-
         dayBox.setFont(new java.awt.Font("supermarket", 0, 14)); // NOI18N
         dayBox.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "-", "01", "02", "03", "04", "05", "06", "07", "08", "09", "10", "11", "12", "13", "14", "15", "16", "17", "18", "19", "20", "21", "22", "23", "24", "25", "26", "27", "28", "29", "30", "31" }));
         dayBox.addActionListener(new java.awt.event.ActionListener() {
@@ -242,13 +194,6 @@ public class SaleReport extends javax.swing.JFrame {
             }
         });
 
-        searchByComboBox.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Day", "Month", "Year" }));
-        searchByComboBox.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                searchByComboBoxActionPerformed(evt);
-            }
-        });
-
         jLabel2.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabel2.setForeground(new java.awt.Color(255, 255, 255));
         jLabel2.setText("Date");
@@ -269,51 +214,41 @@ public class SaleReport extends javax.swing.JFrame {
                 .addContainerGap(35, Short.MAX_VALUE)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addComponent(jLabel6)
-                        .addGap(18, 18, 18)
-                        .addComponent(searchByComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
+                        .addGap(72, 72, 72)
                         .addComponent(jLabel2)
                         .addGap(18, 18, 18)
-                        .addComponent(dayBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(dayBox, javax.swing.GroupLayout.PREFERRED_SIZE, 67, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
                         .addComponent(jLabel3)
-                        .addGap(18, 18, 18)
-                        .addComponent(monthBox, javax.swing.GroupLayout.PREFERRED_SIZE, 51, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(15, 15, 15)
+                        .addComponent(monthBox, javax.swing.GroupLayout.PREFERRED_SIZE, 94, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
                         .addComponent(jLabel4)
                         .addGap(18, 18, 18)
                         .addComponent(yearBox, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(searchButton, javax.swing.GroupLayout.PREFERRED_SIZE, 77, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addComponent(SealReportButton, javax.swing.GroupLayout.PREFERRED_SIZE, 66, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(FlieReport, javax.swing.GroupLayout.PREFERRED_SIZE, 167, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 637, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 637, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(SealReportButton, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 66, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(28, 28, 28))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
-                .addGap(22, 22, 22)
+                .addGap(23, 23, 23)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(yearBox, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(monthBox, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(dayBox, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel6)
                     .addComponent(searchButton, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(searchByComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel2)
                     .addComponent(jLabel3)
                     .addComponent(jLabel4))
                 .addGap(29, 29, 29)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 369, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 27, Short.MAX_VALUE)
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(FlieReport, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(SealReportButton, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(31, 31, 31))
+                .addGap(18, 18, 18)
+                .addComponent(SealReportButton, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(40, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
@@ -363,10 +298,6 @@ public class SaleReport extends javax.swing.JFrame {
 
     }//GEN-LAST:event_searchButtonActionPerformed
 
-    private void FlieReportActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_FlieReportActionPerformed
-        this.InfoToExcel();
-    }//GEN-LAST:event_FlieReportActionPerformed
-
     private void dayBoxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_dayBoxActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_dayBoxActionPerformed
@@ -387,10 +318,6 @@ public class SaleReport extends javax.swing.JFrame {
         this.setVisible(false);
         new Menu().setVisible(true);
     }//GEN-LAST:event_SealReportButtonMouseClicked
-
-    private void searchByComboBoxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_searchByComboBoxActionPerformed
-
-    }//GEN-LAST:event_searchByComboBoxActionPerformed
 
     /**
      * @param args the command line arguments
@@ -439,60 +366,49 @@ public class SaleReport extends javax.swing.JFrame {
             Connection con = StockAndAccountSystem.getConnect();
             Statement stm = con.createStatement();
             results = stm.executeQuery(sql);
-            String receiptID, proID, Date;
-
-            double proPrice, totalEachPro, totalPurchase;
-            int purQuantity;
+            String proID, proName;
+            double proPrice, totalSale;
+            int saleAmount;
             int i = 0;
-            while (results.next() && i < 20) {
-                int j = 0;
-                receiptID = results.getString(1);
-
-                proID = results.getString(2);
-                proPrice = results.getDouble(4);
-                totalEachPro = results.getDouble(5);
-                totalPurchase = results.getDouble(6);
-                purQuantity = results.getInt(3);
-                Date = results.getString(7);
-                SaleReportTable.setValueAt(receiptID, i, j);
-                j++;
-                SaleReportTable.setValueAt(Date, i, j);
-                j++;
-                SaleReportTable.setValueAt(proID, i, j);
-                j++;
-                SaleReportTable.setValueAt(new Integer(purQuantity), i, j);
-                j++;
-                SaleReportTable.setValueAt(new Double(proPrice), i, j);
-                j++;
-                SaleReportTable.setValueAt(new Double(totalEachPro), i, j);
-                j++;
-                SaleReportTable.setValueAt(new Double(totalPurchase), i, j);
-                j++;
+            while(results.next()){
+                System.out.println(".......");
+                int j=0;
+                proID = results.getString(3);                    
+                //proName=rs.getString(4);             
+                //proPrice =rs.getDouble(5);         
+                saleAmount = results.getInt(1);
+                totalSale =results.getDouble(2);
+ 
+                System.out.println("proID ("+i+") :"+proID);
+                SaleReportTable.setValueAt(i+1, i, j); j++;
+                SaleReportTable.setValueAt(proID, i, j); j++;
+                //SaleReportTable.setValueAt(proName, i, j); j++;
+                //SaleReportTable.setValueAt(new Double(proPrice), i, j); j++;
+                SaleReportTable.setValueAt(new Integer(saleAmount), i, j); j++;
+                SaleReportTable.setValueAt(new Double(totalSale), i, j); j++;
                 i++;
             }
             System.out.println("sus");
         } catch (Exception e) {
-<<<<<<< HEAD
             System.out.println("Connect failed ! ");
         }
 
     }
 
-    public void InfoToExcel() {
-
-        String sql = "select * from APP.SALEREPORT";
-
-        try {
-            Connection con = StockAndAccountSystem.getConnect();
-            Statement stm = con.createStatement();
-            results = stm.executeQuery(sql);
-
-            //*** for Excel Report ***//
-=======
-            e.printStackTrace();
-        } 
-        
-    } 
+//    public void InfoToExcel() {
+//
+//        String sql = "select * from APP.SALEREPORT";
+//
+//        try {
+//            Connection con = StockAndAccountSystem.getConnect();
+//            Statement stm = con.createStatement();
+//            results = stm.executeQuery(sql);
+//        }catch(Exception e){
+// 
+//            e.printStackTrace();
+//        } 
+//        
+//    } 
     
     public void InfoToExcel(){
         
@@ -504,7 +420,6 @@ public class SaleReport extends javax.swing.JFrame {
              results=stm.executeQuery(sql);
              
                 //*** for Excel Report ***//
->>>>>>> 2320f3ea52dc6eee9064c8432aabf09df1a0b97f
             String fileName = "C:\\Users\\PS\\Desktop\\report\\saleReport.xls";
 
             WritableWorkbook workbook = Workbook.createWorkbook(new java.io.File(fileName));
@@ -578,66 +493,21 @@ public class SaleReport extends javax.swing.JFrame {
 
     public String getMonth() {
         Calendar cal = Calendar.getInstance();
-        int month = cal.get(Calendar.MONTH);
+        int month = cal.get(Calendar.MONTH)+1;
 
         return String.valueOf(month);
     }
 
     public String getYear() {
         Calendar cal = Calendar.getInstance();
-        int month = cal.get(Calendar.YEAR);
+        int year = cal.get(Calendar.YEAR)-543;
 
-        return String.valueOf(month);
+        return String.valueOf(year);
     }
 
     public void setForSearch() {
         this.clearTable(SaleReportTable);
-<<<<<<< HEAD
 
-        String day, month, year;
-        int yearTmp;
-
-        day = (String) dayBox.getSelectedItem();
-        month = (String) monthBox.getSelectedItem();
-        yearTmp = Integer.parseInt((String) year2.getSelectedItem()) + 543;
-
-        try {
-            Connection con = StockAndAccountSystem.getConnect();
-            Statement stm = con.createStatement();
-            ResultSet rs = stm.executeQuery("select * from salereport");
-
-            String receiptID, proID;
-            double proPrice, totalEachPro, totalPurchase;
-            int purQuantity;
-            String date;
-            int i = 0;
-            while (rs.next()) {
-                System.out.println(".......");
-                int j = 0;
-                receiptID = rs.getString(1);
-                proID = rs.getString(2);
-                proPrice = rs.getDouble(4);
-                totalEachPro = rs.getDouble(5);
-                totalPurchase = rs.getDouble(6);
-                purQuantity = rs.getInt(3);
-                date = rs.getString(7);
-                System.out.println("receiptID (" + i + ") :" + receiptID);
-                SaleReportTable.setValueAt(receiptID, i, j);
-                j++;
-                SaleReportTable.setValueAt(date, i, j);
-                j++;
-                SaleReportTable.setValueAt(proID, i, j);
-                j++;
-                SaleReportTable.setValueAt(new Integer(purQuantity), i, j);
-                j++;
-                SaleReportTable.setValueAt(new Double(proPrice), i, j);
-                j++;
-                SaleReportTable.setValueAt(new Double(totalEachPro), i, j);
-                j++;
-                SaleReportTable.setValueAt(new Double(totalPurchase), i, j);
-                j++;
-=======
-        
         String day,month;
         int year;
         
@@ -647,22 +517,11 @@ public class SaleReport extends javax.swing.JFrame {
         String date = ""+year+"-"+month+"-"+day;
         
         String sql="";
-        if(searchByComboBox.getSelectedItem() == "Day"){
-            sql="select r.PRODUCTID, s.PRODUCTNAME, s.PRICE, sum(r.PURCHASEQUANTITY), sum(r.TOTALEACHPRODUCT) \n" +
-                "from app.stock as s, app.saleReport as r \n" +
-                "where s.PRODUCTID = r.PRODUCTID AND r.purchaseDate = '"+date+"' \n" +
-                "group by r.productID";
-        }else if(searchByComboBox.getSelectedItem() == "Month"){
-            sql="select r.PRODUCTID, s.PRODUCTNAME, s.PRICE, sum(r.PURCHASEQUANTITY), sum(r.TOTALEACHPRODUCT) \n" +
-                "from app.stock as s, app.saleReport as r \n" +
-                "where s.PRODUCTID = r.PRODUCTID AND (DATEPART(yy, register_date) = "+year+" AND DATEPART(mm, register_date) = "+month+") \n" +
-                "group by r.productID";
-        }else if(searchByComboBox.getSelectedItem()== "Year"){
-            sql="select r.PRODUCTID, s.PRODUCTNAME, s.PRICE, sum(r.PURCHASEQUANTITY), sum(r.TOTALEACHPRODUCT) \n" +
-                "from app.stock as s, app.saleReport as r \n" +
-                "where s.PRODUCTID = r.PRODUCTID AND (DATEPART(yy, register_date) = "+year+") \n" +
-                "group by r.productID";
-        }
+            sql="select sum(PURCHASEQUANTITY), sum(TOTALEACHPRODUCT), PRODUCTID \n" +
+                "from saleReport \n" +
+                "where purchaseDate = '"+date+"' \n" +
+                "group by productID";
+  
         
         System.out.println(sql);
         try{
@@ -678,37 +537,31 @@ public class SaleReport extends javax.swing.JFrame {
             while(rs.next()){
                 System.out.println(".......");
                 int j=0;
-                proID = rs.getString(1);                    
-                proName=rs.getString(2);             
-                proPrice =rs.getDouble(3);         
-                saleAmount = rs.getInt(4);
-                totalSale =rs.getDouble(5);
+                proID = rs.getString(3);                    
+                //proName=rs.getString(4);             
+                //proPrice =rs.getDouble(5);         
+                saleAmount = rs.getInt(1);
+                totalSale =rs.getDouble(2);
  
                 System.out.println("proID ("+i+") :"+proID);
-                SaleReportTable.setValueAt(i, i, j); j++;
+                SaleReportTable.setValueAt(i+1, i, j); j++;
                 SaleReportTable.setValueAt(proID, i, j); j++;
-                SaleReportTable.setValueAt(proName, i, j); j++;
-                SaleReportTable.setValueAt(new Double(proPrice), i, j); j++;
+                //SaleReportTable.setValueAt(proName, i, j); j++;
+                //SaleReportTable.setValueAt(new Double(proPrice), i, j); j++;
                 SaleReportTable.setValueAt(new Integer(saleAmount), i, j); j++;
                 SaleReportTable.setValueAt(new Double(totalSale), i, j); j++;
->>>>>>> 2320f3ea52dc6eee9064c8432aabf09df1a0b97f
                 i++;
             }
 
-        } catch (Exception e) {
-<<<<<<< HEAD
+        } catch (SQLException e) {
             System.out.println("Connect failed !");
-        }
-=======
             e.printStackTrace();
-        } 
->>>>>>> 2320f3ea52dc6eee9064c8432aabf09df1a0b97f
+        } catch (Exception ex) { 
+            Logger.getLogger(SaleReport.class.getName()).log(Level.SEVERE, null, ex);
+        }
         System.out.println("the end");
     }
-
-
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton FlieReport;
     private javax.swing.JTable SaleReportTable;
     private javax.swing.JToggleButton SealReportButton;
     private javax.swing.JComboBox dayBox;
@@ -717,14 +570,12 @@ public class SaleReport extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
-    private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JScrollPane jScrollPane1;
     public javax.swing.JComboBox monthBox;
     private javax.swing.JButton searchButton;
-    private javax.swing.JComboBox<String> searchByComboBox;
     private javax.swing.JComboBox yearBox;
     // End of variables declaration//GEN-END:variables
 }
