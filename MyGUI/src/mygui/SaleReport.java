@@ -534,7 +534,7 @@ public class SaleReport extends javax.swing.JFrame {
         day = (String) dayBox.getSelectedItem();
         month = (String) monthBox.getSelectedItem();
         year = Integer.parseInt((String) yearBox.getSelectedItem());
-        String date = year+"-"+month+"-"+day;
+        String date = ""+year+"-"+month+"-"+day;
         
         String sql="";
         if(searchByComboBox.getSelectedItem() == "Day"){
@@ -554,7 +554,7 @@ public class SaleReport extends javax.swing.JFrame {
                 "group by r.productID";
         }
         
-        //System.out.println(sql);
+        System.out.println(sql);
         try{
             Connection con = StockAndAccountSystem.getConnect();
             Statement stm =con.createStatement();
