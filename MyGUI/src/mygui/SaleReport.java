@@ -85,8 +85,8 @@ public class SaleReport extends javax.swing.JFrame {
         SealReportButton = new javax.swing.JToggleButton();
         FlieReport = new javax.swing.JButton();
         jLabel6 = new javax.swing.JLabel();
-        day2 = new javax.swing.JComboBox();
-        month2 = new javax.swing.JComboBox();
+        dayBox = new javax.swing.JComboBox();
+        monthBox = new javax.swing.JComboBox();
         year2 = new javax.swing.JComboBox();
         searchByComboBox = new javax.swing.JComboBox<>();
         jLabel2 = new javax.swing.JLabel();
@@ -131,31 +131,31 @@ public class SaleReport extends javax.swing.JFrame {
         SaleReportTable.setForeground(new java.awt.Color(255, 255, 255));
         SaleReportTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null}
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null}
             },
             new String [] {
-                "ReceiptID", "Date", "ID", "Quantity", "Price", "Total Product", "Total Purchase"
+                "No.", "ID", "Name", "Price/Unit", "Sale Amount", "Total Sale"
             }
         ));
         SaleReportTable.setToolTipText("");
@@ -198,19 +198,19 @@ public class SaleReport extends javax.swing.JFrame {
         jLabel6.setForeground(new java.awt.Color(255, 255, 255));
         jLabel6.setText("Search by");
 
-        day2.setFont(new java.awt.Font("supermarket", 0, 14)); // NOI18N
-        day2.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "-", "01", "02", "03", "04", "05", "06", "07", "08", "09", "10", "11", "12", "13", "14", "15", "16", "17", "18", "19", "20", "21", "22", "23", "24", "25", "26", "27", "28", "29", "30", "31" }));
-        day2.addActionListener(new java.awt.event.ActionListener() {
+        dayBox.setFont(new java.awt.Font("supermarket", 0, 14)); // NOI18N
+        dayBox.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "-", "01", "02", "03", "04", "05", "06", "07", "08", "09", "10", "11", "12", "13", "14", "15", "16", "17", "18", "19", "20", "21", "22", "23", "24", "25", "26", "27", "28", "29", "30", "31" }));
+        dayBox.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                day2ActionPerformed(evt);
+                dayBoxActionPerformed(evt);
             }
         });
 
-        month2.setFont(new java.awt.Font("supermarket", 0, 14)); // NOI18N
-        month2.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "-", "01", "02", "03", "04", "05", "06", "07", "08", "09", "10", "11", "12" }));
-        month2.addActionListener(new java.awt.event.ActionListener() {
+        monthBox.setFont(new java.awt.Font("supermarket", 0, 14)); // NOI18N
+        monthBox.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "-", "01", "02", "03", "04", "05", "06", "07", "08", "09", "10", "11", "12" }));
+        monthBox.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                month2ActionPerformed(evt);
+                monthBoxActionPerformed(evt);
             }
         });
 
@@ -255,11 +255,11 @@ public class SaleReport extends javax.swing.JFrame {
                         .addGap(18, 18, 18)
                         .addComponent(jLabel2)
                         .addGap(18, 18, 18)
-                        .addComponent(day2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(dayBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
                         .addComponent(jLabel3)
                         .addGap(18, 18, 18)
-                        .addComponent(month2, javax.swing.GroupLayout.PREFERRED_SIZE, 51, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(monthBox, javax.swing.GroupLayout.PREFERRED_SIZE, 51, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(15, 15, 15)
                         .addComponent(jLabel4)
                         .addGap(18, 18, 18)
@@ -279,8 +279,8 @@ public class SaleReport extends javax.swing.JFrame {
                 .addGap(22, 22, 22)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(year2, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(month2, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(day2, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(monthBox, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(dayBox, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel6)
                     .addComponent(searchButton, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(searchByComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -347,13 +347,13 @@ public class SaleReport extends javax.swing.JFrame {
          this.InfoToExcel();
     }//GEN-LAST:event_FlieReportActionPerformed
 
-    private void day2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_day2ActionPerformed
+    private void dayBoxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_dayBoxActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_day2ActionPerformed
+    }//GEN-LAST:event_dayBoxActionPerformed
 
-    private void month2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_month2ActionPerformed
+    private void monthBoxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_monthBoxActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_month2ActionPerformed
+    }//GEN-LAST:event_monthBoxActionPerformed
 
     private void year2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_year2ActionPerformed
         // TODO add your handling code here:
@@ -531,8 +531,8 @@ public class SaleReport extends javax.swing.JFrame {
         String day,month,year;
         int yearTmp;
         
-        day = (String) day2.getSelectedItem();
-        month = (String) month2.getSelectedItem();
+        day = (String) dayBox.getSelectedItem();
+        month = (String) monthBox.getSelectedItem();
         yearTmp = Integer.parseInt((String) year2.getSelectedItem())+543;
         
         
@@ -578,7 +578,7 @@ public class SaleReport extends javax.swing.JFrame {
     private javax.swing.JButton FlieReport;
     private javax.swing.JTable SaleReportTable;
     private javax.swing.JToggleButton SealReportButton;
-    private javax.swing.JComboBox day2;
+    private javax.swing.JComboBox dayBox;
     public javax.swing.JComboBox jComboBox6;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
@@ -589,7 +589,7 @@ public class SaleReport extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JScrollPane jScrollPane1;
-    public javax.swing.JComboBox month2;
+    public javax.swing.JComboBox monthBox;
     private javax.swing.JButton searchButton;
     private javax.swing.JComboBox<String> searchByComboBox;
     private javax.swing.JComboBox year2;

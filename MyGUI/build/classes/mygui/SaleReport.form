@@ -141,11 +141,11 @@
                               <EmptySpace type="separate" max="-2" attributes="0"/>
                               <Component id="jLabel2" min="-2" max="-2" attributes="0"/>
                               <EmptySpace type="separate" max="-2" attributes="0"/>
-                              <Component id="day2" min="-2" max="-2" attributes="0"/>
+                              <Component id="dayBox" min="-2" max="-2" attributes="0"/>
                               <EmptySpace type="separate" max="-2" attributes="0"/>
                               <Component id="jLabel3" min="-2" max="-2" attributes="0"/>
                               <EmptySpace type="separate" max="-2" attributes="0"/>
-                              <Component id="month2" min="-2" pref="51" max="-2" attributes="0"/>
+                              <Component id="monthBox" min="-2" pref="51" max="-2" attributes="0"/>
                               <EmptySpace min="-2" pref="15" max="-2" attributes="0"/>
                               <Component id="jLabel4" min="-2" max="-2" attributes="0"/>
                               <EmptySpace type="separate" max="-2" attributes="0"/>
@@ -170,8 +170,8 @@
                       <EmptySpace min="-2" pref="22" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="3" attributes="0">
                           <Component id="year2" alignment="3" min="-2" pref="30" max="-2" attributes="0"/>
-                          <Component id="month2" alignment="3" min="-2" pref="30" max="-2" attributes="0"/>
-                          <Component id="day2" alignment="3" min="-2" pref="30" max="-2" attributes="0"/>
+                          <Component id="monthBox" alignment="3" min="-2" pref="30" max="-2" attributes="0"/>
+                          <Component id="dayBox" alignment="3" min="-2" pref="30" max="-2" attributes="0"/>
                           <Component id="jLabel6" alignment="3" min="-2" max="-2" attributes="0"/>
                           <Component id="searchButton" alignment="3" min="-2" pref="30" max="-2" attributes="0"/>
                           <Component id="searchByComboBox" alignment="3" min="-2" pref="30" max="-2" attributes="0"/>
@@ -226,24 +226,18 @@
                       <Color blue="ff" green="ff" red="ff" type="rgb"/>
                     </Property>
                     <Property name="model" type="javax.swing.table.TableModel" editor="org.netbeans.modules.form.editors2.TableModelEditor">
-                      <Table columnCount="7" rowCount="22">
-                        <Column editable="true" title="ReceiptID" type="java.lang.Object"/>
-                        <Column editable="true" title="Date" type="java.lang.Object"/>
+                      <Table columnCount="6" rowCount="22">
+                        <Column editable="true" title="No." type="java.lang.Object"/>
                         <Column editable="true" title="ID" type="java.lang.Object"/>
-                        <Column editable="true" title="Quantity" type="java.lang.Object"/>
-                        <Column editable="true" title="Price" type="java.lang.Object"/>
-                        <Column editable="true" title="Total Product" type="java.lang.Object"/>
-                        <Column editable="true" title="Total Purchase" type="java.lang.Object"/>
+                        <Column editable="true" title="Name" type="java.lang.Object"/>
+                        <Column editable="true" title="Price/Unit" type="java.lang.Object"/>
+                        <Column editable="true" title="Sale Amount" type="java.lang.Object"/>
+                        <Column editable="true" title="Total Sale" type="java.lang.Object"/>
                       </Table>
                     </Property>
                     <Property name="toolTipText" type="java.lang.String" value=""/>
                     <Property name="columnModel" type="javax.swing.table.TableColumnModel" editor="org.netbeans.modules.form.editors2.TableColumnModelEditor">
                       <TableColumnModel selectionModel="0">
-                        <Column maxWidth="-1" minWidth="-1" prefWidth="-1" resizable="true">
-                          <Title/>
-                          <Editor/>
-                          <Renderer/>
-                        </Column>
                         <Column maxWidth="-1" minWidth="-1" prefWidth="-1" resizable="true">
                           <Title/>
                           <Editor/>
@@ -345,7 +339,7 @@
                 <Property name="text" type="java.lang.String" value="Search by"/>
               </Properties>
             </Component>
-            <Component class="javax.swing.JComboBox" name="day2">
+            <Component class="javax.swing.JComboBox" name="dayBox">
               <Properties>
                 <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
                   <Font name="supermarket" size="14" style="0"/>
@@ -388,10 +382,10 @@
                 </Property>
               </Properties>
               <Events>
-                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="day2ActionPerformed"/>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="dayBoxActionPerformed"/>
               </Events>
             </Component>
-            <Component class="javax.swing.JComboBox" name="month2">
+            <Component class="javax.swing.JComboBox" name="monthBox">
               <Properties>
                 <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
                   <Font name="supermarket" size="14" style="0"/>
@@ -415,7 +409,7 @@
                 </Property>
               </Properties>
               <Events>
-                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="month2ActionPerformed"/>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="monthBoxActionPerformed"/>
               </Events>
               <AuxValues>
                 <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="1"/>
