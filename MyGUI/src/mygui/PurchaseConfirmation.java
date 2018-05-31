@@ -143,7 +143,7 @@ public class PurchaseConfirmation extends javax.swing.JFrame {
             System.out.println("SALE REPORT ID " + recieptID + "INSERTED");
         } catch (SQLException ex) {
             System.out.println("insert Connection failed");
-            Logger.getLogger(AddProduct.class.getName()).log(Level.SEVERE, null, ex);
+
         }
 
     }
@@ -166,7 +166,7 @@ public class PurchaseConfirmation extends javax.swing.JFrame {
             }    //JOptionPane.showMessageDialog(null, "Record Inserted Successfully");
         } catch (SQLException ex) {
             System.out.println("Connection failed");
-            Logger.getLogger(AddProduct.class.getName()).log(Level.SEVERE, null, ex);
+
         }
 
     }
