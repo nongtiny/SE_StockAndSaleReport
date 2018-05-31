@@ -9,6 +9,8 @@ import static java.awt.Color.BLACK;
 import static java.awt.Color.BLUE;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 import jxl.*;
 import jxl.write.*;
 import java.io.*;
@@ -20,25 +22,25 @@ import java.sql.Statement;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JTable;
-import java.util.Date; 
+import java.util.Date;
 import java.sql.DriverManager;
 import jxl.write.biff.RowsExceededException;
 import java.io.IOException;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+import java.util.Calendar;
 import java.util.Date;
+import javax.swing.DefaultComboBoxModel;
 import javax.swing.JComboBox;
 import jxl.write.WritableWorkbook;
 import jxl.read.biff.File;
-
-
-
-
 
 /**
  *
  * @author Diamond
  */
 public class SaleReport extends javax.swing.JFrame {
-    
+
     /**
      * Creates new form SaleReport
      */
@@ -46,22 +48,40 @@ public class SaleReport extends javax.swing.JFrame {
         System.out.println("preconcon");
         initComponents();
         showData();
-//        searchByComboBox.addActionListener(new ActionListener() {
-//            public void actionPerformed(ActionEvent event) {
-//                //
-//                // Get the source of the component, which is our combo
-//                // box.
-//                //
-//                JComboBox comboBox = (JComboBox) event.getSource();
-//
-//                Object selected = comboBox.getSelectedItem();
-//                if(selected.toString().equals("item1"))
-//                field.setText("30");
-//                else if(selected.toString().equals("item2"))
-//                    field.setText("40");
-//
-//            }
-//        });
+        System.out.println(getDate());
+        dayBox.getModel().setSelectedItem(getDayOfMonth());
+        monthBox.getModel().setSelectedItem(getMonth());
+        year2.getModel().setSelectedItem(getYear());
+
+        try {
+
+            searchByComboBox.addActionListener(new ActionListener() {
+                public void actionPerformed(ActionEvent event) {
+                    //
+                    // Get the source of the component, which is our combo
+                    // box.
+                    //
+                    JComboBox comboBox = (JComboBox) event.getSource();
+
+                    Object selected = comboBox.getSelectedItem();
+                    if (selected.toString().equals("Day")) {
+                        dayBox.getModel().setSelectedItem(getDayOfMonth());
+                        monthBox.getModel().setSelectedItem(getMonth());
+                        year2.getModel().setSelectedItem(getYear());
+                    } else if (selected.toString().equals("Month")) {
+                        dayBox.getModel().setSelectedItem("-");
+                        monthBox.getModel().setSelectedItem(getMonth());
+                        year2.getModel().setSelectedItem(getYear());
+                    } else if (selected.toString().equals("Year")) {
+                        dayBox.getModel().setSelectedItem("-");
+                        monthBox.getModel().setSelectedItem("-");
+                        year2.getModel().setSelectedItem(getYear());
+                    }
+
+                }
+            });
+        } catch (NullPointerException n) {
+        }
         System.out.println("concon");
     }
 
@@ -337,14 +357,14 @@ public class SaleReport extends javax.swing.JFrame {
     }//GEN-LAST:event_SealReportButtonActionPerformed
 
     private void searchButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_searchButtonActionPerformed
-        
-            //this.showData();
-            this.setForSearch();
-        
+
+        //this.showData();
+        this.setForSearch();
+
     }//GEN-LAST:event_searchButtonActionPerformed
 
     private void FlieReportActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_FlieReportActionPerformed
-         this.InfoToExcel();
+        this.InfoToExcel();
     }//GEN-LAST:event_FlieReportActionPerformed
 
     private void dayBoxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_dayBoxActionPerformed
@@ -369,7 +389,7 @@ public class SaleReport extends javax.swing.JFrame {
     }//GEN-LAST:event_SealReportButtonMouseClicked
 
     private void searchByComboBoxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_searchByComboBoxActionPerformed
-        
+
     }//GEN-LAST:event_searchByComboBoxActionPerformed
 
     /**
@@ -399,7 +419,7 @@ public class SaleReport extends javax.swing.JFrame {
         }
         //</editor-fold>
         //</editor-fold>
-        
+
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
@@ -408,171 +428,204 @@ public class SaleReport extends javax.swing.JFrame {
             }
         });
     }
-    
+
     ResultSet results;
+
     public void showData() {
-        
+
         String sql = "select * from APP.SALEREPORT ";    //order by receiptid
         System.out.println("eieiei after search");
-        try{
+        try {
             Connection con = StockAndAccountSystem.getConnect();
-            Statement stm =con.createStatement();
-            results=stm.executeQuery(sql);
+            Statement stm = con.createStatement();
+            results = stm.executeQuery(sql);
             String receiptID, proID, Date;
-            
+
             double proPrice, totalEachPro, totalPurchase;
             int purQuantity;
-            int i=0;
-            while(results.next() && i<20){
-                int j=0;
-                receiptID = results.getString(1);       
-                
-                proID=results.getString(2);             
-                proPrice =results.getDouble(4);         
+            int i = 0;
+            while (results.next() && i < 20) {
+                int j = 0;
+                receiptID = results.getString(1);
+
+                proID = results.getString(2);
+                proPrice = results.getDouble(4);
                 totalEachPro = results.getDouble(5);
-                totalPurchase =results.getDouble(6);
+                totalPurchase = results.getDouble(6);
                 purQuantity = results.getInt(3);
-                Date=results.getString(7);
-                SaleReportTable.setValueAt(receiptID, i, j); j++;
-                SaleReportTable.setValueAt(Date, i, j); j++;
-                SaleReportTable.setValueAt(proID, i, j); j++;
-                SaleReportTable.setValueAt(new Integer(purQuantity), i, j); j++;
-                SaleReportTable.setValueAt(new Double(proPrice), i, j); j++;
-                SaleReportTable.setValueAt(new Double(totalEachPro), i, j); j++;
-                SaleReportTable.setValueAt(new Double(totalPurchase), i, j); j++;
+                Date = results.getString(7);
+                SaleReportTable.setValueAt(receiptID, i, j);
+                j++;
+                SaleReportTable.setValueAt(Date, i, j);
+                j++;
+                SaleReportTable.setValueAt(proID, i, j);
+                j++;
+                SaleReportTable.setValueAt(new Integer(purQuantity), i, j);
+                j++;
+                SaleReportTable.setValueAt(new Double(proPrice), i, j);
+                j++;
+                SaleReportTable.setValueAt(new Double(totalEachPro), i, j);
+                j++;
+                SaleReportTable.setValueAt(new Double(totalPurchase), i, j);
+                j++;
                 i++;
             }
             System.out.println("sus");
         } catch (Exception e) {
             System.out.println("Connect failed ! ");
-        } 
-        
-    } 
-    
-    public void InfoToExcel(){
-        
-         String sql = "select * from APP.SALEREPORT";
-         
-         try{
-             Connection con = StockAndAccountSystem.getConnect();
-             Statement stm =con.createStatement();
-             results=stm.executeQuery(sql);
-             
-                //*** for Excel Report ***//
+        }
+
+    }
+
+    public void InfoToExcel() {
+
+        String sql = "select * from APP.SALEREPORT";
+
+        try {
+            Connection con = StockAndAccountSystem.getConnect();
+            Statement stm = con.createStatement();
+            results = stm.executeQuery(sql);
+
+            //*** for Excel Report ***//
             String fileName = "C:\\Users\\PS\\Desktop\\report\\saleReport.xls";
- 
-            
+
             WritableWorkbook workbook = Workbook.createWorkbook(new java.io.File(fileName));
-                //*** Create Font ***//
+            //*** Create Font ***//
             WritableFont fontBlue = new WritableFont(WritableFont.TIMES, 10);
             WritableFont fontRed = new WritableFont(WritableFont.TIMES, 10);
-                //*** Sheet 1 ***//
+            //*** Sheet 1 ***//
             WritableSheet ws1 = workbook.createSheet("mySheet1", 0);
- 
-                //*** Header ***//
+
+            //*** Header ***//
             WritableCellFormat cellFormat1 = new WritableCellFormat(fontRed);
             //*** Data ***//
             WritableCellFormat cellFormat2 = new WritableCellFormat(fontBlue);
-            
+
             ws1.mergeCells(0, 0, 5, 0);
-            Label lable = new Label(0, 0,"Sale Report", cellFormat1);
+            Label lable = new Label(0, 0, "Sale Report", cellFormat1);
             ws1.addCell(lable);
-            ws1.addCell(new Label(0,1,"ReceiptID",cellFormat1));
-            ws1.addCell(new Label(1,1,"Date",cellFormat1));
-            ws1.addCell(new Label(2,1,"ID",cellFormat1));
-            ws1.addCell(new Label(3,1,"Quatity",cellFormat1));
-            ws1.addCell(new Label(4,1,"proPrice",cellFormat1));
-            ws1.addCell(new Label(5,1,"TotalEachProduct",cellFormat1));
-            ws1.addCell(new Label(6,1,"TotalPurchase",cellFormat1));
-            
-            
+            ws1.addCell(new Label(0, 1, "ReceiptID", cellFormat1));
+            ws1.addCell(new Label(1, 1, "Date", cellFormat1));
+            ws1.addCell(new Label(2, 1, "ID", cellFormat1));
+            ws1.addCell(new Label(3, 1, "Quatity", cellFormat1));
+            ws1.addCell(new Label(4, 1, "proPrice", cellFormat1));
+            ws1.addCell(new Label(5, 1, "TotalEachProduct", cellFormat1));
+            ws1.addCell(new Label(6, 1, "TotalPurchase", cellFormat1));
+
             int iRows = 2;
-            while((results!=null) && (results.next()))
-            {   
-                
-                ws1.addCell(new Label(0,iRows,results.getString("ReceiptID"),cellFormat2));
-                ws1.addCell(new Label(1,iRows,results.getString("purchaseDate"),cellFormat2));
-                ws1.addCell(new Label(2,iRows,results.getString("PRODUCTID"),cellFormat2));
-                ws1.addCell(new Label(3,iRows,results.getString("purchaseQuantity"),cellFormat2));
-                ws1.addCell(new Label(4,iRows,results.getString("productPrice"),cellFormat2));
-                ws1.addCell(new Label(5,iRows,results.getString("TotalEachProduct"),cellFormat2));
-                ws1.addCell(new Label(6,iRows,results.getString("TotalPurchase"),cellFormat2));
-                
+            while ((results != null) && (results.next())) {
+
+                ws1.addCell(new Label(0, iRows, results.getString("ReceiptID"), cellFormat2));
+                ws1.addCell(new Label(1, iRows, results.getString("purchaseDate"), cellFormat2));
+                ws1.addCell(new Label(2, iRows, results.getString("PRODUCTID"), cellFormat2));
+                ws1.addCell(new Label(3, iRows, results.getString("purchaseQuantity"), cellFormat2));
+                ws1.addCell(new Label(4, iRows, results.getString("productPrice"), cellFormat2));
+                ws1.addCell(new Label(5, iRows, results.getString("TotalEachProduct"), cellFormat2));
+                ws1.addCell(new Label(6, iRows, results.getString("TotalPurchase"), cellFormat2));
+
                 ++iRows;
             }
- 
+
             workbook.write();
             workbook.close();
- 
+
             System.out.println("Excel file created.");
-            
-        }
-        catch (Exception e)
-        {
+
+        } catch (Exception e) {
             e.printStackTrace();
         }
- 
- 
-        
-        
-        
+
     }
-    
+
+    public String getDate() {
+        LocalDate localDate = LocalDate.now();
+        System.out.println(DateTimeFormatter.ofPattern("dd").format(localDate));
+        return DateTimeFormatter.ofPattern("dd").format(localDate);
+    }
+
     public static void clearTable(JTable table) {
-        for (int i = 0; i < table.getRowCount(); i++)
-            for(int j = 0; j < table.getColumnCount(); j++) {
-              table.setValueAt("", i, j);
-          }
+        for (int i = 0; i < table.getRowCount(); i++) {
+            for (int j = 0; j < table.getColumnCount(); j++) {
+                table.setValueAt("", i, j);
+            }
+        }
     }
-    
-    public void setForSearch(){
+
+    public String getDayOfMonth() {
+        Calendar cal = Calendar.getInstance();
+        int dayOfMonth = cal.get(Calendar.DAY_OF_MONTH);
+
+        return String.valueOf(dayOfMonth);
+    }
+
+    public String getMonth() {
+        Calendar cal = Calendar.getInstance();
+        int month = cal.get(Calendar.MONTH);
+
+        return String.valueOf(month);
+    }
+
+    public String getYear() {
+        Calendar cal = Calendar.getInstance();
+        int month = cal.get(Calendar.YEAR);
+
+        return String.valueOf(month);
+    }
+
+    public void setForSearch() {
         this.clearTable(SaleReportTable);
-        
-        String day,month,year;
+
+        String day, month, year;
         int yearTmp;
-        
+
         day = (String) dayBox.getSelectedItem();
         month = (String) monthBox.getSelectedItem();
-        yearTmp = Integer.parseInt((String) year2.getSelectedItem())+543;
-        
-        
-        try{
+        yearTmp = Integer.parseInt((String) year2.getSelectedItem()) + 543;
+
+        try {
             Connection con = StockAndAccountSystem.getConnect();
-            Statement stm =con.createStatement();
-            ResultSet rs=stm.executeQuery("select * from salereport");
+            Statement stm = con.createStatement();
+            ResultSet rs = stm.executeQuery("select * from salereport");
 
             String receiptID, proID;
             double proPrice, totalEachPro, totalPurchase;
             int purQuantity;
             String date;
-            int i=0;
-            while(rs.next()){
+            int i = 0;
+            while (rs.next()) {
                 System.out.println(".......");
-                int j=0;
-                receiptID = rs.getString(1);                    
-                proID=rs.getString(2);             
-                proPrice =rs.getDouble(4);         
+                int j = 0;
+                receiptID = rs.getString(1);
+                proID = rs.getString(2);
+                proPrice = rs.getDouble(4);
                 totalEachPro = rs.getDouble(5);
-                totalPurchase =rs.getDouble(6);
+                totalPurchase = rs.getDouble(6);
                 purQuantity = rs.getInt(3);
-                date=rs.getString(7);
-                System.out.println("receiptID ("+i+") :"+receiptID);
-                SaleReportTable.setValueAt(receiptID, i, j); j++;
-                SaleReportTable.setValueAt(date, i, j); j++;
-                SaleReportTable.setValueAt(proID, i, j); j++;
-                SaleReportTable.setValueAt(new Integer(purQuantity), i, j); j++;
-                SaleReportTable.setValueAt(new Double(proPrice), i, j); j++;
-                SaleReportTable.setValueAt(new Double(totalEachPro), i, j); j++;
-                SaleReportTable.setValueAt(new Double(totalPurchase), i, j); j++;
+                date = rs.getString(7);
+                System.out.println("receiptID (" + i + ") :" + receiptID);
+                SaleReportTable.setValueAt(receiptID, i, j);
+                j++;
+                SaleReportTable.setValueAt(date, i, j);
+                j++;
+                SaleReportTable.setValueAt(proID, i, j);
+                j++;
+                SaleReportTable.setValueAt(new Integer(purQuantity), i, j);
+                j++;
+                SaleReportTable.setValueAt(new Double(proPrice), i, j);
+                j++;
+                SaleReportTable.setValueAt(new Double(totalEachPro), i, j);
+                j++;
+                SaleReportTable.setValueAt(new Double(totalPurchase), i, j);
+                j++;
                 i++;
             }
-            
+
         } catch (Exception e) {
             System.out.println("Connect failed !");
-        } 
+        }
         System.out.println("the end");
     }
-    
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton FlieReport;
