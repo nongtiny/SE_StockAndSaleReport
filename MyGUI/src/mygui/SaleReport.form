@@ -149,7 +149,7 @@
                               <EmptySpace min="-2" pref="15" max="-2" attributes="0"/>
                               <Component id="jLabel4" min="-2" max="-2" attributes="0"/>
                               <EmptySpace type="separate" max="-2" attributes="0"/>
-                              <Component id="year2" min="-2" pref="60" max="-2" attributes="0"/>
+                              <Component id="yearBox" min="-2" pref="60" max="-2" attributes="0"/>
                               <EmptySpace max="32767" attributes="0"/>
                               <Component id="searchButton" min="-2" pref="77" max="-2" attributes="0"/>
                           </Group>
@@ -169,7 +169,7 @@
                   <Group type="102" alignment="0" attributes="0">
                       <EmptySpace min="-2" pref="22" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="3" attributes="0">
-                          <Component id="year2" alignment="3" min="-2" pref="30" max="-2" attributes="0"/>
+                          <Component id="yearBox" alignment="3" min="-2" pref="30" max="-2" attributes="0"/>
                           <Component id="monthBox" alignment="3" min="-2" pref="30" max="-2" attributes="0"/>
                           <Component id="dayBox" alignment="3" min="-2" pref="30" max="-2" attributes="0"/>
                           <Component id="jLabel6" alignment="3" min="-2" max="-2" attributes="0"/>
@@ -415,7 +415,7 @@
                 <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="1"/>
               </AuxValues>
             </Component>
-            <Component class="javax.swing.JComboBox" name="year2">
+            <Component class="javax.swing.JComboBox" name="yearBox">
               <Properties>
                 <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
                   <Font name="supermarket" size="14" style="0"/>
@@ -430,7 +430,7 @@
                 </Property>
               </Properties>
               <Events>
-                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="year2ActionPerformed"/>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="yearBoxActionPerformed"/>
               </Events>
             </Component>
             <Component class="javax.swing.JComboBox" name="searchByComboBox">
