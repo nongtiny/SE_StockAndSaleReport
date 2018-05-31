@@ -101,7 +101,6 @@ public class Stock extends javax.swing.JFrame {
         deleteButton = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
         stockTable = new javax.swing.JTable();
-        refreshButton = new javax.swing.JButton();
         exitButton = new javax.swing.JButton();
 
         add.setMinimumSize(new java.awt.Dimension(500, 340));
@@ -797,15 +796,6 @@ public class Stock extends javax.swing.JFrame {
         stockTable.getTableHeader().setReorderingAllowed(false);
         jScrollPane1.setViewportView(stockTable);
 
-        refreshButton.setBackground(new java.awt.Color(255, 255, 255));
-        refreshButton.setFont(new java.awt.Font("Sukhumvit Set", 0, 14)); // NOI18N
-        refreshButton.setText("Refresh");
-        refreshButton.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                refreshButtonMouseClicked(evt);
-            }
-        });
-
         exitButton.setBackground(new java.awt.Color(255, 255, 255));
         exitButton.setFont(new java.awt.Font("Sukhumvit Set", 0, 14)); // NOI18N
         exitButton.setText("Back");
@@ -826,8 +816,6 @@ public class Stock extends javax.swing.JFrame {
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
                 .addGap(0, 0, Short.MAX_VALUE)
-                .addComponent(refreshButton)
-                .addGap(18, 18, 18)
                 .addComponent(exitButton)
                 .addGap(30, 30, 30))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
@@ -868,9 +856,7 @@ public class Stock extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 382, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(refreshButton, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(exitButton, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addComponent(exitButton, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(35, Short.MAX_VALUE))
         );
 
@@ -987,11 +973,6 @@ public class Stock extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(null,"Please select a record!");
         }
     }//GEN-LAST:event_deleteButtonMouseClicked
-
-    private void refreshButtonMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_refreshButtonMouseClicked
-        this.clearTable(stockTable);
-        this.showData();
-    }//GEN-LAST:event_refreshButtonMouseClicked
 
     private void exitButtonMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_exitButtonMouseClicked
         this.setVisible(false);
@@ -1506,7 +1487,6 @@ public class Stock extends javax.swing.JFrame {
     private javax.swing.JComboBox<String> proType;
     private javax.swing.JComboBox<String> proType1;
     private javax.swing.JLabel productInfo;
-    private javax.swing.JButton refreshButton;
     private javax.swing.JTextField searchBox;
     private javax.swing.JButton searchButton;
     private javax.swing.JComboBox<String> searchByList;

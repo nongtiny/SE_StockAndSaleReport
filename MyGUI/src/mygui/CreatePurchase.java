@@ -409,7 +409,7 @@ public class CreatePurchase extends javax.swing.JFrame {
 
             //JOptionPane.showMessageDialog(null, "Record Inserted Successfully");
         } catch (SQLException ex) {
-            Logger.getLogger(AddProduct.class.getName()).log(Level.SEVERE, null, ex);
+            
         }
 
         showRow++;

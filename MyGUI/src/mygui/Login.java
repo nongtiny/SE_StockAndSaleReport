@@ -141,7 +141,7 @@ public class Login extends javax.swing.JFrame {
         jLabel5.setForeground(new java.awt.Color(255, 255, 255));
         jLabel5.setText("By power ranger");
 
-        jLabel7.setFont(new java.awt.Font("Tahoma", 0, 70)); // NOI18N
+        jLabel7.setFont(new java.awt.Font("Sukhumvit Set", 0, 70)); // NOI18N
         jLabel7.setForeground(new java.awt.Color(255, 255, 255));
         jLabel7.setText("ดีเจริญ");
 
