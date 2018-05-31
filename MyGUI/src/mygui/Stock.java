@@ -1271,7 +1271,6 @@ public class Stock extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(null,"Record Inserted Successfully");
     }   catch (SQLException ex) {
             System.out.println("catch in addProduct");
-            Logger.getLogger(AddProduct.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
     
@@ -1300,7 +1299,7 @@ public class Stock extends javax.swing.JFrame {
             proType.setModel(new javax.swing.DefaultComboBoxModel<>(types));
             
         } catch (SQLException ex) {
-            Logger.getLogger(AddProduct.class.getName()).log(Level.SEVERE, null, ex);
+            
         }
     }
     
@@ -1359,7 +1358,7 @@ public class Stock extends javax.swing.JFrame {
             stm.executeUpdate(sql);
             JOptionPane.showMessageDialog(null,"Record Edited Successfully");
     }   catch (SQLException ex) {
-            Logger.getLogger(AddProduct.class.getName()).log(Level.SEVERE, null, ex);
+            
         }
     }
     
@@ -1390,7 +1389,7 @@ public class Stock extends javax.swing.JFrame {
             proType1.setModel(new javax.swing.DefaultComboBoxModel<>(types));
             
         } catch (SQLException ex) {
-            Logger.getLogger(AddProduct.class.getName()).log(Level.SEVERE, null, ex);
+            
         }
     }
 
@@ -1445,7 +1444,7 @@ public class Stock extends javax.swing.JFrame {
             stm.executeUpdate(sql);
             JOptionPane.showMessageDialog(null,"Record Deleted Successfully");
         } catch (SQLException ex) {
-            Logger.getLogger(AddProduct.class.getName()).log(Level.SEVERE, null, ex);
+            
         }
     }
     
